@@ -1,2 +1,2 @@
-I can puch to the GitHub
+I can push to the GitHub
 -Patrick
