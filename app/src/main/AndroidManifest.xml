@@ -26,6 +26,18 @@
             android:name=".SetupActivity"
             android:label="@string/title_activity_setup" >
         </activity>
+        <activity
+            android:name=".GroupSelectActivity"
+            android:label="@string/title_activity_group_select" >
+        </activity>
+        <activity
+            android:name=".FriendsList"
+            android:label="@string/title_activity_friends_list" >
+        </activity>
+        <activity
+            android:name=".TopResultActivity"
+            android:label="@string/title_activity_top_result" >
+        </activity>
     </application>
 
 </manifest>

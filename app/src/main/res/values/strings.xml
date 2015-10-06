@@ -17,4 +17,7 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_group_select">GroupSelectActivity</string>
+    <string name="title_activity_friends_list">FriendsList</string>
+    <string name="title_activity_top_result">TopResultActivity</string>
 </resources>
