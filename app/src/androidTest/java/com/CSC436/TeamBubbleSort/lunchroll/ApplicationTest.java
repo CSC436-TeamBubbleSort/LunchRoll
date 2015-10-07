@@ -1,4 +1,4 @@
-package com.example.devinb.lunchroll;
+package com.CSC436.TeamBubbleSort.lunchroll;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
