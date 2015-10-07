@@ -20,4 +20,7 @@
     <string name="title_activity_group_select">GroupSelectActivity</string>
     <string name="title_activity_friends_list">FriendsList</string>
     <string name="title_activity_top_result">TopResultActivity</string>
+
+    <!-- String related to Friends List -->
+    <string name="contacts">Contacts</string>
 </resources>

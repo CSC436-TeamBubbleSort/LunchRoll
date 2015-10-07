@@ -1,23 +1,22 @@
-package com.CSC436.TeamBubbleSort.lunchroll;
+package com.csc436.team_bubble_sort.lunchroll;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class TopResultActivity extends AppCompatActivity {
+public class SetupActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_top_result);
+        setContentView(R.layout.activity_setup);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_top_result, menu);
+        getMenuInflater().inflate(R.menu.menu_setup, menu);
         return true;
     }
 

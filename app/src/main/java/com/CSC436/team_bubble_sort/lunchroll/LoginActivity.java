@@ -1,4 +1,4 @@
-package com.CSC436.TeamBubbleSort.lunchroll;
+package com.csc436.team_bubble_sort.lunchroll;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * TODO: remove after connecting to a real authentication system.
      */
     private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@com.com.CSC436.CSC436.com:hello", "bar@com.com.CSC436.CSC436.com:world"
+            "foo@com.com.csc436.csc436.com:hello", "bar@com.com.csc436.csc436.com:world"
     };
     /**
      * Keep track of the login task to ensure we can cancel it if requested.

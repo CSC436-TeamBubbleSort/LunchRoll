@@ -1,4 +1,4 @@
-package com.CSC436.TeamBubbleSort.lunchroll;
+package com.csc436.team_bubble_sort.lunchroll;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
