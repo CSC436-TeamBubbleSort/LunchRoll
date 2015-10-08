@@ -18,7 +18,8 @@
         android:textSize="20sp"
         android:textAlignment="center"
         android:layout_weight="15"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        />
 
     <ListView
         android:layout_width="fill_parent"
