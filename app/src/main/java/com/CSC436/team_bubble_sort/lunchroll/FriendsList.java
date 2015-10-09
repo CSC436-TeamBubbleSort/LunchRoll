@@ -1,20 +1,30 @@
 package com.csc436.team_bubble_sort.lunchroll;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class FriendsList extends AppCompatActivity {
+public class FriendsList extends AppCompatActivity implements OnClickListener{
 
-    private String[] friends = {"bob", "susan","bob", "susan","bob", "susan","bob", "susan","bob", "susan","bob", "susan","bob", "susan","bob", "susan","bob", "susan","bob", "susan","bob", "susan","bob", "susan","bob", "susan"};
+    private String[] friends = {"bob", "susan", "susan", "bob", "susan", "bob", "susan", "bob", "susan", "bob", "susan"};
+    LinearLayout layoutOfPopup;
+    PopupWindow popupMessage;
+    Button popupButton, insidePopupButton;
+    TextView popupText;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,14 +39,39 @@ public class FriendsList extends AppCompatActivity {
         friendsView.setAdapter(listAdapter);
 
         // The create group button
-        final Button create_group_button = (Button) findViewById(R.id.Button);
-        create_group_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Show popup here
-                // Ask for a name for the new group
-            }
-        });
+        popupButton = (Button) findViewById(R.id.popupbutton);
+        popupText = new TextView(this);
+        insidePopupButton = new Button(this);
+        layoutOfPopup = new LinearLayout(this);
+        insidePopupButton.setText("Popup");
+        popupText.setText("This is a popup");
+        popupText.setPadding(0, -200, 70, 0);
+        layoutOfPopup.setOrientation(LinearLayout.VERTICAL);
+        layoutOfPopup.addView(popupText);
+        layoutOfPopup.addView(insidePopupButton);
+
+        // The group creation popup
+        popupInit();
+
+        // Second popup window attempt
+        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND, WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+    }
+
+    public void popupInit(){
+        popupButton.setOnClickListener(this);
+        insidePopupButton.setOnClickListener(this);
+        popupMessage = new PopupWindow(layoutOfPopup, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        popupMessage.setContentView(layoutOfPopup);
+    }
+
+    @Override
+    public void onClick(View v){
+        if(v.getId() == R.id.popupbutton){
+            popupMessage.showAsDropDown(popupButton, 0, 0);
+        }
+        else{
+            popupMessage.dismiss();
+        }
     }
 
     @Override
