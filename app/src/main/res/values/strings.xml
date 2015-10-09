@@ -22,5 +22,5 @@
     <string name="title_activity_top_result">TopResultActivity</string>
 
     <!-- String related to Friends List -->
-    <string name="contacts">Contacts</string>
+    <string name="create_group">Create Group</string>
 </resources>

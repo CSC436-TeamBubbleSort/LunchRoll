@@ -4,7 +4,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -18,11 +20,23 @@ public class FriendsList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends_list);
+
+        // The friend's list
         ListView friendsView = (ListView) findViewById(R.id.listView);
         ArrayList<String> friendsList = new ArrayList<String>();
         friendsList.addAll(Arrays.asList(friends));
         ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, friendsList);
         friendsView.setAdapter(listAdapter);
+
+        // The create group button
+        final Button create_group_button = (Button) findViewById(R.id.Button);
+        create_group_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Show popup here
+                // Ask for a name for the new group
+            }
+        });
     }
 
     @Override
