@@ -12,7 +12,7 @@ import java.util.Arrays;
 
 public class FriendsList extends AppCompatActivity {
 
-    private String[] friends = {"bob", "susan"};
+    private String[] friends = {"bob", "susan","bob", "susan","bob", "susan","bob", "susan","bob", "susan","bob", "susan","bob", "susan","bob", "susan","bob", "susan","bob", "susan","bob", "susan","bob", "susan","bob", "susan"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +21,7 @@ public class FriendsList extends AppCompatActivity {
         ListView friendsView = (ListView) findViewById(R.id.listView);
         ArrayList<String> friendsList = new ArrayList<String>();
         friendsList.addAll(Arrays.asList(friends));
-        ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this, R.layout.activity_friends_list, friendsList);
+        ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, friendsList);
         friendsView.setAdapter(listAdapter);
     }
 
