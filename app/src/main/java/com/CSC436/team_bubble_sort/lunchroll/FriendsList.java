@@ -2,6 +2,7 @@ package com.csc436.team_bubble_sort.lunchroll;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -52,12 +53,13 @@ public class FriendsList extends AppCompatActivity implements OnClickListener{
 
         // The group creation popup
         popupInit();
+        popupMessage.showAtLocation(friendsView, Gravity.CENTER, 0, 0);
 
         // Second popup window attempt
         //getWindow().setFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND, WindowManager.LayoutParams.FLAG_DIM_BEHIND);
     }
 
-    public void popupInit(){
+    public void popupInit() {
         popupButton.setOnClickListener(this);
         insidePopupButton.setOnClickListener(this);
         popupMessage = new PopupWindow(layoutOfPopup, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
