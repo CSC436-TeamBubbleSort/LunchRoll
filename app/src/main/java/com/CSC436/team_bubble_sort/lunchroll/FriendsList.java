@@ -43,22 +43,28 @@ public class FriendsList extends AppCompatActivity implements OnClickListener{
         ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, friendsList);
         friendsView.setAdapter(listAdapter);
 
-        // The create group button
+        // The following is for the create group button, and the following popup that results from clicking it
+        // The create group button below the friends list that we click on to create a group
         groupCreateButton = (Button) findViewById(R.id.create_group_button);
+        groupCreateButton.setOnClickListener(this);
+        // Layout parameters for objects in the popup
+        groupCreateButtonLayoutParams = new ActionBar.LayoutParams(ActionBar.LayoutParams.WRAP_CONTENT,
+                ActionBar.LayoutParams.WRAP_CONTENT);
+        // The text of the popup
         groupCreatePopupText = new TextView(this);
-        groupCreatePopupCreateButton = new Button(this);
-        layoutOfPopup = new LinearLayout(this);
-        groupCreatePopupCreateButton.setText("Popup");
-        groupCreateButtonLayoutParams = new ActionBar.LayoutParams(ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT);
         groupCreatePopupText.setText("This is a popup");
         groupCreatePopupText.setPadding(0, -200, 70, 0);
-        layoutOfPopup.setOrientation(LinearLayout.VERTICAL);
-        layoutOfPopup.addView(groupCreatePopupText);
-        layoutOfPopup.addView(groupCreatePopupCreateButton);
-
-        // The group creation popup
-        groupCreateButton.setOnClickListener(this);
+        // The button of the popup
+        groupCreatePopupCreateButton = new Button(this);
+        groupCreatePopupCreateButton.setText("Popup");
         groupCreatePopupCreateButton.setOnClickListener(this);
+        // The layout of the popup
+        layoutOfPopup = new LinearLayout(this);
+        layoutOfPopup.setWeightSum(5);
+        layoutOfPopup.setOrientation(LinearLayout.VERTICAL);
+        layoutOfPopup.addView(groupCreatePopupText, groupCreateButtonLayoutParams);
+        layoutOfPopup.addView(groupCreatePopupCreateButton, groupCreateButtonLayoutParams);
+        // The group creation popup (Putting everything together)
         groupCreationPopup = new PopupWindow(layoutOfPopup, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         groupCreationPopup.setContentView(layoutOfPopup);
     }
