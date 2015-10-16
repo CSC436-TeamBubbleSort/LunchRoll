@@ -7,24 +7,24 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class FriendsList extends AppCompatActivity implements OnClickListener{
 
+    // Array holding list of friends
     private String[] friends = {"bob", "susan", "susan", "bob", "susan", "bob", "susan", "bob", "susan", "bob", "susan"};
-    LinearLayout layoutOfPopup;
-    PopupWindow popupMessage;
-    Button popupButton, insidePopupButton;
-    TextView popupText;
+    LinearLayout layoutOfPopup; // Layout of list of friends
+    Button groupCreateButton; // Button for creating a group
+    PopupWindow groupCreationPopup; // Popup for creating the group
+    //Button popupButton, insidePopupButton;
+    //TextView popupText;
 
 
     @Override
@@ -40,39 +40,31 @@ public class FriendsList extends AppCompatActivity implements OnClickListener{
         friendsView.setAdapter(listAdapter);
 
         // The create group button
-        popupButton = (Button) findViewById(R.id.popupbutton);
-        popupText = new TextView(this);
-        insidePopupButton = new Button(this);
+        groupCreateButton = (Button) findViewById(R.id.create_group_button);
+        //popupText = new TextView(this);
+        //insidePopupButton = new Button(this);
         layoutOfPopup = new LinearLayout(this);
-        insidePopupButton.setText("Popup");
-        popupText.setText("This is a popup");
-        popupText.setPadding(0, -200, 70, 0);
+        //insidePopupButton.setText("Popup");
+        //popupText.setText("This is a popup");
+        //popupText.setPadding(0, -200, 70, 0);
         layoutOfPopup.setOrientation(LinearLayout.VERTICAL);
-        layoutOfPopup.addView(popupText);
-        layoutOfPopup.addView(insidePopupButton);
+        //layoutOfPopup.addView(popupText);
+        //layoutOfPopup.addView(insidePopupButton);
 
         // The group creation popup
-        popupInit();
-        popupMessage.showAtLocation(friendsView, Gravity.CENTER, 0, 0);
-
-        // Second popup window attempt
-        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND, WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-    }
-
-    public void popupInit() {
-        popupButton.setOnClickListener(this);
-        insidePopupButton.setOnClickListener(this);
-        popupMessage = new PopupWindow(layoutOfPopup, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        popupMessage.setContentView(layoutOfPopup);
+        groupCreateButton.setOnClickListener(this);
+        //insidePopupButton.setOnClickListener(this);
+        groupCreationPopup = new PopupWindow(layoutOfPopup, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        groupCreationPopup.setContentView(layoutOfPopup);
     }
 
     @Override
     public void onClick(View v){
-        if(v.getId() == R.id.popupbutton){
-            popupMessage.showAsDropDown(popupButton, 0, 0);
+        if(v.getId() == R.id.create_group_button){
+            groupCreationPopup.showAtLocation(v, Gravity.CENTER, 0, 0);
         }
         else{
-            popupMessage.dismiss();
+            groupCreationPopup.dismiss();
         }
     }
 
