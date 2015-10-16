@@ -1,5 +1,6 @@
 package com.csc436.team_bubble_sort.lunchroll;
 
+import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
@@ -7,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -26,6 +28,8 @@ public class FriendsList extends AppCompatActivity implements OnClickListener{
     PopupWindow groupCreationPopup; // Popup for creating the group
     Button groupCreatePopupCreateButton; // Button on the popup window to create the group
     TextView groupCreatePopupText; // The text that displays in the group create popup window
+    ViewGroup.LayoutParams groupCreateButtonLayoutParams;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +49,7 @@ public class FriendsList extends AppCompatActivity implements OnClickListener{
         groupCreatePopupCreateButton = new Button(this);
         layoutOfPopup = new LinearLayout(this);
         groupCreatePopupCreateButton.setText("Popup");
+        groupCreateButtonLayoutParams = new ActionBar.LayoutParams(ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT);
         groupCreatePopupText.setText("This is a popup");
         groupCreatePopupText.setPadding(0, -200, 70, 0);
         layoutOfPopup.setOrientation(LinearLayout.VERTICAL);
