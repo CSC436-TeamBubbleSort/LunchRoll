@@ -7,11 +7,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -117,6 +120,8 @@ public class FriendsList extends AppCompatActivity implements OnClickListener{
         return new Point(screenWidth, screenHeight);
     }
 
+
+
     @Override
     public void onClick(View v){
         if(v.getId() == R.id.create_group_button){
@@ -128,7 +133,7 @@ public class FriendsList extends AppCompatActivity implements OnClickListener{
                     (int) Math.floor(screenWidth * .1), (int) Math.floor(screenHeight * .1));
         }
         else if(v.getId() == groupCreatePopupNameField.getId()){
-            groupCreatePopupNameField.setText("");
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         }
         else if(v.getId() == groupCreatePopupCreateButton.getId()){
             groupCreationPopup.dismiss();
