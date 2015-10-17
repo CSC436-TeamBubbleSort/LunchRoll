@@ -52,6 +52,10 @@ public class FriendsList extends AppCompatActivity implements OnClickListener{
                 android.R.layout.simple_list_item_multiple_choice, friendsList);
         friendsView = (ListView) findViewById(R.id.listView); // Friends list
         friendsView.setAdapter(friendsAdapter);
+        // Getting width and height
+        Point point = getWidthAndHeight();
+        int screenWidth = point.x;
+        int screenHeight = point.y;
         // Dummy additions for now (want to grab selected names for listview in popup)
         selectedFriendsView = new ListView(this);
         selectedFriends.add("Jimmy");
@@ -75,7 +79,7 @@ public class FriendsList extends AppCompatActivity implements OnClickListener{
         // Text field so the user can give the group a name
         groupCreatePopupNameField = new EditText(this);
         groupCreatePopupNameField.setOnClickListener(this);
-        groupCreatePopupNameField.setWidth(ActionBar.LayoutParams.MATCH_PARENT);
+        groupCreatePopupNameField.setWidth((int) Math.floor(screenWidth * .75));
         groupCreatePopupNameField.setText("Name of Group");
         // The create group button of the popup
         groupCreatePopupCreateButton = new Button(this);
@@ -96,10 +100,6 @@ public class FriendsList extends AppCompatActivity implements OnClickListener{
         layoutOfPopup.addView(groupCreatePopupNameField, groupCreateButtonLayoutParams);
         layoutOfPopup.addView(groupCreatePopupCreateButton, groupCreateButtonLayoutParams);
         layoutOfPopup.addView(groupCreatePopupCancelButton, groupCreateButtonLayoutParams);
-        // Getting width and height
-        Point point = getWidthAndHeight();
-        int screenWidth = point.x;
-        int screenHeight = point.y;
         // The group creation popup (Putting everything together)
         groupCreationPopup = new PopupWindow(layoutOfPopup, LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
