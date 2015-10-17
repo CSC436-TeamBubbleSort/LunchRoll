@@ -12,7 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -30,13 +29,17 @@ public class FriendsList extends AppCompatActivity implements OnClickListener{
     // Array holding list of friends
     private String[] friends = {"bob", "susan", "susan", "bob", "susan", "bob",
             "susan", "bob", "susan", "bob", "susan"};
+    ArrayList<String> friendsList = new ArrayList<String>();
+    private ArrayList<String> selectedFriends = new ArrayList<String>();
     LinearLayout layoutOfPopup; // Layout of list of friends
     Button groupCreateButton; // Button for creating a group
     PopupWindow groupCreationPopup; // Popup for creating the group
     Button groupCreatePopupCreateButton; // Button on the popup window to create the group
+    Button groupCreatePopupCancelButton; // Cancel button on the popup window to create group
     TextView groupCreatePopupText; // The text that displays in the group create popup window
-    ViewGroup.LayoutParams groupCreateButtonLayoutParams;
-
+    ViewGroup.LayoutParams groupCreateButtonLayoutParams; // Params for objects in popup
+    ListView friendsView = (ListView) findViewById(R.id.listView); // Friends list
+    ListView selectedFriendsView; // Selected friends that appear in popup window
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,13 +47,15 @@ public class FriendsList extends AppCompatActivity implements OnClickListener{
         setContentView(R.layout.activity_friends_list);
 
         // The friend's list
-        ListView friendsView = (ListView) findViewById(R.id.listView);
-        ArrayList<String> friendsList = new ArrayList<String>();
         friendsList.addAll(Arrays.asList(friends));
-        ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> friendsAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_multiple_choice, friendsList);
-        friendsView.setAdapter(listAdapter);
-
+        friendsView.setAdapter(friendsAdapter);
+        // Dummy additions for now (want to grab selected names for listview in popup)
+        selectedFriends.add("Jimmy");
+        selectedFriends.add("Nepal");
+        selectedFriends.add("Inanimate Object");
+        selectedFriends.add("Mini-Texas");
         // The following is for the create group button, and the following popup that results from clicking it
         // The create group button below the friends list that we click on to create a group
         groupCreateButton = (Button) findViewById(R.id.create_group_button);
@@ -60,11 +65,19 @@ public class FriendsList extends AppCompatActivity implements OnClickListener{
                 ActionBar.LayoutParams.WRAP_CONTENT);
         // The text of the popup
         groupCreatePopupText = new TextView(this);
-        groupCreatePopupText.setText("This is a popup");
-        // The button of the popup
+        groupCreatePopupText.setText("Create a Group");
+        // The listview of the popup ( might have to put in own method to make more dynamic??)
+        ArrayAdapter<String> selectedFriendsAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_multiple_choice, selectedFriends);
+        selectedFriendsView.setAdapter(selectedFriendsAdapter);
+        // The create group button of the popup
         groupCreatePopupCreateButton = new Button(this);
-        groupCreatePopupCreateButton.setText("Popup");
+        groupCreatePopupCreateButton.setText("Create Group");
         groupCreatePopupCreateButton.setOnClickListener(this);
+        // The cancel group button of the popup
+        groupCreatePopupCancelButton = new Button(this);
+        groupCreatePopupCancelButton.setText("Cancel");
+        groupCreatePopupCancelButton.setOnClickListener(this);
         // The layout of the popup
         layoutOfPopup = new LinearLayout(this);
         layoutOfPopup.setWeightSum(5);
@@ -72,7 +85,9 @@ public class FriendsList extends AppCompatActivity implements OnClickListener{
         layoutOfPopup.setBackgroundColor(Color.BLUE);
         layoutOfPopup.setGravity(Gravity.CENTER);
         layoutOfPopup.addView(groupCreatePopupText, groupCreateButtonLayoutParams);
+        layoutOfPopup.addView(selectedFriendsView, groupCreateButtonLayoutParams);
         layoutOfPopup.addView(groupCreatePopupCreateButton, groupCreateButtonLayoutParams);
+        layoutOfPopup.addView(groupCreatePopupCancelButton, groupCreateButtonLayoutParams);
         // Getting width and height
         Point point = getWidthAndHeight();
         int screenWidth = point.x;
