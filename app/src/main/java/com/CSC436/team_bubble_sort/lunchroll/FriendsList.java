@@ -53,7 +53,6 @@ public class FriendsList extends AppCompatActivity implements OnClickListener{
         // The text of the popup
         groupCreatePopupText = new TextView(this);
         groupCreatePopupText.setText("This is a popup");
-        groupCreatePopupText.setPadding(0, -200, 70, 0);
         // The button of the popup
         groupCreatePopupCreateButton = new Button(this);
         groupCreatePopupCreateButton.setText("Popup");
