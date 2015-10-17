@@ -38,7 +38,7 @@ public class FriendsList extends AppCompatActivity implements OnClickListener{
     Button groupCreatePopupCancelButton; // Cancel button on the popup window to create group
     TextView groupCreatePopupText; // The text that displays in the group create popup window
     ViewGroup.LayoutParams groupCreateButtonLayoutParams; // Params for objects in popup
-    ListView friendsView = (ListView) findViewById(R.id.listView); // Friends list
+    ListView friendsView; // Friends list
     ListView selectedFriendsView; // Selected friends that appear in popup window
 
     @Override
@@ -50,12 +50,14 @@ public class FriendsList extends AppCompatActivity implements OnClickListener{
         friendsList.addAll(Arrays.asList(friends));
         ArrayAdapter<String> friendsAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_multiple_choice, friendsList);
+        friendsView = (ListView) findViewById(R.id.listView); // Friends list
         friendsView.setAdapter(friendsAdapter);
         // Dummy additions for now (want to grab selected names for listview in popup)
-        //selectedFriends.add("Jimmy");
-        //selectedFriends.add("Nepal");
-        //selectedFriends.add("Inanimate Object");
-        //selectedFriends.add("Mini-Texas");
+        selectedFriendsView = new ListView(this);
+        selectedFriends.add("Jimmy");
+        selectedFriends.add("Nepal");
+        selectedFriends.add("Inanimate Object");
+        selectedFriends.add("Mini-Texas");
         // The following is for the create group button, and the following popup that results from clicking it
         // The create group button below the friends list that we click on to create a group
         groupCreateButton = (Button) findViewById(R.id.create_group_button);
@@ -67,9 +69,9 @@ public class FriendsList extends AppCompatActivity implements OnClickListener{
         groupCreatePopupText = new TextView(this);
         groupCreatePopupText.setText("Create a Group");
         // The listview of the popup ( might have to put in own method to make more dynamic??)
-        //ArrayAdapter<String> selectedFriendsAdapter = new ArrayAdapter<String>(this,
-         //       android.R.layout.simple_list_item_multiple_choice, selectedFriends);
-        //selectedFriendsView.setAdapter(selectedFriendsAdapter);
+        ArrayAdapter<String> selectedFriendsAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_multiple_choice, selectedFriends);
+        selectedFriendsView.setAdapter(selectedFriendsAdapter);
         // The create group button of the popup
         groupCreatePopupCreateButton = new Button(this);
         groupCreatePopupCreateButton.setText("Create Group");
@@ -85,7 +87,7 @@ public class FriendsList extends AppCompatActivity implements OnClickListener{
         layoutOfPopup.setBackgroundColor(Color.BLUE);
         layoutOfPopup.setGravity(Gravity.CENTER);
         layoutOfPopup.addView(groupCreatePopupText, groupCreateButtonLayoutParams);
-        //layoutOfPopup.addView(selectedFriendsView, groupCreateButtonLayoutParams);
+        layoutOfPopup.addView(selectedFriendsView, groupCreateButtonLayoutParams);
         layoutOfPopup.addView(groupCreatePopupCreateButton, groupCreateButtonLayoutParams);
         layoutOfPopup.addView(groupCreatePopupCancelButton, groupCreateButtonLayoutParams);
         // Getting width and height
