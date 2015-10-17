@@ -52,10 +52,10 @@ public class FriendsList extends AppCompatActivity implements OnClickListener{
                 android.R.layout.simple_list_item_multiple_choice, friendsList);
         friendsView.setAdapter(friendsAdapter);
         // Dummy additions for now (want to grab selected names for listview in popup)
-        selectedFriends.add("Jimmy");
-        selectedFriends.add("Nepal");
-        selectedFriends.add("Inanimate Object");
-        selectedFriends.add("Mini-Texas");
+        //selectedFriends.add("Jimmy");
+        //selectedFriends.add("Nepal");
+        //selectedFriends.add("Inanimate Object");
+        //selectedFriends.add("Mini-Texas");
         // The following is for the create group button, and the following popup that results from clicking it
         // The create group button below the friends list that we click on to create a group
         groupCreateButton = (Button) findViewById(R.id.create_group_button);
