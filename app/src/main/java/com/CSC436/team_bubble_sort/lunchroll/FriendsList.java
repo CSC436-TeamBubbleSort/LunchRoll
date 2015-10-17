@@ -81,8 +81,8 @@ public class FriendsList extends AppCompatActivity implements OnClickListener{
         groupCreationPopup = new PopupWindow(layoutOfPopup, LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
         groupCreationPopup.setContentView(layoutOfPopup);
-        groupCreationPopup.setWidth(screenWidth / 2);
-        groupCreationPopup.setHeight(screenHeight / 2);
+        groupCreationPopup.setWidth((int) Math.floor(screenWidth * .8));
+        groupCreationPopup.setHeight((int) Math.floor(screenWidth * .8));
     }
 
     @Override
