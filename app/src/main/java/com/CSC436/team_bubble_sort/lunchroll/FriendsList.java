@@ -91,6 +91,7 @@ public class FriendsList extends AppCompatActivity implements OnClickListener{
         layoutOfPopup.setGravity(Gravity.CENTER);
         layoutOfPopup.addView(groupCreatePopupText, groupCreateButtonLayoutParams);
         layoutOfPopup.addView(selectedFriendsView, groupCreateButtonLayoutParams);
+        layoutOfPopup.addView(groupCreatePopupNameField, groupCreateButtonLayoutParams);
         layoutOfPopup.addView(groupCreatePopupCreateButton, groupCreateButtonLayoutParams);
         layoutOfPopup.addView(groupCreatePopupCancelButton, groupCreateButtonLayoutParams);
         // Getting width and height
