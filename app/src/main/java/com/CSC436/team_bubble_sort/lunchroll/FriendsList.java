@@ -67,9 +67,9 @@ public class FriendsList extends AppCompatActivity implements OnClickListener{
         groupCreatePopupText = new TextView(this);
         groupCreatePopupText.setText("Create a Group");
         // The listview of the popup ( might have to put in own method to make more dynamic??)
-        ArrayAdapter<String> selectedFriendsAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_multiple_choice, selectedFriends);
-        selectedFriendsView.setAdapter(selectedFriendsAdapter);
+        //ArrayAdapter<String> selectedFriendsAdapter = new ArrayAdapter<String>(this,
+         //       android.R.layout.simple_list_item_multiple_choice, selectedFriends);
+        //selectedFriendsView.setAdapter(selectedFriendsAdapter);
         // The create group button of the popup
         groupCreatePopupCreateButton = new Button(this);
         groupCreatePopupCreateButton.setText("Create Group");
