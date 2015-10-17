@@ -23,7 +23,8 @@ import java.util.Arrays;
 public class FriendsList extends AppCompatActivity implements OnClickListener{
 
     // Array holding list of friends
-    private String[] friends = {"bob", "susan", "susan", "bob", "susan", "bob", "susan", "bob", "susan", "bob", "susan"};
+    private String[] friends = {"bob", "susan", "susan", "bob", "susan", "bob",
+            "susan", "bob", "susan", "bob", "susan"};
     LinearLayout layoutOfPopup; // Layout of list of friends
     Button groupCreateButton; // Button for creating a group
     PopupWindow groupCreationPopup; // Popup for creating the group
@@ -41,7 +42,8 @@ public class FriendsList extends AppCompatActivity implements OnClickListener{
         ListView friendsView = (ListView) findViewById(R.id.listView);
         ArrayList<String> friendsList = new ArrayList<String>();
         friendsList.addAll(Arrays.asList(friends));
-        ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, friendsList);
+        ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_multiple_choice, friendsList);
         friendsView.setAdapter(listAdapter);
 
         // The following is for the create group button, and the following popup that results from clicking it
@@ -64,18 +66,20 @@ public class FriendsList extends AppCompatActivity implements OnClickListener{
         layoutOfPopup.setOrientation(LinearLayout.VERTICAL);
         layoutOfPopup.setBackgroundColor(Color.BLUE);
         layoutOfPopup.setGravity(Gravity.CENTER);
-        layoutOfPopup.setPadding(50,0,50,0);
         layoutOfPopup.addView(groupCreatePopupText, groupCreateButtonLayoutParams);
         layoutOfPopup.addView(groupCreatePopupCreateButton, groupCreateButtonLayoutParams);
         // The group creation popup (Putting everything together)
-        groupCreationPopup = new PopupWindow(layoutOfPopup, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        groupCreationPopup = new PopupWindow(layoutOfPopup, LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
         groupCreationPopup.setContentView(layoutOfPopup);
+        groupCreationPopup.setWidth(200);
+        groupCreationPopup.setHeight(200);
     }
 
     @Override
     public void onClick(View v){
         if(v.getId() == R.id.create_group_button){
-            groupCreationPopup.showAtLocation(v, Gravity.CENTER, 0, 0);
+            groupCreationPopup.showAtLocation(v, Gravity.CENTER, 50, 0);
         }
         else{
             groupCreationPopup.dismiss();
