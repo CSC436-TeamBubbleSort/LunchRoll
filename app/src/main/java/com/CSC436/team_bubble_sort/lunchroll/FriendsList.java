@@ -74,7 +74,6 @@ public class FriendsList extends AppCompatActivity implements OnClickListener{
         selectedFriendsView.setAdapter(selectedFriendsAdapter);
         // Text field so the user can give the group a name
         groupCreatePopupNameField = new EditText(this);
-        groupCreatePopupNameField.setPadding(10,5,10,5);
         // The create group button of the popup
         groupCreatePopupCreateButton = new Button(this);
         groupCreatePopupCreateButton.setText("Create Group");
