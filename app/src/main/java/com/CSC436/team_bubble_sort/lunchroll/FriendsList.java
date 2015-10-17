@@ -127,8 +127,17 @@ public class FriendsList extends AppCompatActivity implements OnClickListener{
             groupCreationPopup.showAtLocation(v, Gravity.NO_GRAVITY,
                     (int) Math.floor(screenWidth * .1), (int) Math.floor(screenHeight * .1));
         }
-        else{
+        else if(v.getId() == groupCreatePopupNameField.getId()){
+            groupCreatePopupNameField.setText("");
+        }
+        else if(v.getId() == groupCreatePopupCreateButton.getId()){
             groupCreationPopup.dismiss();
+        }
+        else if(v.getId() == groupCreatePopupCancelButton.getId()){
+            groupCreationPopup.dismiss();
+        }
+        else{
+            //groupCreationPopup.dismiss();
         }
     }
 
