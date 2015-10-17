@@ -1,6 +1,7 @@
 package com.csc436.team_bubble_sort.lunchroll;
 
 import android.app.ActionBar;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
@@ -61,6 +62,7 @@ public class FriendsList extends AppCompatActivity implements OnClickListener{
         layoutOfPopup = new LinearLayout(this);
         layoutOfPopup.setWeightSum(5);
         layoutOfPopup.setOrientation(LinearLayout.VERTICAL);
+        layoutOfPopup.setBackgroundColor(Color.BLUE);
         layoutOfPopup.addView(groupCreatePopupText, groupCreateButtonLayoutParams);
         layoutOfPopup.addView(groupCreatePopupCreateButton, groupCreateButtonLayoutParams);
         // The group creation popup (Putting everything together)
