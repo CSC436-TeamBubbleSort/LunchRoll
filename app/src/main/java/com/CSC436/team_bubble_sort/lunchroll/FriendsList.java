@@ -63,6 +63,8 @@ public class FriendsList extends AppCompatActivity implements OnClickListener{
         layoutOfPopup.setWeightSum(5);
         layoutOfPopup.setOrientation(LinearLayout.VERTICAL);
         layoutOfPopup.setBackgroundColor(Color.BLUE);
+        layoutOfPopup.setGravity(Gravity.CENTER);
+        layoutOfPopup.setPadding(50,0,50,0);
         layoutOfPopup.addView(groupCreatePopupText, groupCreateButtonLayoutParams);
         layoutOfPopup.addView(groupCreatePopupCreateButton, groupCreateButtonLayoutParams);
         // The group creation popup (Putting everything together)
