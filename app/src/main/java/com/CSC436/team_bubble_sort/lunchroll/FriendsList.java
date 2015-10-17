@@ -14,6 +14,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
@@ -21,8 +22,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-
-import static com.csc436.team_bubble_sort.lunchroll.R.drawable.friends_list_gradient;
 
 public class FriendsList extends AppCompatActivity implements OnClickListener{
 
@@ -37,6 +36,7 @@ public class FriendsList extends AppCompatActivity implements OnClickListener{
     Button groupCreatePopupCreateButton; // Button on the popup window to create the group
     Button groupCreatePopupCancelButton; // Cancel button on the popup window to create group
     TextView groupCreatePopupText; // The text that displays in the group create popup window
+    EditText groupCreatePopupNameField; // Field where user will enter name of group
     ViewGroup.LayoutParams groupCreateButtonLayoutParams; // Params for objects in popup
     ListView friendsView; // Friends list
     ListView selectedFriendsView; // Selected friends that appear in popup window
@@ -70,8 +70,11 @@ public class FriendsList extends AppCompatActivity implements OnClickListener{
         groupCreatePopupText.setText("Create a Group");
         // The listview of the popup ( might have to put in own method to make more dynamic??)
         ArrayAdapter<String> selectedFriendsAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_multiple_choice, selectedFriends);
+                android.R.layout.list_content, selectedFriends);
         selectedFriendsView.setAdapter(selectedFriendsAdapter);
+        // Text field so the user can give the group a name
+        groupCreatePopupNameField = new EditText(this);
+        groupCreatePopupNameField.setPadding(10,5,10,5);
         // The create group button of the popup
         groupCreatePopupCreateButton = new Button(this);
         groupCreatePopupCreateButton.setText("Create Group");
