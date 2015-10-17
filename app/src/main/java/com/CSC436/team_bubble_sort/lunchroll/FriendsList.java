@@ -4,12 +4,14 @@ import android.app.ActionBar;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -19,6 +21,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import static com.csc436.team_bubble_sort.lunchroll.R.drawable.friends_list_gradient;
 
 public class FriendsList extends AppCompatActivity implements OnClickListener{
 
@@ -68,12 +72,17 @@ public class FriendsList extends AppCompatActivity implements OnClickListener{
         layoutOfPopup.setGravity(Gravity.CENTER);
         layoutOfPopup.addView(groupCreatePopupText, groupCreateButtonLayoutParams);
         layoutOfPopup.addView(groupCreatePopupCreateButton, groupCreateButtonLayoutParams);
+        // Getting width and height of screen
+        DisplayMetrics displaymetrics = new DisplayMetrics();
+        this.getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+        int screenWidth = displaymetrics.widthPixels;
+        int screenHeight = displaymetrics.heightPixels;
         // The group creation popup (Putting everything together)
         groupCreationPopup = new PopupWindow(layoutOfPopup, LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
         groupCreationPopup.setContentView(layoutOfPopup);
-        groupCreationPopup.setWidth(200);
-        groupCreationPopup.setHeight(200);
+        groupCreationPopup.setWidth(screenWidth / 2);
+        groupCreationPopup.setHeight(screenHeight / 2);
     }
 
     @Override
