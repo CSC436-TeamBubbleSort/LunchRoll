@@ -2,6 +2,7 @@ package com.csc436.team_bubble_sort.lunchroll;
 
 import android.app.ActionBar;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
@@ -72,23 +73,36 @@ public class FriendsList extends AppCompatActivity implements OnClickListener{
         layoutOfPopup.setGravity(Gravity.CENTER);
         layoutOfPopup.addView(groupCreatePopupText, groupCreateButtonLayoutParams);
         layoutOfPopup.addView(groupCreatePopupCreateButton, groupCreateButtonLayoutParams);
-        // Getting width and height of screen
-        DisplayMetrics displaymetrics = new DisplayMetrics();
-        this.getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
-        int screenWidth = displaymetrics.widthPixels;
-        int screenHeight = displaymetrics.heightPixels;
+        // Getting width and height
+        Point point = getWidthAndHeight();
+        int screenWidth = point.x;
+        int screenHeight = point.y;
         // The group creation popup (Putting everything together)
         groupCreationPopup = new PopupWindow(layoutOfPopup, LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
         groupCreationPopup.setContentView(layoutOfPopup);
         groupCreationPopup.setWidth((int) Math.floor(screenWidth * .8));
-        groupCreationPopup.setHeight((int) Math.floor(screenWidth * .8));
+        groupCreationPopup.setHeight((int) Math.floor(screenHeight * .8));
+    }
+
+    private Point getWidthAndHeight(){
+        // Getting width and height of screen
+        DisplayMetrics displaymetrics = new DisplayMetrics();
+        this.getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+        int screenWidth = displaymetrics.widthPixels;
+        int screenHeight = displaymetrics.heightPixels;
+        return new Point(screenWidth, screenHeight);
     }
 
     @Override
     public void onClick(View v){
         if(v.getId() == R.id.create_group_button){
-            groupCreationPopup.showAtLocation(v, Gravity.CENTER, 50, 0);
+            // Getting width and height of screen
+            Point point = getWidthAndHeight();
+            int screenWidth = point.x;
+            int screenHeight = point.y;
+            groupCreationPopup.showAtLocation(v, Gravity.CENTER,
+                    (int) Math.floor(screenWidth * .1), (int) Math.floor(screenHeight * .1));
         }
         else{
             groupCreationPopup.dismiss();
