@@ -101,7 +101,7 @@ public class FriendsList extends AppCompatActivity implements OnClickListener{
             Point point = getWidthAndHeight();
             int screenWidth = point.x;
             int screenHeight = point.y;
-            groupCreationPopup.showAtLocation(v, Gravity.CENTER,
+            groupCreationPopup.showAtLocation(v, Gravity.NO_GRAVITY,
                     (int) Math.floor(screenWidth * .1), (int) Math.floor(screenHeight * .1));
         }
         else{
