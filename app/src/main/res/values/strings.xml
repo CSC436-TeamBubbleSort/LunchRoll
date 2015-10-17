@@ -23,4 +23,8 @@
 
     <!-- String related to Friends List -->
     <string name="create_group">Create Group</string>
+    <string name="create_group_popup_header_string">Group Creation</string>
+    <string name="create_group_popup_create_button_string">Create Group</string>
+    <string name="create_group_popup_cancel_button_string">Cancel</string>
+    <string name="create_group_popup_name_label">Name of Group:</string>
 </resources>
