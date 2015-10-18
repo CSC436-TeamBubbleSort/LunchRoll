@@ -6,7 +6,7 @@
     android:weightSum="1"
     android:id="@+id/create_group_popup_layout"
     android:background="@drawable/friends_list_gradient">
-    
+
     <TextView
         android:layout_width="181dp"
         android:layout_height="wrap_content"
