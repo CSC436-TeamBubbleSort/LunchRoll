@@ -1,12 +1,8 @@
 package com.csc436.team_bubble_sort.lunchroll;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Point;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ShapeDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
@@ -16,15 +12,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
-import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -33,11 +25,6 @@ public class FriendsListActivity extends AppCompatActivity implements OnClickLis
     // Array holding list of friends
     private String[] friends = {"bob", "susan", "susan", "bob", "susan", "bob",
             "susan", "bob", "susan", "bob", "susan"};
-    ArrayList<String> friendsList = new ArrayList<String>();
-    private ArrayList<String> selectedFriends = new ArrayList<String>();
-    ViewGroup.LayoutParams groupCreateButtonLayoutParams; // Params for objects in popup
-    ListView friendsView; // Friends list
-    ListView selectedFriendsView; // Selected friends that appear in popup window
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,19 +32,21 @@ public class FriendsListActivity extends AppCompatActivity implements OnClickLis
         setContentView(R.layout.activity_friends_list);
 
         // The friend's list
+        ArrayList<String> friendsList = new ArrayList<>();
         friendsList.addAll(Arrays.asList(friends));
-        ArrayAdapter<String> friendsAdapter = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> friendsAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_multiple_choice, friendsList);
-        friendsView = (ListView) findViewById(R.id.listView); // Friends list
+        ListView friendsView = (ListView) findViewById(R.id.listView); // Friends list
         friendsView.setAdapter(friendsAdapter);
         // Dummy additions for now (want to grab selected names for listview in popup)
-        selectedFriendsView = new ListView(this);
+        ListView selectedFriendsView = new ListView(this);
+        ArrayList<String> selectedFriends = new ArrayList<>();
         selectedFriends.add("Jimmy");
         selectedFriends.add("Nepal");
         selectedFriends.add("Inanimate Object");
         selectedFriends.add("Mini-Texas");
         // The listview of the popup ( might have to put in own method to make more dynamic??)
-        ArrayAdapter<String> selectedFriendsAdapter = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> selectedFriendsAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_multiple_choice, selectedFriends);
         selectedFriendsView.setAdapter(selectedFriendsAdapter);
     }
