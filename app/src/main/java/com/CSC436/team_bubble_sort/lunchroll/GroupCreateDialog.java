@@ -56,7 +56,7 @@ public class GroupCreateDialog extends DialogFragment implements  View.OnClickLi
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
         if(v.getId() == R.id.create_group_popup_name_field){
             getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-            nameBox.requestFocus();
+            v.requestFocus();
         }
         return false;
     }
