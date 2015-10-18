@@ -33,7 +33,7 @@
         android:focusableInTouchMode="true"
         android:focusable="true"
         android:layout_weight=".5"
-        android:hint="@+id/create_group_popup_name_field_string" />
+        android:hint="@string/create_group_popup_hint_string" />
 
     <LinearLayout
         android:orientation="horizontal"
