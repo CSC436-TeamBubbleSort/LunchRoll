@@ -26,13 +26,11 @@ public class GroupCreateDialog extends DialogFragment implements  View.OnClickLi
     private ArrayList<String> selectedFriendsList;
     private ArrayAdapter selectedFriendsAdapter;
     private ListView selectedFriendsView;
-    private Context context;
 
     @Override
     public void onAttach(Activity activity){
         super.onAttach(activity);
         communicator = (CommunicateBackToFriendsList) activity;
-        context = activity;
     }
 
     @Override
@@ -69,9 +67,9 @@ public class GroupCreateDialog extends DialogFragment implements  View.OnClickLi
     private void initSelectedFriendsList(){
         selectedFriendsList = new ArrayList<>();
         selectedFriendsList.addAll(Arrays.asList(selectedFriends));
-        selectedFriendsAdapter = new ArrayAdapter<>(context,
+        selectedFriendsAdapter = new ArrayAdapter<>(this.getContext(),
                 android.R.layout.simple_list_item_multiple_choice, selectedFriendsList);
-        selectedFriendsView = (ListView) getActivity().findViewById(R.id.selected_friends); // Friends list
+        selectedFriendsView = (ListView) this.getView().findViewById(R.id.selected_friends); // Friends list
         selectedFriendsView.setAdapter(selectedFriendsAdapter);
     }
 }
