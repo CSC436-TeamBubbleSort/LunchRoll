@@ -33,7 +33,6 @@ public class FriendsListActivity extends AppCompatActivity implements GroupCreat
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends_list);
         initFriendsList();
-
     }
 
     public void showGroupCreateDialog(View view) {

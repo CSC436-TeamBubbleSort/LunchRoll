@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by DevinB on 10/17/2015.
@@ -21,7 +22,8 @@ public class GroupCreateDialog extends DialogFragment implements  View.OnClickLi
     Button createGroup, cancel;
     EditText nameBox;
     CommunicateBackToFriendsList communicator;
-    private ArrayList<String> selectedFriends;
+    private String[] selectedFriends = {"Cortana", "Siri", "someDrunkGuy", "fortuneCookie"};
+    private ArrayList<String> selectedFriendsList;
     private ArrayAdapter selectedFriendsAdapter;
     private ListView selectedFriendsView;
 
@@ -64,13 +66,9 @@ public class GroupCreateDialog extends DialogFragment implements  View.OnClickLi
 
     private void initSelectedFriendsList(Context context){
         selectedFriendsView = new ListView(context);
-        selectedFriends = new ArrayList<>();
-        selectedFriends.add("Jimmy");
-        selectedFriends.add("Nepal");
-        selectedFriends.add("Inanimate Object");
-        selectedFriends.add("Mini-Texas");
-        // The listview of the popup ( might have to put in own method to make more dynamic??)
-        selectedFriendsAdapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_multiple_choice, selectedFriends);
+        selectedFriendsList.addAll(Arrays.asList(selectedFriends));
+        selectedFriendsAdapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_multiple_choice, selectedFriendsList);
+        selectedFriendsView = (ListView) getActivity().findViewById(R.id.selected_friends); // Friends list
         selectedFriendsView.setAdapter(selectedFriendsAdapter);
     }
 }
