@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * TODO: remove after connecting to a real authentication system.
      */
     private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@com.com.csc436.csc436.com:hello", "bar@com.com.csc436.csc436.com:world"
+            "admin@gmail.com:abc", "dev@gmail.com:123"
     };
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
@@ -137,7 +137,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
-
     /**
      * Attempts to sign in or register the account specified by the login form.
      * If there are form errors (invalid email, missing fields, etc.), the
@@ -191,13 +190,23 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
-        return email.contains("@");
+        for(String cred : DUMMY_CREDENTIALS){
+            String dummy_email = cred.split(":")[0];
+            if(email.equals(dummy_email)){
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
-        return password.length() > 4;
+        for(String cred : DUMMY_CREDENTIALS){
+            String dummy_password = cred.split(":")[1];
+            if(password.equals(dummy_password)){
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
