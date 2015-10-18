@@ -2,15 +2,17 @@ package com.csc436.team_bubble_sort.lunchroll;
 
 import android.app.Activity;
 import android.app.DialogFragment;
+import android.content.Context;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 /**
  * Created by DevinB on 10/17/2015.
@@ -19,6 +21,9 @@ public class GroupCreateDialog extends DialogFragment implements  View.OnClickLi
     Button createGroup, cancel;
     EditText nameBox;
     CommunicateBackToFriendsList communicator;
+    private ArrayList<String> selectedFriends;
+    private ArrayAdapter selectedFriendsAdapter;
+    private ListView selectedFriendsView;
 
     @Override
     public void onAttach(Activity activity){
@@ -32,6 +37,7 @@ public class GroupCreateDialog extends DialogFragment implements  View.OnClickLi
         createGroup = (Button) view.findViewById(R.id.create_group_popup_create_button);
         cancel = (Button) view.findViewById(R.id.create_group_popup_cancel_button);
         nameBox = (EditText) view.findViewById(R.id.create_group_popup_name_field);
+        initSelectedFriendsList(getActivity());
         createGroup.setOnClickListener(this);
         cancel.setOnClickListener(this);
         setCancelable(false);
@@ -53,6 +59,18 @@ public class GroupCreateDialog extends DialogFragment implements  View.OnClickLi
     }
 
     interface CommunicateBackToFriendsList{
-        public void sendCreateGroupMessageBack(String nameOfGroup);
+        void sendCreateGroupMessageBack(String nameOfGroup);
+    }
+
+    private void initSelectedFriendsList(Context context){
+        selectedFriendsView = new ListView(context);
+        selectedFriends = new ArrayList<>();
+        selectedFriends.add("Jimmy");
+        selectedFriends.add("Nepal");
+        selectedFriends.add("Inanimate Object");
+        selectedFriends.add("Mini-Texas");
+        // The listview of the popup ( might have to put in own method to make more dynamic??)
+        selectedFriendsAdapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_multiple_choice, selectedFriends);
+        selectedFriendsView.setAdapter(selectedFriendsAdapter);
     }
 }

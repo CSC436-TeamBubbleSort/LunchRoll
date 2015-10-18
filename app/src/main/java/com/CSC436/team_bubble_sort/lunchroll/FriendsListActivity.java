@@ -23,12 +23,9 @@ public class FriendsListActivity extends AppCompatActivity implements GroupCreat
     // Array holding list of friends
     private String[] friends = {"bob", "susan", "susan", "bob", "susan", "bob",
             "susan", "bob", "susan", "bob", "susan"};
-    private ListView selectedFriendsView;
     private ArrayList<String> friendsList;
     private ArrayAdapter<String> friendsAdapter;
     private ListView friendsView;
-    private ArrayList<String> selectedFriends;
-    private ArrayAdapter<String> selectedFriendsAdapter;
     private String newGroupName = "";
 
     @Override
@@ -36,7 +33,7 @@ public class FriendsListActivity extends AppCompatActivity implements GroupCreat
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends_list);
         initFriendsList();
-        initSelectedFriendsList();
+
     }
 
     public void showGroupCreateDialog(View view) {
@@ -49,19 +46,6 @@ public class FriendsListActivity extends AppCompatActivity implements GroupCreat
     public void sendCreateGroupMessageBack(String nameOfGroup) {
         newGroupName = nameOfGroup;
         Toast.makeText(this, newGroupName, Toast.LENGTH_SHORT).show();
-    }
-
-    private void initSelectedFriendsList(){
-        selectedFriendsView = new ListView(this);
-        selectedFriends = new ArrayList<>();
-        selectedFriends.add("Jimmy");
-        selectedFriends.add("Nepal");
-        selectedFriends.add("Inanimate Object");
-        selectedFriends.add("Mini-Texas");
-        // The listview of the popup ( might have to put in own method to make more dynamic??)
-        selectedFriendsAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_multiple_choice, selectedFriends);
-        selectedFriendsView.setAdapter(selectedFriendsAdapter);
     }
 
     private void initFriendsList(){
