@@ -64,11 +64,12 @@ public class GroupCreateDialog extends DialogFragment implements  View.OnClickLi
         void sendCreateGroupMessageBack(String nameOfGroup);
     }
 
-    private void initSelectedFriendsList(Context context){
-        selectedFriendsView = new ListView(context);
+    private void initSelectedFriendsList(Activity activity){
+        selectedFriendsList = new ArrayList<>();
         selectedFriendsList.addAll(Arrays.asList(selectedFriends));
-        selectedFriendsAdapter = new ArrayAdapter<>(context, android.R.layout.simple_list_item_multiple_choice, selectedFriendsList);
-        selectedFriendsView = (ListView) getActivity().findViewById(R.id.selected_friends); // Friends list
+        selectedFriendsAdapter = new ArrayAdapter<>(activity,
+                android.R.layout.simple_list_item_multiple_choice, selectedFriendsList);
+        selectedFriendsView = (ListView) activity.findViewById(R.id.selected_friends); // Friends list
         selectedFriendsView.setAdapter(selectedFriendsAdapter);
     }
 }
