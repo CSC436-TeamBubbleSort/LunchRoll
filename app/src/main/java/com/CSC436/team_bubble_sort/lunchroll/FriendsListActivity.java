@@ -3,6 +3,7 @@ package com.csc436.team_bubble_sort.lunchroll;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Point;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
@@ -83,7 +84,14 @@ public class FriendsListActivity extends AppCompatActivity implements OnClickLis
         View layout = layoutInflater.inflate(R.layout.create_group_popup, viewGroup);
         // Create the popup window
         final PopupWindow createGroupPopup = new PopupWindow(context);
-        setContentView(layout);
+        createGroupPopup.setContentView(layout);
+        createGroupPopup.setWidth(popupWidth);
+        createGroupPopup.setHeight(popupHeight);
+        createGroupPopup.setFocusable(true);
+        createGroupPopup.setBackgroundDrawable(new BitmapDrawable());
+        // Display the popup
+        createGroupPopup.showAtLocation(layout, Gravity.NO_GRAVITY, 0, 0);
+
     }
 
     @Override
