@@ -24,38 +24,18 @@
         android:layout_weight="0.64"
         android:paddingTop="8dp" />
 
-    <LinearLayout
-        android:orientation="horizontal"
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:weightSum="4"
+        android:id="@+id/create_group_popup_name_field"
+        android:layout_gravity="center_horizontal"
+        android:inputType="text"
+        android:labelFor="@+id/create_group_popup_name_field"
+        android:paddingRight="8dp"
+        android:paddingLeft="8dp"
         android:paddingTop="8dp"
-        android:id="@+id/create_group_popup_name_layout"
-        >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="45dp"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/create_group_popup_name_label"
-            android:id="@+id/create_group_popup_name_label"
-            android:layout_weight="0.09"
-            android:paddingRight="8dp"
-            android:paddingLeft="8dp"/>
-
-        <EditText
-            android:layout_width="173dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/create_group_popup_name_field"
-            android:layout_gravity="center_horizontal"
-            android:inputType="text"
-            android:labelFor="@+id/create_group_popup_name_field"
-            android:paddingRight="8dp"
-            android:paddingLeft="8dp"
-            android:layout_weight="0.59"
-            android:editable="true"
-            android:focusableInTouchMode="false" />
-    </LinearLayout>
+        android:focusableInTouchMode="false"
+        android:text="@string/create_group_popup_name_field_string" />
 
     <LinearLayout
         android:orientation="horizontal"
