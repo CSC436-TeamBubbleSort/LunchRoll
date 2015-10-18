@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1"
-    android:id="@+id/create_group_popup_layout"
     android:background="@drawable/friends_list_gradient">
 
     <TextView
@@ -70,18 +69,6 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/create_group_popup_create_button_string"
-            android:id="@+id/create_group_popup_create_button"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="1.55"
-            android:paddingRight="8dp"
-            android:paddingLeft="8dp"
-            style="?android:attr/buttonBarButtonStyle"
-            android:textColor="@color/myBlack"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="@string/create_group_popup_cancel_button_string"
             android:id="@+id/create_group_popup_cancel_button"
             android:layout_gravity="center_horizontal"
@@ -91,5 +78,17 @@
             style="?android:attr/buttonBarButtonStyle"
             android:textColor="@color/myBlack"
             />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/create_group_popup_create_button_string"
+            android:id="@+id/create_group_popup_create_button"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1.55"
+            android:paddingRight="8dp"
+            android:paddingLeft="8dp"
+            style="?android:attr/buttonBarButtonStyle"
+            android:textColor="@color/myBlack"/>
     </LinearLayout>
 </LinearLayout>

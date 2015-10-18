@@ -1,22 +1,19 @@
 package com.csc436.team_bubble_sort.lunchroll;
 
 import android.app.Activity;
-import android.content.Context;
+import android.app.FragmentManager;
 import android.graphics.Point;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
+import android.widget.Button;
 import android.widget.ListView;
-import android.widget.PopupWindow;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -30,15 +27,10 @@ public class FriendsListActivity extends AppCompatActivity implements OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends_list);
-
+        final Button createGroupButton = (Button) findViewById(R.id.create_group_button);
         initFriendsList();
         initSelectedFriendsList();
 
-    }
-
-    @Override
-    public void onClick(View v){
-        if(v.getId() == R.id.create_group_button) showPopup(this);
     }
 
     private void initSelectedFriendsList(){
@@ -71,26 +63,8 @@ public class FriendsListActivity extends AppCompatActivity implements OnClickLis
         return new Point(displayMetrics.widthPixels, displayMetrics.heightPixels);
     }
 
-    private void showPopup(final Activity context){
-        Point p = getWidthAndHeight();
-        //int popupWidth = p.x;
-        //int popupHeight = p.y;
-        int popupWidth = 500;
-        int popupHeight = 500;
-        // Inflate the popup layout xml file
-        LinearLayout viewGroup = (LinearLayout) context.findViewById(R.id.create_group_popup_layout);
-        LayoutInflater layoutInflater = (LayoutInflater)
-                context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View layout = layoutInflater.inflate(R.layout.create_group_popup, viewGroup);
-        // Create the popup window
-        final PopupWindow createGroupPopup = new PopupWindow(context);
-        createGroupPopup.setContentView(layout);
-        createGroupPopup.setWidth(popupWidth);
-        createGroupPopup.setHeight(popupHeight);
-        createGroupPopup.setFocusable(true);
-        createGroupPopup.setBackgroundDrawable(new BitmapDrawable());
-        // Display the popup
-        createGroupPopup.showAtLocation(layout, Gravity.NO_GRAVITY, 0, 0);
+    private void showPopup(Activity context){
+
 
     }
 
@@ -114,5 +88,16 @@ public class FriendsListActivity extends AppCompatActivity implements OnClickLis
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void showGroupCreateDialog(View view) {
+        FragmentManager manager = getFragmentManager();
+        GroupCreateDialog dialog = new GroupCreateDialog();
+        dialog.show(manager,"groupCreateDialog");
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }
