@@ -82,8 +82,6 @@ public class FriendsListActivity extends AppCompatActivity implements OnClickLis
         createGroupPopup.setWidth(popupWidth);
         createGroupPopup.setHeight(popupHeight);
         createGroupPopup.setFocusable(true);
-        createGroupPopup.setWindowLayoutMode(ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
 
         // Display the popup
         createGroupPopup.showAtLocation(layout,Gravity.NO_GRAVITY, 0, 0);
@@ -95,6 +93,7 @@ public class FriendsListActivity extends AppCompatActivity implements OnClickLis
                 createGroupPopup.dismiss();
             }
         });
+        createGroupPopup.update();
     }
 
     @Override
