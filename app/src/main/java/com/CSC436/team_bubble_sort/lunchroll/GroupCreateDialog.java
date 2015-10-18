@@ -3,17 +3,19 @@ package com.csc436.team_bubble_sort.lunchroll;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 /**
  * Created by DevinB on 10/17/2015.
  */
-public class GroupCreateDialog extends DialogFragment implements  View.OnClickListener{
+public class GroupCreateDialog extends DialogFragment implements  View.OnClickListener, TextView.OnEditorActionListener{
     Button createGroup, cancel;
     EditText nameBox;
     CommunicateBackToFriendsList communicator;
@@ -30,8 +32,7 @@ public class GroupCreateDialog extends DialogFragment implements  View.OnClickLi
         createGroup = (Button) view.findViewById(R.id.create_group_popup_create_button);
         cancel = (Button) view.findViewById(R.id.create_group_popup_cancel_button);
         nameBox = (EditText) view.findViewById(R.id.create_group_popup_name_field);
-        getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-        nameBox.requestFocus();
+        nameBox.setOnEditorActionListener(this);
         createGroup.setOnClickListener(this);
         cancel.setOnClickListener(this);
         setCancelable(false);
@@ -49,6 +50,15 @@ public class GroupCreateDialog extends DialogFragment implements  View.OnClickLi
             communicator.sendCreateGroupMessageBack(groupName);
             dismiss();
         }
+    }
+
+    @Override
+    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+        if(v.getId() == R.id.create_group_popup_name_field){
+            getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+            nameBox.requestFocus();
+        }
+        return false;
     }
 
     interface CommunicateBackToFriendsList{
