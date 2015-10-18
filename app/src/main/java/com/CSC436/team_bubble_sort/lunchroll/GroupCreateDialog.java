@@ -27,10 +27,10 @@ public class GroupCreateDialog extends DialogFragment implements  View.OnClickLi
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.create_group_popup_cancel_button){
-            // Add group!
+            dismiss();
         }
         else if(v.getId() == R.id.create_group_popup_create_button){
-            dismiss();
+            // Add group!
         }
     }
 }
