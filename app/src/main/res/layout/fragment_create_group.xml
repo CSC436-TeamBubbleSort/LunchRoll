@@ -14,7 +14,10 @@
         android:id="@+id/selected_friends"
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.64"
-        android:paddingTop="8dp" />
+        android:paddingTop="8dp"
+        android:choiceMode="none"
+        android:cacheColorHint="@color/transparent"
+        android:clickable="false"/>
 
     <EditText
         android:layout_width="match_parent"
