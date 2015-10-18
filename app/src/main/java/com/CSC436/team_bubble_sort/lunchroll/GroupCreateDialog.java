@@ -2,7 +2,6 @@ package com.csc436.team_bubble_sort.lunchroll;
 
 import android.app.Activity;
 import android.app.DialogFragment;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -67,7 +66,7 @@ public class GroupCreateDialog extends DialogFragment implements  View.OnClickLi
     private void initSelectedFriendsList(){
         selectedFriendsList = new ArrayList<>();
         selectedFriendsList.addAll(Arrays.asList(selectedFriends));
-        selectedFriendsAdapter = new ArrayAdapter<>(this.getContext(),
+        selectedFriendsAdapter = new ArrayAdapter<>(this.getActivity(),
                 android.R.layout.simple_list_item_multiple_choice, selectedFriendsList);
         selectedFriendsView = (ListView) this.getView().findViewById(R.id.selected_friends); // Friends list
         selectedFriendsView.setAdapter(selectedFriendsAdapter);
