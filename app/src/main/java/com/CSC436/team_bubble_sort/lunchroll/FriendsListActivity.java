@@ -3,6 +3,7 @@ package com.csc436.team_bubble_sort.lunchroll;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Point;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
@@ -71,7 +72,7 @@ public class FriendsListActivity extends AppCompatActivity implements OnClickLis
         LinearLayout viewGroup = (LinearLayout) context.findViewById(R.id.create_group_popup_layout);
         LayoutInflater layoutInflater = (LayoutInflater)
                 context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View layout = layoutInflater.inflate(R.layout.create_group_popup_layout, viewGroup);
+        View layout = layoutInflater.inflate(R.layout.create_group_popup, viewGroup);
         // Create the popup window
         final PopupWindow createGroupPopup = new PopupWindow(context);
         createGroupPopup.setContentView(layout);
@@ -80,7 +81,7 @@ public class FriendsListActivity extends AppCompatActivity implements OnClickLis
         createGroupPopup.setFocusable(true);
 
         // Clear the default translucent background
-
+        createGroupPopup.setBackgroundDrawable(new BitmapDrawable());
         // Display the popup
         createGroupPopup.showAtLocation(layout,Gravity.NO_GRAVITY, 0, 0);
         // Getting a reference to the cancel button, and closing the popup when clicked
