@@ -39,7 +39,7 @@ public class GroupCreateDialog extends DialogFragment implements  View.OnClickLi
         createGroup = (Button) view.findViewById(R.id.create_group_popup_create_button);
         cancel = (Button) view.findViewById(R.id.create_group_popup_cancel_button);
         nameBox = (EditText) view.findViewById(R.id.create_group_popup_name_field);
-        initSelectedFriendsList(getActivity());
+        initSelectedFriendsList();
         createGroup.setOnClickListener(this);
         cancel.setOnClickListener(this);
         setCancelable(false);
@@ -64,12 +64,12 @@ public class GroupCreateDialog extends DialogFragment implements  View.OnClickLi
         void sendCreateGroupMessageBack(String nameOfGroup);
     }
 
-    private void initSelectedFriendsList(Activity activity){
+    private void initSelectedFriendsList(){
         selectedFriendsList = new ArrayList<>();
         selectedFriendsList.addAll(Arrays.asList(selectedFriends));
-        selectedFriendsAdapter = new ArrayAdapter<>(activity,
+        selectedFriendsAdapter = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_list_item_multiple_choice, selectedFriendsList);
-        selectedFriendsView = (ListView) activity.findViewById(R.id.selected_friends); // Friends list
+        selectedFriendsView = (ListView) getActivity().findViewById(R.id.selected_friends); // Friends list
         selectedFriendsView.setAdapter(selectedFriendsAdapter);
     }
 }
