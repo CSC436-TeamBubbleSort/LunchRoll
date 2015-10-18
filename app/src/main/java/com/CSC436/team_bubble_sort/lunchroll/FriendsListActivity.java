@@ -13,6 +13,7 @@ import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,15 +23,20 @@ public class FriendsListActivity extends AppCompatActivity implements GroupCreat
     // Array holding list of friends
     private String[] friends = {"bob", "susan", "susan", "bob", "susan", "bob",
             "susan", "bob", "susan", "bob", "susan"};
+    private ListView selectedFriendsView;
+    private ArrayList<String> friendsList;
+    private ArrayAdapter<String> friendsAdapter;
+    private ListView friendsView;
+    private ArrayList<String> selectedFriends;
+    private ArrayAdapter<String> selectedFriendsAdapter;
+    private String newGroupName = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends_list);
-        final Button createGroupButton = (Button) findViewById(R.id.create_group_button);
         initFriendsList();
         initSelectedFriendsList();
-
     }
 
     public void showGroupCreateDialog(View view) {
@@ -41,29 +47,31 @@ public class FriendsListActivity extends AppCompatActivity implements GroupCreat
 
     @Override
     public void sendCreateGroupMessageBack(String nameOfGroup) {
-
+        newGroupName = nameOfGroup;
+        // Temporary Display for testing
+        Toast.makeText(this, newGroupName, Toast.LENGTH_SHORT).show();
     }
 
     private void initSelectedFriendsList(){
-        ListView selectedFriendsView = new ListView(this);
-        ArrayList<String> selectedFriends = new ArrayList<>();
+        selectedFriendsView = new ListView(this);
+        selectedFriends = new ArrayList<>();
         selectedFriends.add("Jimmy");
         selectedFriends.add("Nepal");
         selectedFriends.add("Inanimate Object");
         selectedFriends.add("Mini-Texas");
         // The listview of the popup ( might have to put in own method to make more dynamic??)
-        ArrayAdapter<String> selectedFriendsAdapter = new ArrayAdapter<>(this,
+        selectedFriendsAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_multiple_choice, selectedFriends);
         selectedFriendsView.setAdapter(selectedFriendsAdapter);
     }
 
     private void initFriendsList(){
         // The friend's list
-        ArrayList<String> friendsList = new ArrayList<>();
+        friendsList = new ArrayList<>();
         friendsList.addAll(Arrays.asList(friends));
-        ArrayAdapter<String> friendsAdapter = new ArrayAdapter<>(this,
+        friendsAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_multiple_choice, friendsList);
-        ListView friendsView = (ListView) findViewById(R.id.listView); // Friends list
+        friendsView = (ListView) findViewById(R.id.listView); // Friends list
         friendsView.setAdapter(friendsAdapter);
     }
 
