@@ -94,6 +94,13 @@ public class FriendsListActivity extends AppCompatActivity implements OnClickLis
     }
 
     @Override
+    public void onWindowFocusChanged(boolean hasFocus){
+        int[] location = new int[2];
+        Button button = (Button) findViewById(R.id.create_group_button);
+        button.getLocationOnScreen(location);
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_friends_list, menu);
