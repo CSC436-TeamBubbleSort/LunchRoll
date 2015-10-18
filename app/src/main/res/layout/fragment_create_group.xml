@@ -34,7 +34,9 @@
         android:paddingRight="8dp"
         android:paddingLeft="8dp"
         android:paddingTop="8dp"
-        android:focusableInTouchMode="false"
+        android:background="@color/myWhite"
+        android:focusableInTouchMode="true"
+        android:focusable="true"
         android:text="@string/create_group_popup_name_field_string" />
 
     <LinearLayout
