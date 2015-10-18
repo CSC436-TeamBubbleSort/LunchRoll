@@ -91,7 +91,7 @@ public class FriendsListActivity extends AppCompatActivity implements OnClickLis
         createGroupPopup.setFocusable(true);
 
         // Clear the default translucent background
-        
+
         // Display the popup
         createGroupPopup.showAtLocation(layout,Gravity.NO_GRAVITY, 0, 0);
         // Getting a reference to the cancel button, and closing the popup when clicked
