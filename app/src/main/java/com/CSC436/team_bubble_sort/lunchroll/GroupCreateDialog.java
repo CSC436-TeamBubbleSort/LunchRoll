@@ -25,6 +25,7 @@ public class GroupCreateDialog extends DialogFragment implements  View.OnClickLi
     private ArrayList<String> selectedFriendsList;
     private ArrayAdapter selectedFriendsAdapter;
     private ListView selectedFriendsView;
+    View view;
 
     @Override
     public void onAttach(Activity activity){
@@ -34,7 +35,7 @@ public class GroupCreateDialog extends DialogFragment implements  View.OnClickLi
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.fragment_create_group, null);
+        view = inflater.inflate(R.layout.fragment_create_group, null);
         createGroup = (Button) view.findViewById(R.id.create_group_popup_create_button);
         cancel = (Button) view.findViewById(R.id.create_group_popup_cancel_button);
         nameBox = (EditText) view.findViewById(R.id.create_group_popup_name_field);
@@ -66,9 +67,9 @@ public class GroupCreateDialog extends DialogFragment implements  View.OnClickLi
     private void initSelectedFriendsList(){
         selectedFriendsList = new ArrayList<>();
         selectedFriendsList.addAll(Arrays.asList(selectedFriends));
-        selectedFriendsAdapter = new ArrayAdapter<>(this.getActivity(),
+        selectedFriendsAdapter = new ArrayAdapter<>(view.getContext(),
                 android.R.layout.simple_list_item_multiple_choice, selectedFriendsList);
-        selectedFriendsView = (ListView) this.getView().findViewById(R.id.selected_friends); // Friends list
+        selectedFriendsView = (ListView) view.findViewById(R.id.selected_friends); // Friends list
         selectedFriendsView.setAdapter(selectedFriendsAdapter);
     }
 }
