@@ -48,7 +48,6 @@ public class FriendsListActivity extends AppCompatActivity implements GroupCreat
     @Override
     public void sendCreateGroupMessageBack(String nameOfGroup) {
         newGroupName = nameOfGroup;
-        // Temporary Display for testing
         Toast.makeText(this, newGroupName, Toast.LENGTH_SHORT).show();
     }
 

@@ -35,6 +35,7 @@ public class GroupCreateDialog extends DialogFragment implements  View.OnClickLi
         createGroup.setOnClickListener(this);
         cancel.setOnClickListener(this);
         setCancelable(false);
+        getDialog().setTitle("Create Group");
         // Don't need ViewGroup parent so pass null
         return view;
     }
