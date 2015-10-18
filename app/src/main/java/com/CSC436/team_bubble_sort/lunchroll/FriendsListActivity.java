@@ -2,12 +2,9 @@ package com.csc436.team_bubble_sort.lunchroll;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Point;
-import android.graphics.drawable.ShapeDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.style.BackgroundColorSpan;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -15,9 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
@@ -35,14 +30,17 @@ public class FriendsListActivity extends AppCompatActivity implements OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends_list);
 
-        // The friend's list
-        ArrayList<String> friendsList = new ArrayList<>();
-        friendsList.addAll(Arrays.asList(friends));
-        ArrayAdapter<String> friendsAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_multiple_choice, friendsList);
-        ListView friendsView = (ListView) findViewById(R.id.listView); // Friends list
-        friendsView.setAdapter(friendsAdapter);
-        // Dummy additions for now (want to grab selected names for listview in popup)
+        initFriendsList();
+        initSelectedFriendsList();
+
+    }
+
+    @Override
+    public void onClick(View v){
+        if(v.getId() == R.id.create_group_button) showPopup(this);
+    }
+
+    private void initSelectedFriendsList(){
         ListView selectedFriendsView = new ListView(this);
         ArrayList<String> selectedFriends = new ArrayList<>();
         selectedFriends.add("Jimmy");
@@ -55,9 +53,14 @@ public class FriendsListActivity extends AppCompatActivity implements OnClickLis
         selectedFriendsView.setAdapter(selectedFriendsAdapter);
     }
 
-    @Override
-    public void onClick(View v){
-        if(v.getId() == R.id.create_group_button) showPopup(this);
+    private void initFriendsList(){
+        // The friend's list
+        ArrayList<String> friendsList = new ArrayList<>();
+        friendsList.addAll(Arrays.asList(friends));
+        ArrayAdapter<String> friendsAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_multiple_choice, friendsList);
+        ListView friendsView = (ListView) findViewById(R.id.listView); // Friends list
+        friendsView.setAdapter(friendsAdapter);
     }
 
     private Point getWidthAndHeight(){
@@ -69,8 +72,10 @@ public class FriendsListActivity extends AppCompatActivity implements OnClickLis
 
     private void showPopup(final Activity context){
         Point p = getWidthAndHeight();
-        int popupWidth = p.x;
-        int popupHeight = p.y;
+        //int popupWidth = p.x;
+        //int popupHeight = p.y;
+        int popupWidth = 500;
+        int popupHeight = 500;
         // Inflate the popup layout xml file
         LinearLayout viewGroup = (LinearLayout) context.findViewById(R.id.create_group_popup_layout);
         LayoutInflater layoutInflater = (LayoutInflater)
@@ -82,18 +87,10 @@ public class FriendsListActivity extends AppCompatActivity implements OnClickLis
         createGroupPopup.setWidth(popupWidth);
         createGroupPopup.setHeight(popupHeight);
         createGroupPopup.setFocusable(true);
-
         // Display the popup
-        createGroupPopup.showAtLocation(layout,Gravity.NO_GRAVITY, 0, 0);
-        // Getting a reference to the cancel button, and closing the popup when clicked
-        Button cancel = (Button) layout.findViewById(R.id.create_group_popup_cancel_button);
-        cancel.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                createGroupPopup.dismiss();
-            }
-        });
+        createGroupPopup.showAtLocation(layout, Gravity.NO_GRAVITY, 0, 0);
         createGroupPopup.update();
+
     }
 
     @Override

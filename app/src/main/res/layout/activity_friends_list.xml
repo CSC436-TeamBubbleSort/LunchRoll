@@ -30,6 +30,8 @@
         android:id="@+id/create_group_button"
         android:layout_weight="1"
         android:layout_gravity="center"
-        />
+        android:contextClickable="true"
+        android:clickable="true"
+        android:enabled="true" />
 
 </LinearLayout>
