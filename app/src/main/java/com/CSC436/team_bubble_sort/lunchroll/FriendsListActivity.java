@@ -17,7 +17,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class FriendsListActivity extends AppCompatActivity implements OnClickListener{
+public class FriendsListActivity extends AppCompatActivity implements GroupCreateDialog.CommunicateBackToFriendsList{
 
     // Array holding list of friends
     private String[] friends = {"bob", "susan", "susan", "bob", "susan", "bob",
@@ -30,6 +30,17 @@ public class FriendsListActivity extends AppCompatActivity implements OnClickLis
         final Button createGroupButton = (Button) findViewById(R.id.create_group_button);
         initFriendsList();
         initSelectedFriendsList();
+
+    }
+
+    public void showGroupCreateDialog(View view) {
+        FragmentManager manager = getFragmentManager();
+        GroupCreateDialog dialog = new GroupCreateDialog();
+        dialog.show(manager,"groupCreateDialog");
+    }
+
+    @Override
+    public void sendCreateGroupMessageBack(String nameOfGroup) {
 
     }
 
@@ -56,18 +67,6 @@ public class FriendsListActivity extends AppCompatActivity implements OnClickLis
         friendsView.setAdapter(friendsAdapter);
     }
 
-    private Point getWidthAndHeight(){
-        // Getting width and height of screen
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        this.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        return new Point(displayMetrics.widthPixels, displayMetrics.heightPixels);
-    }
-
-    private void showPopup(Activity context){
-
-
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -88,16 +87,5 @@ public class FriendsListActivity extends AppCompatActivity implements OnClickLis
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void showGroupCreateDialog(View view) {
-        FragmentManager manager = getFragmentManager();
-        GroupCreateDialog dialog = new GroupCreateDialog();
-        dialog.show(manager,"groupCreateDialog");
-    }
-
-    @Override
-    public void onClick(View v) {
-
     }
 }

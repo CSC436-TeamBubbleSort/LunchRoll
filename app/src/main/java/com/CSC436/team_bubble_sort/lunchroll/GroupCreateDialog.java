@@ -1,5 +1,6 @@
 package com.csc436.team_bubble_sort.lunchroll;
 
+import android.app.Activity;
 import android.app.DialogFragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,6 +13,14 @@ import android.widget.Button;
  */
 public class GroupCreateDialog extends DialogFragment implements  View.OnClickListener{
     Button createGroup, cancel;
+    CommunicateBackToFriendsList communicator;
+
+    @Override
+    public void onAttach(Activity activity){
+        super.onAttach(activity);
+        communicator = (CommunicateBackToFriendsList) activity;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment_create_group, null);
@@ -30,7 +39,12 @@ public class GroupCreateDialog extends DialogFragment implements  View.OnClickLi
             dismiss();
         }
         else if(v.getId() == R.id.create_group_popup_create_button){
-            // Add group!
+            communicator.sendCreateGroupMessageBack("Group Name");
+            dismiss();
         }
+    }
+
+    interface CommunicateBackToFriendsList{
+        public void sendCreateGroupMessageBack(String nameOfGroup);
     }
 }
