@@ -189,8 +189,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
         }
-        
-        Intent intent = new Intent(this, FragmentActivity.class);
+
+        Intent intent = new Intent(this, FriendsListActivity.class);
         startActivity(intent);
     }
 
