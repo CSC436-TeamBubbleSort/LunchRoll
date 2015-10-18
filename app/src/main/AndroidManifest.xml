@@ -26,7 +26,7 @@
             android:label="@string/title_activity_group_select" >
         </activity>
         <activity
-            android:name=".FriendsListActivity"
+            android:name="com.csc436.team_bubble_sort.lunchroll.FriendsListActivity"
             android:label="@string/title_activity_friends_list" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
