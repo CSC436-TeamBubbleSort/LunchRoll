@@ -83,14 +83,7 @@ public class FriendsListActivity extends AppCompatActivity implements OnClickLis
         View layout = layoutInflater.inflate(R.layout.create_group_popup, viewGroup);
         // Create the popup window
         final PopupWindow createGroupPopup = new PopupWindow(context);
-        createGroupPopup.setContentView(layout);
-        createGroupPopup.setWidth(popupWidth);
-        createGroupPopup.setHeight(popupHeight);
-        createGroupPopup.setFocusable(true);
-        // Display the popup
-        createGroupPopup.showAtLocation(layout, Gravity.NO_GRAVITY, 0, 0);
-        createGroupPopup.update();
-
+        setContentView(layout);
     }
 
     @Override
