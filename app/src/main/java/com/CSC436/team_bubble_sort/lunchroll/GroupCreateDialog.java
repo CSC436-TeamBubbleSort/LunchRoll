@@ -68,7 +68,7 @@ public class GroupCreateDialog extends DialogFragment implements  View.OnClickLi
 
     private void initSelectedFriendsList(){
         selectedFriendsAdapter = new ArrayAdapter<>(view.getContext(),
-                android.R.layout.list_content, selectedFriendsList);
+                android.R.layout.activity_list_item, selectedFriendsList);
         selectedFriendsView = (ListView) view.findViewById(R.id.selected_friends); // Friends list
         selectedFriendsView.setAdapter(selectedFriendsAdapter);
     }
