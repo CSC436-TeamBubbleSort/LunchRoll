@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -25,6 +26,7 @@ public class FriendsListActivity extends AppCompatActivity implements GroupCreat
     private ListView friendsView;
     private String newGroupName = "";
     private ArrayList<String> selectedFriends;
+    private Button createGroupButton;
 
     public ArrayList<String> getSelectedFriendsList(){
         return selectedFriends;
@@ -35,6 +37,8 @@ public class FriendsListActivity extends AppCompatActivity implements GroupCreat
         super.onCreate(savedInstanceState);
         selectedFriends = new ArrayList<>();
         setContentView(R.layout.activity_friends_list);
+        createGroupButton = (Button) findViewById(R.id.create_group_button);
+        createGroupButton.setOnClickListener(this);
         initFriendsList();
     }
 
@@ -85,6 +89,7 @@ public class FriendsListActivity extends AppCompatActivity implements GroupCreat
         return super.onOptionsItemSelected(item);
     }
 
+    // Trying to get checked friends out of list
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.create_group_button){
@@ -99,6 +104,7 @@ public class FriendsListActivity extends AppCompatActivity implements GroupCreat
                     selectedFriends.add(friendsList.get(key));
                 }
             }
+            showGroupCreateDialog(v);
         }
     }
 }
