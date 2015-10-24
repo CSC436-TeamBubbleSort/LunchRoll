@@ -22,22 +22,15 @@ public class FriendsListActivity extends AppCompatActivity implements GroupCreat
             "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q",
             "r", "s", "t", "u", "v", "w", "x", "y", "z"};
     private ArrayList<String> friendsList;
-    private ArrayAdapter<String> friendsAdapter;
-    private ListView friendsView;
     private String newGroupName = "";
     private ArrayList<String> selectedFriends;
-    private Button createGroupButton;
-
-    public ArrayList<String> getSelectedFriendsList(){
-        return selectedFriends;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         selectedFriends = new ArrayList<>();
         setContentView(R.layout.activity_friends_list);
-        createGroupButton = (Button) findViewById(R.id.create_group_button);
+        Button createGroupButton = (Button) findViewById(R.id.create_group_button);
         createGroupButton.setOnClickListener(this);
         initFriendsList();
     }
@@ -54,6 +47,7 @@ public class FriendsListActivity extends AppCompatActivity implements GroupCreat
     @Override
     public void sendCreateGroupMessageBack(String nameOfGroup) {
         newGroupName = nameOfGroup;
+        // TODO Do something with this group name!!!!
         Toast.makeText(this, newGroupName, Toast.LENGTH_SHORT).show();
     }
 
@@ -61,9 +55,9 @@ public class FriendsListActivity extends AppCompatActivity implements GroupCreat
         // The friend's list
         friendsList = new ArrayList<>();
         friendsList.addAll(Arrays.asList(friends));
-        friendsAdapter = new ArrayAdapter<>(this,
+        ArrayAdapter<String> friendsAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_multiple_choice, friendsList);
-        friendsView = (ListView) findViewById(R.id.friends_list); // Friends list
+        ListView friendsView = (ListView) findViewById(R.id.friends_list);
         friendsView.setAdapter(friendsAdapter);
     }
 
