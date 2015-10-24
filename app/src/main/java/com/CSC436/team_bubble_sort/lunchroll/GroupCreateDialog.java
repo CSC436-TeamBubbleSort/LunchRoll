@@ -38,14 +38,14 @@ public class GroupCreateDialog extends DialogFragment implements  View.OnClickLi
         createGroup = (Button) view.findViewById(R.id.create_group_popup_create_button);
         cancel = (Button) view.findViewById(R.id.create_group_popup_cancel_button);
         nameBox = (EditText) view.findViewById(R.id.create_group_popup_name_field);
+        Bundle args = getArguments();
+        selectedFriendsList = args.getStringArrayList("selected_friends_list");
         initSelectedFriendsList();
-        selectedFriendsList = (ArrayList<String>) savedInstanceState.get("selected_friends_list");
         createGroup.setOnClickListener(this);
         cancel.setOnClickListener(this);
         setCancelable(false);
         getDialog().setTitle("Create Group");
-        Bundle args = getArguments();
-        selectedFriendsList = args.getStringArrayList("selected_friends_list");
+
         // Don't need ViewGroup parent so pass null
         return view;
     }
