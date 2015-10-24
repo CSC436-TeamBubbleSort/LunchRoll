@@ -3,6 +3,7 @@ package com.csc436.team_bubble_sort.lunchroll;
 import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,19 +14,26 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class FriendsListActivity extends AppCompatActivity implements GroupCreateDialog.CommunicateBackToFriendsList{
+public class FriendsListActivity extends AppCompatActivity implements GroupCreateDialog.CommunicateBackToFriendsList, View.OnClickListener{
 
     // Array holding list of friends
-    private String[] friends = {"bob", "susan", "susan", "bob", "susan", "bob",
-            "susan", "bob", "susan", "bob", "susan"};
+    private String[] friends = {"a ", "b", "c", "d", "e", "f",
+            "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q",
+            "r", "s", "t", "u", "v", "w", "x", "y", "z"};
     private ArrayList<String> friendsList;
     private ArrayAdapter<String> friendsAdapter;
     private ListView friendsView;
     private String newGroupName = "";
+    private ArrayList<String> selectedFriends;
+
+    public ArrayList<String> getSelectedFriendsList(){
+        return selectedFriends;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        selectedFriends = new ArrayList<>();
         setContentView(R.layout.activity_friends_list);
         initFriendsList();
     }
@@ -33,6 +41,9 @@ public class FriendsListActivity extends AppCompatActivity implements GroupCreat
     public void showGroupCreateDialog(View view) {
         FragmentManager manager = getFragmentManager();
         GroupCreateDialog dialog = new GroupCreateDialog();
+        Bundle args = new Bundle();
+        args.putStringArrayList("selected_friends_list", selectedFriends);
+        dialog.setArguments(args);
         dialog.show(manager,"groupCreateDialog");
     }
 
@@ -48,7 +59,7 @@ public class FriendsListActivity extends AppCompatActivity implements GroupCreat
         friendsList.addAll(Arrays.asList(friends));
         friendsAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_multiple_choice, friendsList);
-        friendsView = (ListView) findViewById(R.id.listView); // Friends list
+        friendsView = (ListView) findViewById(R.id.friends_list); // Friends list
         friendsView.setAdapter(friendsAdapter);
     }
 
@@ -72,5 +83,22 @@ public class FriendsListActivity extends AppCompatActivity implements GroupCreat
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v.getId() == R.id.create_group_button){
+            selectedFriends.clear();
+            ListView friends = (ListView) findViewById(R.id.friends_list);
+            SparseBooleanArray checkedFriends = friends.getCheckedItemPositions();
+            int size = checkedFriends.size();
+            for(int i = 0; i < size; i++){
+                int key = checkedFriends.keyAt(i);
+                boolean value = checkedFriends.get(key);
+                if(value){
+                    selectedFriends.add(friendsList.get(key));
+                }
+            }
+        }
     }
 }

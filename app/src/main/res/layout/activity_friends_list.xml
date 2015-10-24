@@ -13,7 +13,7 @@
 
     <ListView android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/listView"
+        android:id="@+id/friends_list"
         android:choiceMode="multipleChoice"
         android:cacheColorHint="@android:color/transparent"
         android:clickable="true"
