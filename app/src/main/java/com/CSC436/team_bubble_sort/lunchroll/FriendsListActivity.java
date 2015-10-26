@@ -48,7 +48,6 @@ public class FriendsListActivity extends AppCompatActivity implements GroupCreat
     @Override
     public void sendCreateGroupMessageBack(String nameOfGroup) {
         newGroupName = nameOfGroup;
-        // TODO Store new group name in server
         Toast.makeText(this, newGroupName, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, TopResultActivity.class);
         intent.putExtra("SELECTION", newGroupName);

@@ -57,6 +57,7 @@ public class GroupCreateDialog extends DialogFragment implements  View.OnClickLi
         }
         else if(v.getId() == R.id.create_group_popup_create_button){
             String groupName = nameBox.getText().toString();
+            // TODO Store new group name in server with associated list of friends
             communicator.sendCreateGroupMessageBack(groupName);
             dismiss();
         }

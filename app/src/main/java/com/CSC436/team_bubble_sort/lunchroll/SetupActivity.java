@@ -1,16 +1,23 @@
 package com.csc436.team_bubble_sort.lunchroll;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
-public class SetupActivity extends AppCompatActivity {
+public class SetupActivity extends AppCompatActivity implements View.OnClickListener{
+
+    private Button setupPrefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup);
+        setupPrefs = (Button) findViewById(R.id.activity_setup_set_preferences);
+        setupPrefs.setOnClickListener(this);
     }
 
     @Override
@@ -33,5 +40,13 @@ public class SetupActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v.getId() == R.id.activity_setup_set_preferences){
+            Intent intent = new Intent(this, GroupSelectActivity.class);
+            startActivity(intent);
+        }
     }
 }
