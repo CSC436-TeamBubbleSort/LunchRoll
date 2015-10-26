@@ -1,6 +1,7 @@
 package com.csc436.team_bubble_sort.lunchroll;
 
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.SparseBooleanArray;
@@ -47,8 +48,11 @@ public class FriendsListActivity extends AppCompatActivity implements GroupCreat
     @Override
     public void sendCreateGroupMessageBack(String nameOfGroup) {
         newGroupName = nameOfGroup;
-        // TODO Do something with this group name!!!!
+        // TODO Store new group name in server
         Toast.makeText(this, newGroupName, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, TopResultActivity.class);
+        intent.putExtra("SELECTION", newGroupName);
+        startActivity(intent);
     }
 
     private void initFriendsList(){
