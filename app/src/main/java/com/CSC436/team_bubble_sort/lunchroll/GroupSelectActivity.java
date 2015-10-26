@@ -3,12 +3,14 @@ package com.csc436.team_bubble_sort.lunchroll;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,6 +21,8 @@ public class GroupSelectActivity extends AppCompatActivity implements View.OnCli
     private String[] groups = {"group 1", "group 2", "group 3", "group 4", "group 5"};
     private ArrayList<String> groupsList;
     private Button newGroup, selectGroup;
+    private String selection = "";
+    private ListView groupsView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +41,7 @@ public class GroupSelectActivity extends AppCompatActivity implements View.OnCli
         groupsList.addAll(Arrays.asList(groups));
         ArrayAdapter<String> groupsAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_multiple_choice, groupsList);
-        ListView groupsView = (ListView) findViewById(R.id.group_list);
+        groupsView = (ListView) findViewById(R.id.group_list);
         groupsView.setAdapter(groupsAdapter);
     }
 
@@ -70,7 +74,12 @@ public class GroupSelectActivity extends AppCompatActivity implements View.OnCli
             startActivity(intent);
         }
         else if(v.getId() == R.id.select_group_button){
-            // Launch TopResultActivity
+            int selectionPosition = groupsView.getCheckedItemPosition();
+            selection = groupsList.get(selectionPosition);
+            Toast.makeText(this, selection, Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, TopResultActivity.class);
+            intent.putExtra("SELECTION", selection);
+            startActivity(intent);
         }
     }
 }
