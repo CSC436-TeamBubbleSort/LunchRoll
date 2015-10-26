@@ -6,18 +6,35 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class SetupActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private Button setupPrefs;
+    private String[] typesOfFood = {"Mexican", "Asian", "American", "Italian", "Indian"};
+    private ArrayList<String> foodsList;
+    private ListView foodsView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup);
-        setupPrefs = (Button) findViewById(R.id.activity_setup_set_preferences);
+        Button setupPrefs = (Button) findViewById(R.id.activity_setup_set_preferences);
         setupPrefs.setOnClickListener(this);
+        initFoodsList();
+    }
+
+    private void initFoodsList() {
+        foodsList = new ArrayList<>();
+        foodsList.addAll(Arrays.asList(typesOfFood));
+        ArrayAdapter<String> foodsAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_multiple_choice, foodsList);
+        foodsView = (ListView) findViewById(R.id.activity_setup_foods_view);
+        foodsView.setAdapter(foodsAdapter);
     }
 
     @Override

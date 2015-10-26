@@ -20,16 +20,14 @@ public class GroupSelectActivity extends AppCompatActivity implements View.OnCli
     // Array holding list of groups
     private String[] groups = {"group 1", "group 2", "group 3", "group 4", "group 5"};
     private ArrayList<String> groupsList;
-    private Button newGroup, selectGroup;
-    private String selection = "";
     private ListView groupsView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_select);
-        newGroup = (Button) findViewById(R.id.new_group_button);
-        selectGroup = (Button) findViewById(R.id.select_group_button);
+        Button newGroup = (Button) findViewById(R.id.new_group_button);
+        Button selectGroup = (Button) findViewById(R.id.select_group_button);
         newGroup.setOnClickListener(this);
         selectGroup.setOnClickListener(this);
         initGroupList();
@@ -75,7 +73,7 @@ public class GroupSelectActivity extends AppCompatActivity implements View.OnCli
         }
         else if(v.getId() == R.id.select_group_button){
             int selectionPosition = groupsView.getCheckedItemPosition();
-            selection = groupsList.get(selectionPosition);
+            String selection = groupsList.get(selectionPosition);
             Toast.makeText(this, selection, Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, TopResultActivity.class);
             intent.putExtra("SELECTION", selection);
