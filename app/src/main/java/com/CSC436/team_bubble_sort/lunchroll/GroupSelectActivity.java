@@ -37,7 +37,7 @@ public class GroupSelectActivity extends AppCompatActivity implements View.OnCli
         groupsList.addAll(Arrays.asList(groups));
         ArrayAdapter<String> groupsAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_multiple_choice, groupsList);
-        ListView groupsView = (ListView) findViewById(R.id.friends_list);
+        ListView groupsView = (ListView) findViewById(R.id.group_list);
         groupsView.setAdapter(groupsAdapter);
     }
 
