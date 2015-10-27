@@ -10,7 +10,7 @@
 
     <ListView
         android:layout_width="wrap_content"
-        android:layout_height="404dp"
+        android:layout_height="407dp"
         android:id="@+id/activity_setup_foods_view"
         android:background="@color/transparent"
         android:choiceMode="multipleChoice"/>
