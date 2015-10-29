@@ -21,11 +21,10 @@ public class GroupCreateDialog extends DialogFragment implements  View.OnClickLi
     Button createGroup, cancel;
     EditText nameBox;
     CommunicateBackToFriendsList communicator;
-    private String[] selectedFriends = {"Cortana", "Siri", "someDrunkGuy", "fortuneCookie"};
-    private ArrayList<String> selectedFriendsList;
     private ArrayAdapter selectedFriendsAdapter;
     private ListView selectedFriendsView;
     View view;
+    ArrayList<String> selectedFriendsList;
 
     @Override
     public void onAttach(Activity activity){
@@ -39,11 +38,14 @@ public class GroupCreateDialog extends DialogFragment implements  View.OnClickLi
         createGroup = (Button) view.findViewById(R.id.create_group_popup_create_button);
         cancel = (Button) view.findViewById(R.id.create_group_popup_cancel_button);
         nameBox = (EditText) view.findViewById(R.id.create_group_popup_name_field);
+        Bundle args = getArguments();
+        selectedFriendsList = args.getStringArrayList("selected_friends_list");
         initSelectedFriendsList();
         createGroup.setOnClickListener(this);
         cancel.setOnClickListener(this);
         setCancelable(false);
         getDialog().setTitle("Create Group");
+
         // Don't need ViewGroup parent so pass null
         return view;
     }
@@ -55,6 +57,7 @@ public class GroupCreateDialog extends DialogFragment implements  View.OnClickLi
         }
         else if(v.getId() == R.id.create_group_popup_create_button){
             String groupName = nameBox.getText().toString();
+            // TODO Store new group name in server with associated list of friends
             communicator.sendCreateGroupMessageBack(groupName);
             dismiss();
         }
@@ -65,10 +68,8 @@ public class GroupCreateDialog extends DialogFragment implements  View.OnClickLi
     }
 
     private void initSelectedFriendsList(){
-        selectedFriendsList = new ArrayList<>();
-        selectedFriendsList.addAll(Arrays.asList(selectedFriends));
         selectedFriendsAdapter = new ArrayAdapter<>(view.getContext(),
-                android.R.layout.simple_list_item_multiple_choice, selectedFriendsList);
+                android.R.layout.simple_list_item_1, selectedFriendsList);
         selectedFriendsView = (ListView) view.findViewById(R.id.selected_friends); // Friends list
         selectedFriendsView.setAdapter(selectedFriendsAdapter);
     }

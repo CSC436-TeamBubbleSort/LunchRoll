@@ -27,4 +27,7 @@
     <string name="create_group_popup_create_button_string">Create Group</string>
     <string name="create_group_popup_cancel_button_string">Cancel</string>
     <string name="create_group_popup_hint_string">Group Name Here</string>
+    <string name="group_select_group_name_string">New Group</string>
+    <string name="group_select_select_group_string">Select Group</string>
+    <string name="activity_setup_set_prefs_string">Set Preferences</string>
 </resources>

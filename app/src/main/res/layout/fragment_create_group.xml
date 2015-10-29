@@ -29,7 +29,7 @@
         android:paddingLeft="8dp"
         android:paddingTop="16dp"
         android:paddingBottom="8dp"
-        android:background="@color/myWhite"
+        android:background="@color/transparent"
         android:focusableInTouchMode="true"
         android:focusable="true"
         android:layout_weight=".5"
