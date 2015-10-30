@@ -12,28 +12,28 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class SetupActivity extends AppCompatActivity implements View.OnClickListener{
-
-    private String[] typesOfFood = {"Mexican", "Asian", "American", "Italian", "Indian"};
-    private ArrayList<String> foodsList;
-    private ListView foodsView;
+    private CategoryOfFoodPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup);
+        preferences = new CategoryOfFoodPreferences();
         Button setupPrefs = (Button) findViewById(R.id.activity_setup_set_preferences);
         setupPrefs.setOnClickListener(this);
         initFoodsList();
     }
 
     private void initFoodsList() {
-        foodsList = new ArrayList<>();
-        foodsList.addAll(Arrays.asList(typesOfFood));
+        List<String> typesOfFood = preferences.getFoodTypesOnly();
+        ArrayList<String> foodsList = new ArrayList<>();
+        foodsList.addAll(typesOfFood);
         ArrayAdapter<String> foodsAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_multiple_choice, foodsList);
-        foodsView = (ListView) findViewById(R.id.activity_setup_foods_view);
+        ListView foodsView = (ListView) findViewById(R.id.activity_setup_foods_view);
         foodsView.setAdapter(foodsAdapter);
     }
 
@@ -62,6 +62,7 @@ public class SetupActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.activity_setup_set_preferences){
+            preferences.savePreferences();
             Intent intent = new Intent(this, GroupSelectActivity.class);
             startActivity(intent);
         }
