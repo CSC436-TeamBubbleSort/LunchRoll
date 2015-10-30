@@ -3,12 +3,14 @@ package com.csc436.team_bubble_sort.lunchroll;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,6 +27,7 @@ public class SetupActivity extends AppCompatActivity implements View.OnClickList
         Button setupPrefs = (Button) findViewById(R.id.activity_setup_set_preferences);
         setupPrefs.setOnClickListener(this);
         initFoodsList();
+        Log.d("MyApp", preferences.toString());
     }
 
     private void initFoodsList() {

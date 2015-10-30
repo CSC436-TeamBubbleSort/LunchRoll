@@ -46,11 +46,11 @@ public class CategoryOfFoodPreferences implements Preferences {
 
     @Override
     public String toString(){
-        String result = "";
+        String result = "{";
         for(CategoryOfFoodPreference foodType : preferences){
-            result += foodType.toString() + ",";
+            result += foodType.toString() + ", ";
         }
-        return result.substring(0,result.length() - 1);
+        return result.substring(0,result.length() - 2) + "}";
     }
 
     // Private class of individual preferences. I just wanted a key:value pair object where
@@ -70,6 +70,6 @@ public class CategoryOfFoodPreferences implements Preferences {
         }
 
         @Override
-        public String toString(){return categoryOfFood + ":" + userApproved;}
+        public String toString(){return "\"" + categoryOfFood + "\":" + userApproved;}
     }
 }
