@@ -10,10 +10,10 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
+
+import com.csc436.team_bubble_sort.lunchroll.model.preferences.CategoryOfFoodPreferences;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class SetupActivity extends AppCompatActivity implements View.OnClickListener{

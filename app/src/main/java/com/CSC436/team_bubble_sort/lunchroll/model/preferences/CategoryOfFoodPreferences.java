@@ -1,4 +1,4 @@
-package com.csc436.team_bubble_sort.lunchroll;
+package com.csc436.team_bubble_sort.lunchroll.model.preferences;
 
 import java.util.ArrayList;
 import java.util.Collections;
