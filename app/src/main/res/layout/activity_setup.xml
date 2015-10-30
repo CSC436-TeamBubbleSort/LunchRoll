@@ -9,7 +9,7 @@
     tools:context="com.csc436.team_bubble_sort.lunchroll.SetupActivity">
 
     <ListView
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="407dp"
         android:id="@+id/activity_setup_foods_view"
         android:background="@color/transparent"
