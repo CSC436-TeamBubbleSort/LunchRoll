@@ -7,19 +7,19 @@ import java.util.Collections;
 
 public class UserGroup implements Comparable<UserGroup>{
     private String groupName;
-    private int parentUserID;
+    private String parentUsername;
     private ArrayList<AppUser> appUsers;
     // Constructor
-    public UserGroup(String newGroupName, int newParentUserID){
+    public UserGroup(String newGroupName, String newParentUserID){
         groupName = newGroupName;
-        parentUserID = newParentUserID;
+        parentUsername = newParentUserID;
         appUsers = new ArrayList<>();
     }
     // Getters and Setters
     public void setGroupName(String newGroupName){groupName = newGroupName;}
     public String getGroupName(){return groupName;}
-    public void setParentUserID(int newParentUserID){parentUserID = newParentUserID;}
-    public int getParentUserID(){return parentUserID;}
+    public void setParentUsername(String newParentUserID){parentUsername = newParentUserID;}
+    public String getParentUsername(){return parentUsername;}
     public ArrayList<AppUser> getAppUsers(){return appUsers;}
     public void setAppUsers(ArrayList<AppUser> newAppUserList){appUsers = newAppUserList;}
     // Maintaining appUsers list

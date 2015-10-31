@@ -10,47 +10,38 @@ import com.csc436.team_bubble_sort.lunchroll.model.preferences.PreferencesCalls;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-/**
- * Created by Devin on 10/31/2015.
- */
 public class AppUser implements PreferencesCalls, Comparable<AppUser>, ClientNearbyAnyCalls, UsersCalls, GroupsCalls {
     private PreferencesCalls preferences;
     private ArrayList<UserGroup> userGroups;
-    private int userID;
+    private String username;
     private String email;
     private BigDecimal phoneNumber;
     private Point location;
 
-    public AppUser(int userID, PreferencesCalls preferences, ArrayList<UserGroup> userGroups){
-        this.userID = userID;
+    public AppUser(String username, PreferencesCalls preferences, ArrayList<UserGroup> userGroups){
+        this.username = username;
         this.preferences = preferences;
         this.userGroups = userGroups;
     }
-
+    // TODO Helps build JSON object in string form
     @Override
     public String toString(){
         return null;
     }
-
+    // Allows a list of appUsers to be compared
     @Override
     public int compareTo(AppUser another) {
-        if (this.userID < another.userID) return -1;
-        else if(this.userID > another.userID) return 1;
+        if (this.username.compareTo(another.username) < 0) return -1;
+        else if(this.username.compareTo(another.username) > 0) return 1;
         else return 0;
     }
-
     // Getters and Setters
     public PreferencesCalls getPreferences(){return preferences;}
-
     public void setPreferences(PreferencesCalls newPreferences){preferences = newPreferences;}
-
     public ArrayList<UserGroup> getUserGroups(){return userGroups;}
-
     public void setUserGroups(ArrayList<UserGroup> newUserGroups){userGroups = newUserGroups;}
-
-    public int getUserID(){return userID;}
-
-    public void setUserID(int newUserID){userID = newUserID;}
+    public String getUsername(){return username;}
+    public void setUsername(String newUserID){username = newUserID;}
 
     // TODO Web Service Calls
     @Override
