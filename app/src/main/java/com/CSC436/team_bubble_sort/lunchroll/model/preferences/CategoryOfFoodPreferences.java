@@ -35,12 +35,12 @@ public class CategoryOfFoodPreferences implements Preferences {
     // Calls to Server happen here
     // Maybe toString I wrote is helpful
     @Override
-    public void savePreferences(){
+    public void savePreferenceList(){
 
     }
 
     @Override
-    public void loadPreferences() {
+    public void loadPreferenceList() {
 
     }
 

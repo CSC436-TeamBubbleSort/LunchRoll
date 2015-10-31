@@ -65,7 +65,7 @@ public class SetupActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.activity_setup_set_preferences){
-            preferences.savePreferences();
+            preferences.savePreferenceList();
             Intent intent = new Intent(this, GroupSelectActivity.class);
             startActivity(intent);
         }
