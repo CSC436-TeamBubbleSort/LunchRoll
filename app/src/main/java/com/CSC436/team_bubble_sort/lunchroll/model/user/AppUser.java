@@ -21,11 +21,25 @@ public class AppUser implements Preferences, Comparable<AppUser>, ClientNearbyAn
     private BigDecimal phoneNumber;
     private Point location;
 
-    public AppUser(){
-
+    public AppUser(int userID, Preferences preferences, ArrayList<UserGroup> userGroups){
+        this.userID = userID;
+        this.preferences = preferences;
+        this.userGroups = userGroups;
     }
 
+    @Override
+    public String toString(){
+        return null;
+    }
 
+    @Override
+    public int compareTo(AppUser another) {
+        if (this.userID < another.userID) return -1;
+        else if(this.userID > another.userID) return 1;
+        else return 0;
+    }
+
+    // TODO Web Service Calls
     @Override
     public void savePreferenceList() {
 
@@ -49,16 +63,6 @@ public class AppUser implements Preferences, Comparable<AppUser>, ClientNearbyAn
     @Override
     public String clientNearbyAnyError() {
         return null;
-    }
-
-    @Override
-    public int compareTo(AppUser another) {
-        return 0;
-    }
-
-    @Override
-    public String toString(){
-        return "";
     }
 
     @Override

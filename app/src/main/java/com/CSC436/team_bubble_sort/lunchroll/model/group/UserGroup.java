@@ -8,7 +8,7 @@ import java.util.Collections;
 /**
  * Created by Devin on 10/31/2015.
  */
-public class UserGroup {
+public class UserGroup implements Comparable<UserGroup>{
     private int groupID;
     private int parentUserID;
     private ArrayList<AppUser> appUsers;
@@ -16,8 +16,6 @@ public class UserGroup {
     public UserGroup(){
 
     }
-
-
 
     public void addAppUser(AppUser newAppUser){
         appUsers.add(newAppUser);
@@ -37,5 +35,12 @@ public class UserGroup {
 
     public void setAppUsers(ArrayList<AppUser> newAppUserList){
         appUsers = newAppUserList;
+    }
+
+    @Override
+    public int compareTo(UserGroup another) {
+        if(this.groupID > another.groupID) return 1;
+        else if(this.groupID < another.groupID) return -1;
+        else return 0;
     }
 }

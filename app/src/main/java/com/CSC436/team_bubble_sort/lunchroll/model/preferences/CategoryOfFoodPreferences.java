@@ -5,13 +5,15 @@ import java.util.Collections;
 import java.util.List;
 
 // This class holds everything that needs to be known about a particular set of preferences
-public class CategoryOfFoodPreferences implements Preferences {
+public class CategoryOfFoodPreferences{
     private ArrayList<CategoryOfFoodPreference> preferences;
 
     public CategoryOfFoodPreferences(){
         preferences = new ArrayList<>();
         addDefaultTypesOfFood();
     }
+
+    // TODO ability to set and update preferences
 
     // TODO Should this list should be maintained on server?
     private void addDefaultTypesOfFood(){
@@ -23,6 +25,7 @@ public class CategoryOfFoodPreferences implements Preferences {
         Collections.sort(preferences);
     }
 
+    // This is used for populating a ListView with the names of each type of food
     public List<String> getFoodTypesOnly(){
         ArrayList<String> listOfFoodTypes = new ArrayList<>();
         for(CategoryOfFoodPreference foodType : preferences){
@@ -30,18 +33,6 @@ public class CategoryOfFoodPreferences implements Preferences {
         }
         Collections.sort(listOfFoodTypes);
         return listOfFoodTypes;
-    }
-
-    // Calls to Server happen here
-    // Maybe toString I wrote is helpful
-    @Override
-    public void savePreferenceList(){
-
-    }
-
-    @Override
-    public void loadPreferenceList() {
-
     }
 
     @Override
