@@ -18,10 +18,10 @@ public class AppUser implements PreferencesCalls, Comparable<AppUser>, ClientNea
     private BigDecimal phoneNumber;
     private Point location;
 
-    public AppUser(String username, PreferencesCalls preferences, ArrayList<UserGroup> userGroups){
+    public AppUser(String username, PreferencesCalls preferences){
         this.username = username;
         this.preferences = preferences;
-        this.userGroups = userGroups;
+        this.userGroups = new ArrayList<>();
     }
     // TODO Helps build JSON object in string form
     @Override
