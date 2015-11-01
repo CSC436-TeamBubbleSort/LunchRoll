@@ -30,8 +30,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.csc436.team_bubble_sort.lunchroll.model.preferences.CategoryOfFoodPreferences;
+import com.csc436.team_bubble_sort.lunchroll.model.preferences.PreferencesCalls;
+import com.csc436.team_bubble_sort.lunchroll.model.user.AppUser;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.prefs.Preferences;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -188,6 +193,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
             Intent intent = new Intent(this, SetupActivity.class);
+            AppUser user = new AppUser("theBest", (PreferencesCalls) new CategoryOfFoodPreferences());
+            intent.putExtra("user", user);
             startActivity(intent);
         }
     }

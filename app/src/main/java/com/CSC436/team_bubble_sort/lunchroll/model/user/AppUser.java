@@ -1,24 +1,29 @@
 package com.csc436.team_bubble_sort.lunchroll.model.user;
 
 import android.graphics.Point;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.csc436.team_bubble_sort.lunchroll.model.group.GroupsCalls;
 import com.csc436.team_bubble_sort.lunchroll.model.group.UserGroup;
 import com.csc436.team_bubble_sort.lunchroll.model.locations.ClientNearbyAnyCalls;
+import com.csc436.team_bubble_sort.lunchroll.model.preferences.CategoryOfFoodPreferences;
 import com.csc436.team_bubble_sort.lunchroll.model.preferences.PreferencesCalls;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-public class AppUser implements PreferencesCalls, Comparable<AppUser>, ClientNearbyAnyCalls, UsersCalls, GroupsCalls {
-    private PreferencesCalls preferences;
+//TODO implement Parcelable instead of Serializable for performance boost
+public class AppUser implements PreferencesCalls, Comparable<AppUser>, ClientNearbyAnyCalls, UsersCalls, GroupsCalls, Serializable {
+    private CategoryOfFoodPreferences preferences;
     private ArrayList<UserGroup> userGroups;
     private String username;
     private String email;
     private BigDecimal phoneNumber;
     private Point location;
 
-    public AppUser(String username, PreferencesCalls preferences){
+    public AppUser(String username, CategoryOfFoodPreferences preferences){
         this.username = username;
         this.preferences = preferences;
         this.userGroups = new ArrayList<>();
@@ -36,8 +41,8 @@ public class AppUser implements PreferencesCalls, Comparable<AppUser>, ClientNea
         else return 0;
     }
     // Getters and Setters
-    public PreferencesCalls getPreferences(){return preferences;}
-    public void setPreferences(PreferencesCalls newPreferences){preferences = newPreferences;}
+    public CategoryOfFoodPreferences getPreferences(){return preferences;}
+    public void setPreferences(CategoryOfFoodPreferences newPreferences){preferences = newPreferences;}
     public ArrayList<UserGroup> getUserGroups(){return userGroups;}
     public void setUserGroups(ArrayList<UserGroup> newUserGroups){userGroups = newUserGroups;}
     public String getUsername(){return username;}

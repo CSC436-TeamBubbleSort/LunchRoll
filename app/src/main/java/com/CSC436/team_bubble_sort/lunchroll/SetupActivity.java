@@ -12,18 +12,22 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.csc436.team_bubble_sort.lunchroll.model.preferences.CategoryOfFoodPreferences;
+import com.csc436.team_bubble_sort.lunchroll.model.user.AppUser;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SetupActivity extends AppCompatActivity implements View.OnClickListener{
     private CategoryOfFoodPreferences preferences;
+    private AppUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup);
+        user = (AppUser) getIntent().getExtras().get("user");
         preferences = new CategoryOfFoodPreferences();
+        user.setPreferences(preferences);
         Button setupPrefs = (Button) findViewById(R.id.activity_setup_set_preferences);
         setupPrefs.setOnClickListener(this);
         initFoodsList();
@@ -65,7 +69,7 @@ public class SetupActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.activity_setup_set_preferences){
-            preferences.savePreferenceList();
+            user.savePreferenceList();
             Intent intent = new Intent(this, GroupSelectActivity.class);
             startActivity(intent);
         }
