@@ -38,7 +38,7 @@
             android:label="@string/title_activity_top_result" >
         </activity>
         <meta-data
-            android:name="com.csc436.team_bubble_sort.lunchroll"
+            android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCP0JT1gyIEvqQyammzyPtoMiseGah3EAM" />
 
     </application>
