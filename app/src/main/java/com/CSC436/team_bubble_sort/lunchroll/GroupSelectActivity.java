@@ -22,6 +22,7 @@ public class GroupSelectActivity extends AppCompatActivity implements View.OnCli
     // Array holding list of groups
     private ArrayList<String> groupsList;
     private ListView groupsView;
+    private AppUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +30,7 @@ public class GroupSelectActivity extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_group_select);
         Button newGroup = (Button) findViewById(R.id.new_group_button);
         Button selectGroup = (Button) findViewById(R.id.select_group_button);
-        AppUser user = (AppUser) getIntent().getSerializableExtra("user");
+        user = (AppUser) getIntent().getSerializableExtra("user");
         groupsList = user.getGroupNames();
         newGroup.setOnClickListener(this);
         selectGroup.setOnClickListener(this);
@@ -73,6 +74,7 @@ public class GroupSelectActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View v) {
         if(v.getId() == R.id.new_group_button){
             Intent intent = new Intent(this, FriendsListActivity.class);
+            intent.putExtra("user", user);
             startActivity(intent);
         }
         else if(v.getId() == R.id.select_group_button){
@@ -81,6 +83,7 @@ public class GroupSelectActivity extends AppCompatActivity implements View.OnCli
             Toast.makeText(this, selection, Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, TopResultActivity.class);
             intent.putExtra("SELECTION", selection);
+            intent.putExtra("user", user);
             startActivity(intent);
         }
     }

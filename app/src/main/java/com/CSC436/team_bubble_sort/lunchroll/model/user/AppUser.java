@@ -23,6 +23,7 @@ public class AppUser implements PreferencesCalls, Comparable<AppUser>, ClientNea
     private CategoryOfFoodPreferences preferences;
     private ArrayList<UserGroup> userGroups;
     private String username;
+    private ArrayList<AppUser> friendsList;
     private String email;
     private BigDecimal phoneNumber;
     private Point location;
@@ -31,6 +32,7 @@ public class AppUser implements PreferencesCalls, Comparable<AppUser>, ClientNea
         this.username = username;
         this.preferences = preferences;
         this.userGroups = new ArrayList<>();
+        this.friendsList = new ArrayList<>();
     }
 
     public ArrayList<String> getGroupNames(){
@@ -39,6 +41,14 @@ public class AppUser implements PreferencesCalls, Comparable<AppUser>, ClientNea
             groupNames.add(group.getGroupName());
         }
         return groupNames;
+    }
+
+    public ArrayList<String> getFriendsNames(){
+        ArrayList<String> friends = new ArrayList<>();
+        for(AppUser friend : friendsList){
+            friends.add(friend.getUsername());
+        }
+        return friends;
     }
 
     // TODO Helps build JSON object in string form
@@ -73,6 +83,12 @@ public class AppUser implements PreferencesCalls, Comparable<AppUser>, ClientNea
     public void setUserGroups(ArrayList<UserGroup> newUserGroups){userGroups = newUserGroups;}
     public String getUsername(){return username;}
     public void setUsername(String newUserID){username = newUserID;}
+    public void setFriendsList(ArrayList<AppUser> newFriendsList){
+        friendsList = newFriendsList;
+    }
+    public ArrayList<AppUser> getFriendsList(){
+        return friendsList;
+    }
 
     // TODO Web Service Calls
     @Override

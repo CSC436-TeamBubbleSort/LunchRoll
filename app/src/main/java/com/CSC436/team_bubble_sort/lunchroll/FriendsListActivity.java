@@ -13,18 +13,16 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.csc436.team_bubble_sort.lunchroll.model.user.AppUser;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class FriendsListActivity extends AppCompatActivity implements GroupCreateDialog.CommunicateBackToFriendsList, View.OnClickListener{
 
     // Array holding list of friends
-    private String[] friends = {"a ", "b", "c", "d", "e", "f",
-            "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q",
-            "r", "s", "t", "u", "v", "w", "x", "y", "z"};
     private ArrayList<String> friendsList;
-    private String newGroupName = "";
     private ArrayList<String> selectedFriends;
+    private AppUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +30,7 @@ public class FriendsListActivity extends AppCompatActivity implements GroupCreat
         selectedFriends = new ArrayList<>();
         setContentView(R.layout.activity_friends_list);
         Button createGroupButton = (Button) findViewById(R.id.create_group_button);
+        user = (AppUser) getIntent().getSerializableExtra("user");
         createGroupButton.setOnClickListener(this);
         initFriendsList();
     }
@@ -47,17 +46,18 @@ public class FriendsListActivity extends AppCompatActivity implements GroupCreat
 
     @Override
     public void sendCreateGroupMessageBack(String nameOfGroup) {
-        newGroupName = nameOfGroup;
-        Toast.makeText(this, newGroupName, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, nameOfGroup, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, TopResultActivity.class);
-        intent.putExtra("SELECTION", newGroupName);
+        intent.putExtra("SELECTION", nameOfGroup);
         startActivity(intent);
     }
 
     private void initFriendsList(){
         // The friend's list
-        friendsList = new ArrayList<>();
-        friendsList.addAll(Arrays.asList(friends));
+        friendsList = user.getFriendsNames();
+        if(friendsList.size() == 0){
+            friendsList.add("You have no friends");
+        }
         ArrayAdapter<String> friendsAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_multiple_choice, friendsList);
         ListView friendsView = (ListView) findViewById(R.id.friends_list);
