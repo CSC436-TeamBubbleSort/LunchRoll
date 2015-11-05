@@ -3,6 +3,7 @@ package com.csc436.team_bubble_sort.lunchroll;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
@@ -29,10 +30,13 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.csc436.team_bubble_sort.lunchroll.model.preferences.CategoryOfFoodPreferences;
 import com.csc436.team_bubble_sort.lunchroll.model.preferences.PreferencesCalls;
 import com.csc436.team_bubble_sort.lunchroll.model.user.AppUser;
+import com.csc436.team_bubble_sort.lunchroll.web_services.UserService;
+import com.csc436.team_bubble_sort.lunchroll.web_services.user.UpdateUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +47,7 @@ import static android.Manifest.permission.READ_CONTACTS;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
+public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor>, UpdateUser {
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -61,17 +65,20 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * Keep track of the login task to ensure we can cancel it if requested.
      */
     private UserLoginTask mAuthTask = null;
-
+    private UserService UserService;
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    private String email;
+    private String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        UserService = new UserService(this.getApplicationContext());
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
@@ -158,8 +165,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mPasswordView.setError(null);
 
         // Store values at the time of the login attempt.
-        String email = mEmailView.getText().toString();
-        String password = mPasswordView.getText().toString();
+        this.email = mEmailView.getText().toString();
+        this.password = mPasswordView.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
@@ -189,14 +196,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute((Void) null);
-            Intent intent = new Intent(this, SetupActivity.class);
-            // TODO should change username to be different than email
-            AppUser user = new AppUser("theBest", new CategoryOfFoodPreferences(email));
-            intent.putExtra("user", user);
-            startActivity(intent);
+            //showProgress(true);
+            updateUserRequest();
+            //mAuthTask = new UserLoginTask(email, password);
+            //mAuthTask.execute((Void) null);
+
         }
     }
 
@@ -308,6 +312,28 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
 
         mEmailView.setAdapter(adapter);
+    }
+
+    public void updateUserRequest() {
+        // TODO should change username to be different than email
+        AppUser user = new AppUser("Joe", new CategoryOfFoodPreferences("Joe"));
+        user.setEmail(this.email);
+        user.setPassword(this.password);
+        Intent intent = new Intent(this, SetupActivity.class);
+        intent.putExtra("user", user);
+        startActivity(intent);
+        //UserService.updateUser(this, user);
+    }
+
+    public void updateUserSuccess(String result) {
+        Toast.makeText(this, result, Toast.LENGTH_LONG).show();
+        //Intent intent = new Intent(this, SetupActivity.class);
+        //intent.putExtra("user", user);
+        //startActivity(intent);
+    }
+
+    public void updateUserError(String error) {
+        Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
     }
 
     /**

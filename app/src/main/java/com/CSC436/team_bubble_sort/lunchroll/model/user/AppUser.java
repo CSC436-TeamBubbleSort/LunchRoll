@@ -9,6 +9,7 @@ import com.csc436.team_bubble_sort.lunchroll.model.group.UserGroup;
 import com.csc436.team_bubble_sort.lunchroll.model.locations.ClientNearbyAnyCalls;
 import com.csc436.team_bubble_sort.lunchroll.model.preferences.CategoryOfFoodPreferences;
 import com.csc436.team_bubble_sort.lunchroll.model.preferences.PreferencesCalls;
+import com.csc436.team_bubble_sort.lunchroll.web_services.user.UpdateUser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,16 +20,19 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 //TODO implement Parcelable instead of Serializable for performance boost
-public class AppUser implements PreferencesCalls, Comparable<AppUser>, ClientNearbyAnyCalls, UsersCalls, GroupsCalls, Serializable {
+public class AppUser implements Comparable<AppUser>, Serializable {
     private CategoryOfFoodPreferences preferences;
+    private String userID;
     private ArrayList<UserGroup> userGroups;
     private String username;
+    private String password;
     private ArrayList<AppUser> friendsList;
     private String email;
     private BigDecimal phoneNumber;
     private Point location;
 
     public AppUser(String username, CategoryOfFoodPreferences preferences){
+        this.userID = "0";
         this.username = username;
         this.preferences = preferences;
         this.userGroups = new ArrayList<>();
@@ -62,7 +66,7 @@ public class AppUser implements PreferencesCalls, Comparable<AppUser>, ClientNea
             for(UserGroup group : userGroups){
                 json_usergroups.put(group.toString());
             }
-            json_appuser.accumulate("user_groups", json_usergroups);
+           json_appuser.accumulate("user_groups", json_usergroups);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -86,63 +90,40 @@ public class AppUser implements PreferencesCalls, Comparable<AppUser>, ClientNea
     public void setFriendsList(ArrayList<AppUser> newFriendsList){
         friendsList = newFriendsList;
     }
+
+    public void setEmail(String email){
+        this.email = email;
+    }
+
+    public void setPassword(String password){
+        this.password = password;
+    }
+
+    public String getEmail(){
+        return this.email;
+    }
+
+    public String getPassword(){
+        return this.password;
+    }
+
     public ArrayList<AppUser> getFriendsList(){
         return friendsList;
     }
 
-    // TODO Web Service Calls
-    @Override
-    public void savePreferenceList() {
-
+    public JSONObject toJSON(){
+        JSONObject jsonBody = new JSONObject();
+        try {
+            jsonBody.accumulate("username", username);
+            jsonBody.accumulate("password", password);
+            jsonBody.accumulate("userID", userID);
+            jsonBody.accumulate("email", email);
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonBody;
+        //return "{\"email\":" + email + ", \"password\":" + password + ", \"username\":" + username + ", \"userID\": \"" + userID + "\"}";
     }
 
-    @Override
-    public void loadPreferenceList() {
-
-    }
-
-    @Override
-    public void clientNearbyAnyRequest() {
-
-    }
-
-    @Override
-    public void clientNearbyAnySuccess() {
-
-    }
-
-    @Override
-    public String clientNearbyAnyError() {
-        return null;
-    }
-
-    @Override
-    public void saveUser() {
-
-    }
-
-    @Override
-    public void loadUser() {
-
-    }
-
-    @Override
-    public void saveGroup() {
-
-    }
-
-    @Override
-    public void loadGroup() {
-
-    }
-
-    @Override
-    public void saveGroups() {
-
-    }
-
-    @Override
-    public void loadGroups() {
-
-    }
 }
