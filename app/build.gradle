@@ -33,4 +33,5 @@ dependencies {
     compile 'com.android.support:design:23.1.0'
     compile 'com.google.android.gms:play-services-identity:8.1.0'
     compile project(':volley')
+    compile 'com.google.android.gms:play-services-location:7.+'
 }
