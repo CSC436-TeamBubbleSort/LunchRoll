@@ -51,7 +51,7 @@ public class FriendsListActivity extends AppCompatActivity implements
 
     public void showAddFriendDialog(View view){
         FragmentManager manager = getFragmentManager();
-        GroupCreateDialog dialog = new GroupCreateDialog();
+        AddFriendDialog dialog = new AddFriendDialog();
         dialog.show(manager, "addFriendDialog");
         // TODO Add friend to user's friend's list on server
         // TODO Pull AppUser object for friend
@@ -122,7 +122,9 @@ public class FriendsListActivity extends AppCompatActivity implements
                     selectedFriends.add(friendsList.get(key));
                 }
             }
-            showGroupCreateDialog(v);
+            if(selectedFriends.size() > 0) {
+                showGroupCreateDialog(v);
+            }
         }
         else if(v.getId() == R.id.add_friend_button){
             showAddFriendDialog(v);
