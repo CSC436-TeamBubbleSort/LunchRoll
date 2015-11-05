@@ -15,14 +15,14 @@ import java.util.ArrayList;
 
 public class GroupCreateDialog extends DialogFragment implements  View.OnClickListener{
     private EditText nameBox;
-    private CommunicateBackToFriendsList communicator;
+    private CommunicateGroupNameBackToFriendsList communicator;
     private View view;
     private ArrayList<String> selectedFriendsList;
 
     @Override
     public void onAttach(Activity activity){
         super.onAttach(activity);
-        communicator = (CommunicateBackToFriendsList) activity;
+        communicator = (CommunicateGroupNameBackToFriendsList) activity;
     }
 
     @Override
@@ -37,7 +37,7 @@ public class GroupCreateDialog extends DialogFragment implements  View.OnClickLi
         createGroup.setOnClickListener(this);
         cancel.setOnClickListener(this);
         setCancelable(false);
-        getDialog().setTitle("Create UserGroup");
+        getDialog().setTitle("Create User Group");
 
         // Don't need ViewGroup parent so pass null
         return view;
@@ -56,7 +56,7 @@ public class GroupCreateDialog extends DialogFragment implements  View.OnClickLi
         }
     }
 
-    interface CommunicateBackToFriendsList{
+    interface CommunicateGroupNameBackToFriendsList {
         void sendCreateGroupMessageBack(String nameOfGroup);
     }
 
