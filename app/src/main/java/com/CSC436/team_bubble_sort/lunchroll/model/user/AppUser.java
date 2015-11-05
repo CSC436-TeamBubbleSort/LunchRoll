@@ -33,6 +33,14 @@ public class AppUser implements PreferencesCalls, Comparable<AppUser>, ClientNea
         this.userGroups = new ArrayList<>();
     }
 
+    public ArrayList<String> getGroupNames(){
+        ArrayList<String> groupNames = new ArrayList<>();
+        for(UserGroup group : userGroups){
+            groupNames.add(group.getGroupName());
+        }
+        return groupNames;
+    }
+
     // TODO Helps build JSON object in string form
     @Override
     public String toString(){

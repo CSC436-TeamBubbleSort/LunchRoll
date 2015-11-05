@@ -12,13 +12,14 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.csc436.team_bubble_sort.lunchroll.model.user.AppUser;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class GroupSelectActivity extends AppCompatActivity implements View.OnClickListener{
 
     // Array holding list of groups
-    private String[] groups = {"group 1", "group 2", "group 3", "group 4", "group 5"};
     private ArrayList<String> groupsList;
     private ListView groupsView;
 
@@ -28,6 +29,8 @@ public class GroupSelectActivity extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_group_select);
         Button newGroup = (Button) findViewById(R.id.new_group_button);
         Button selectGroup = (Button) findViewById(R.id.select_group_button);
+        AppUser user = (AppUser) getIntent().getSerializableExtra("user");
+        groupsList = user.getGroupNames();
         newGroup.setOnClickListener(this);
         selectGroup.setOnClickListener(this);
         initGroupList();
@@ -35,8 +38,9 @@ public class GroupSelectActivity extends AppCompatActivity implements View.OnCli
 
     private void initGroupList(){
         // The list of groups
-        groupsList = new ArrayList<>();
-        groupsList.addAll(Arrays.asList(groups));
+        if(groupsList.size() == 0){
+            groupsList.add("You have no groups created");
+        }
         ArrayAdapter<String> groupsAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_multiple_choice, groupsList);
         groupsView = (ListView) findViewById(R.id.group_list);

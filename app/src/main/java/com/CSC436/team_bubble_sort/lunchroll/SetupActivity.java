@@ -70,6 +70,7 @@ public class SetupActivity extends AppCompatActivity implements View.OnClickList
         if(v.getId() == R.id.activity_setup_set_preferences){
             user.savePreferenceList();
             Intent intent = new Intent(this, GroupSelectActivity.class);
+            intent.putExtra("user", user);
             startActivity(intent);
         }
     }
