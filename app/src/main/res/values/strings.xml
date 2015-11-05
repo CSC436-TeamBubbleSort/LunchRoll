@@ -31,4 +31,7 @@
     <string name="group_select_select_group_string">Select Group</string>
     <string name="activity_setup_set_prefs_string">Set Preferences</string>
     <string name="add_friend_string">Add Friend</string>
+    <string name="add_friend_popup_hint_string">Username of Friend</string>
+    <string name="add_friend_popup_cancel_button_string">Cancel</string>
+    <string name="add_friend_popup_add_button_string">ADD FRIEND</string>
 </resources>
