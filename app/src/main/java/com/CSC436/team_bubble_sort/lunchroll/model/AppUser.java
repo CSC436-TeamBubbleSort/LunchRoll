@@ -13,7 +13,7 @@ import java.util.ArrayList;
 //TODO implement Parcelable instead of Serializable for performance boost
 public class AppUser implements Comparable<AppUser>, Serializable {
     private CategoryOfFoodPreferences preferences;
-    private String userID;
+    public String userID;
     private ArrayList<UserGroup> userGroups;
     private String username;
     private String password;

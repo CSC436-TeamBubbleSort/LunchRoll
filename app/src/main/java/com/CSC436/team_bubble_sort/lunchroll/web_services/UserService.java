@@ -6,6 +6,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.csc436.team_bubble_sort.lunchroll.model.AppUser;
 import com.csc436.team_bubble_sort.lunchroll.web_services.user.UpdateUser;
+import com.csc436.team_bubble_sort.lunchroll.web_services.user.Login;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,25 +25,25 @@ public class UserService extends BaseService {
     }
 
     public void updateUser(final UpdateUser userActivity, AppUser user){
-         Response.Listener responseLisenter = new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            try {
-                                response = response.getJSONObject("data");
-                            }
-                            catch (JSONException e){
-                                e.printStackTrace();
-                            }
-                            userActivity.updateUserSuccess(response.toString());
-                        }
-                    };
+        Response.Listener responseLisenter = new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    response = response.getJSONObject("data");
+                }
+                catch (JSONException e){
+                    e.printStackTrace();
+                }
+                userActivity.updateUserSuccess(response.toString());
+            }
+        };
         Response.ErrorListener errorListener = new  Response.ErrorListener() {
 
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            userActivity.updateUserError("error" + error.getLocalizedMessage() + "\n" + error.getMessage());
-                        }
-                    };
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                userActivity.updateUserError("error" + error.getLocalizedMessage() + "\n" + error.getMessage());
+            }
+        };
         JSONObject jsonBody = null;
         jsonBody = user.toJSON();
 
@@ -52,6 +53,43 @@ public class UserService extends BaseService {
         }
         else{
             userActivity.updateUserError("JSON could not be created.");
+        }
+    }
+
+    public void login(final Login userActivity, String password, String email){
+        Response.Listener responseLisenter = new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    response = response.getJSONObject("data");
+                }
+                catch (JSONException e){
+                    e.printStackTrace();
+                }
+                userActivity.loginSuccess(response.toString());
+            }
+        };
+        Response.ErrorListener errorListener = new  Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                userActivity.loginError("error" + error.getLocalizedMessage() + "\n" + error.getMessage());
+            }
+        };
+        JSONObject jsonBody = new JSONObject();
+        try {
+            jsonBody.accumulate("password", password);
+            jsonBody.accumulate("email", email);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        if (jsonBody != null){
+            userActivity.loginError(jsonBody.toString());
+            request.call(baseRoute + "login", jsonBody, responseLisenter, errorListener, context);
+        }
+        else{
+            userActivity.loginError("JSON could not be created.");
         }
     }
 

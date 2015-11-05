@@ -12,22 +12,26 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.csc436.team_bubble_sort.lunchroll.model.AppUser;
+import com.csc436.team_bubble_sort.lunchroll.web_services.GroupService;
+import com.csc436.team_bubble_sort.lunchroll.web_services.group.GetGroups;
 
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class GroupSelectActivity extends AppCompatActivity implements View.OnClickListener{
+public class GroupSelectActivity extends AppCompatActivity implements GetGroups, View.OnClickListener{
 
     // Array holding list of groups
     private ArrayList<String> groupsList;
     private ListView groupsView;
     private AppUser user;
+    private GroupService GroupService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_select);
+        this.GroupService = new GroupService(this.getApplicationContext());
         Button newGroup = (Button) findViewById(R.id.new_group_button);
         Button selectGroup = (Button) findViewById(R.id.select_group_button);
         user = (AppUser) getIntent().getSerializableExtra("user");
@@ -89,4 +93,14 @@ public class GroupSelectActivity extends AppCompatActivity implements View.OnCli
             startActivity(intent);
         }
     }
+    public void getGroupsRequest() {
+        GroupService.getGroups(this, user.userID);
+    }
+    public void getGroupsSuccess(String result) {
+        Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+    }
+    public void getGroupsError(String error){
+        Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
+    }
+
 }

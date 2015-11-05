@@ -34,6 +34,7 @@ import android.widget.Toast;
 import com.csc436.team_bubble_sort.lunchroll.model.CategoryOfFoodPreferences;
 import com.csc436.team_bubble_sort.lunchroll.model.AppUser;
 import com.csc436.team_bubble_sort.lunchroll.web_services.UserService;
+import com.csc436.team_bubble_sort.lunchroll.web_services.user.Login;
 import com.csc436.team_bubble_sort.lunchroll.web_services.user.UpdateUser;
 
 import java.util.ArrayList;
@@ -44,7 +45,7 @@ import static android.Manifest.permission.READ_CONTACTS;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor>, UpdateUser {
+public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor>, Login {
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -202,7 +203,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             //showProgress(true);
-            updateUserRequest();
+            loginRequest();
             //mAuthTask = new UserLoginTask(email, password);
             //mAuthTask.execute((Void) null);
 
@@ -215,23 +216,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     private boolean isEmailValid(String email) {
-        for(String cred : DUMMY_CREDENTIALS){
-            String dummy_email = cred.split(":")[0];
-            if(email.equals(dummy_email)){
-                return true;
-            }
-        }
-        return false;
+        return true;
     }
 
     private boolean isPasswordValid(String password) {
-        for(String cred : DUMMY_CREDENTIALS){
-            String dummy_password = cred.split(":")[1];
-            if(password.equals(dummy_password)){
-                return true;
-            }
-        }
-        return false;
+        return true;
     }
 
     /**
@@ -324,25 +313,23 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mEmailView.setAdapter(adapter);
     }
 
-    public void updateUserRequest() {
-        // TODO should change username to be different than email
+
+
+    public void loginRequest(){
+        UserService.login(this, this.password, this.email);
+    }
+
+    public void loginSuccess(String result) {
+        Toast.makeText(this, result, Toast.LENGTH_LONG).show();
         AppUser user = new AppUser("Joe", new CategoryOfFoodPreferences("Joe"));
         user.setEmail(this.email);
         user.setPassword(this.password);
         Intent intent = new Intent(this, SetupActivity.class);
         intent.putExtra("user", user);
         startActivity(intent);
-        //UserService.updateUser(this, user);
     }
 
-    public void updateUserSuccess(String result) {
-        Toast.makeText(this, result, Toast.LENGTH_LONG).show();
-        //Intent intent = new Intent(this, SetupActivity.class);
-        //intent.putExtra("user", user);
-        //startActivity(intent);
-    }
-
-    public void updateUserError(String error) {
+    public void loginError(String error) {
         Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
     }
 
