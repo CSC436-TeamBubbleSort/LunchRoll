@@ -17,7 +17,7 @@ import com.csc436.team_bubble_sort.lunchroll.model.user.AppUser;
 
 import java.util.ArrayList;
 
-public class FriendsListActivity extends AppCompatActivity implements GroupCreateDialog.CommunicateBackToFriendsList, View.OnClickListener{
+public class FriendsListActivity extends AppCompatActivity implements GroupCreateDialog.CommunicateGroupNameBackToFriendsList, View.OnClickListener{
 
     // Array holding list of friends
     private ArrayList<String> friendsList;
@@ -107,6 +107,7 @@ public class FriendsListActivity extends AppCompatActivity implements GroupCreat
         }
         else if(v.getId() == R.id.add_friend_button){
             // TODO Do Things
+            // TODO store new username in server as new friend if legit
         }
     }
 }
