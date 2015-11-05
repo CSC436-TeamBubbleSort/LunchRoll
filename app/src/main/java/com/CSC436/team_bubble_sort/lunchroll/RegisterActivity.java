@@ -8,21 +8,27 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.csc436.team_bubble_sort.lunchroll.model.AppUser;
 import com.csc436.team_bubble_sort.lunchroll.model.CategoryOfFoodPreferences;
+import com.csc436.team_bubble_sort.lunchroll.web_services.UserService;
+import com.csc436.team_bubble_sort.lunchroll.web_services.user.UpdateUser;
 
 /**
  * Created by Devin on 11/5/2015.
  */
-public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
+public class RegisterActivity extends AppCompatActivity implements UpdateUser, View.OnClickListener{
 
     private EditText nameBox, emailBox, pwBox;
+    private UserService UserService;
+    private AppUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_activity);
+        this.UserService = new UserService(this.getApplicationContext());
         Button registerButton = (Button) findViewById(R.id.register_create_button);
         Button cancelButton = (Button) findViewById(R.id.register_cancel_button);
         registerButton.setOnClickListener(this);
@@ -60,16 +66,29 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             this.finish();
         }
         else if(v.getId() == R.id.register_create_button){
-            String username, email, pw;
-            username = nameBox.getText().toString();
-            email = emailBox.getText().toString();
-            pw = pwBox.getText().toString();
-            Intent intent = new Intent(this, SetupActivity.class);
-            AppUser user = new AppUser(username, new CategoryOfFoodPreferences(username));
-            user.setEmail(email);
-            user.setPassword(pw);
-            intent.putExtra("user", user);
-            startActivity(intent);
+            updateUserRequest();
         }
+    }
+
+    public void updateUserRequest() {
+        String username, email, pw;
+        username = nameBox.getText().toString();
+        email = emailBox.getText().toString();
+        pw = pwBox.getText().toString();
+        user = new AppUser(username, new CategoryOfFoodPreferences(username));
+        user.setEmail(email);
+        user.setPassword(pw);
+        UserService.updateUser(this, user);
+    }
+
+    public void updateUserSuccess(String result) {
+        Toast.makeText(this, result, Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this, SetupActivity.class);
+        intent.putExtra("user", user);
+        startActivity(intent);
+    }
+
+    public void updateUserError(String error) {
+        Toast.makeText(this, error, Toast.LENGTH_LONG).show();
     }
 }

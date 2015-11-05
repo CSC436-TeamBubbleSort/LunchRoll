@@ -210,8 +210,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     private void register(){
-        //Intent intent = new Intent(this, RegisterActivity.class);
-        //startActivity(intent);
+        Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
     }
 
     private boolean isEmailValid(String email) {

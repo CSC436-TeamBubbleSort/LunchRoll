@@ -30,6 +30,10 @@
             android:label="@string/title_activity_setup" >
         </activity>
         <activity
+            android:name="com.csc436.team_bubble_sort.lunchroll.RegisterActivity"
+            android:label="Register" >
+        </activity>
+        <activity
             android:name="com.csc436.team_bubble_sort.lunchroll.GroupSelectActivity"
             android:label="@string/title_activity_group_select" >
         </activity>

@@ -17,12 +17,12 @@ import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
 import com.google.android.gms.location.LocationServices;
 
-public class TopResultActivity extends AppCompatActivity implements NearbyAny, ConnectionCallbacks, OnConnectionFailedListener{
+public class TopResultActivity extends AppCompatActivity implements NearbyAny{ //ConnectionCallbacks, OnConnectionFailedListener{
 
     private TextView result;
     private LocationService LocationService;
-    private GoogleApiClient mGoogleApiClient;
-    Location location;
+    //private GoogleApiClient mGoogleApiClient;
+   // Location location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,18 +30,19 @@ public class TopResultActivity extends AppCompatActivity implements NearbyAny, C
         setContentView(R.layout.activity_top_result);
         result = (TextView) findViewById(R.id.result);
         LocationService = new LocationService(this.getApplicationContext());
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
+       /* mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
-                .build();
-    }
-
-    @Override
-    public void onConnected(Bundle bundle) {
-        Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+                .build();*/
         nearbyAnyRequest();
     }
+
+   /* @Override
+    public void onConnected(Bundle bundle) {
+       // Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -66,7 +67,8 @@ public class TopResultActivity extends AppCompatActivity implements NearbyAny, C
     }
 
     public void nearbyAnyRequest(){
-        this.LocationService.nearbyAny(this, location.getLatitude(), location.getLongitude());
+        //this.LocationService.nearbyAny(this, location.getLatitude(), location.getLongitude());
+        this.LocationService.nearbyAny(this, 32, -111);
     }
     public void nearbyAnySuccess(String result){
         this.result.setText(result);
@@ -75,7 +77,7 @@ public class TopResultActivity extends AppCompatActivity implements NearbyAny, C
         Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
     }
 
-    @Override
+   /* @Override
     public void onConnectionSuspended(int cause) {
         // The connection has been interrupted.
         // Disable any UI components that depend on Google APIs
@@ -106,5 +108,5 @@ public class TopResultActivity extends AppCompatActivity implements NearbyAny, C
         }
 
         super.onStop();
-    }
+    }*/
 }
