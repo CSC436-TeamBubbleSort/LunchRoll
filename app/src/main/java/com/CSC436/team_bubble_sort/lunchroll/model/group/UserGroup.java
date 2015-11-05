@@ -6,10 +6,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONArray;
+
 public class UserGroup implements Comparable<UserGroup>, Serializable{
-    private static final long serialVersionUID = 20L;
     private String groupName;
-    private String parentUsername;
+    private String parentUsername; // User that created this group
     private ArrayList<AppUser> appUsers;
     // Constructor
     public UserGroup(String newGroupName, String newParentUserID){
@@ -17,6 +20,25 @@ public class UserGroup implements Comparable<UserGroup>, Serializable{
         parentUsername = newParentUserID;
         appUsers = new ArrayList<>();
     }
+
+    @Override
+    public String toString(){
+        JSONObject json_group = new JSONObject();
+        JSONArray json_users = new JSONArray();
+        try {
+            json_group.accumulate("name", groupName);
+            json_group.accumulate("user", parentUsername);
+            for(AppUser user : appUsers){
+                json_users.put(user.toString());
+            }
+            json_group.accumulate("users", json_users);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return json_group.toString();
+    }
+
     // Getters and Setters
     public void setGroupName(String newGroupName){groupName = newGroupName;}
     public String getGroupName(){return groupName;}

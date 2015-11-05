@@ -10,13 +10,16 @@ import com.csc436.team_bubble_sort.lunchroll.model.locations.ClientNearbyAnyCall
 import com.csc436.team_bubble_sort.lunchroll.model.preferences.CategoryOfFoodPreferences;
 import com.csc436.team_bubble_sort.lunchroll.model.preferences.PreferencesCalls;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONArray;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
 //TODO implement Parcelable instead of Serializable for performance boost
 public class AppUser implements PreferencesCalls, Comparable<AppUser>, ClientNearbyAnyCalls, UsersCalls, GroupsCalls, Serializable {
-    private static final long serialVersionUID = 1L;
     private CategoryOfFoodPreferences preferences;
     private ArrayList<UserGroup> userGroups;
     private String username;
@@ -33,7 +36,19 @@ public class AppUser implements PreferencesCalls, Comparable<AppUser>, ClientNea
     // TODO Helps build JSON object in string form
     @Override
     public String toString(){
-        return null;
+        JSONObject json_appuser = new JSONObject();
+        JSONArray json_usergroups = new JSONArray();
+        try {
+            json_appuser.accumulate("name", username);
+            json_appuser.accumulate("preferences", preferences.toString());
+            for(UserGroup group : userGroups){
+                json_usergroups.put(group.toString());
+            }
+            json_appuser.accumulate("user_groups", json_usergroups);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return json_appuser.toString();
     }
     // Allows a list of appUsers to be compared
     @Override

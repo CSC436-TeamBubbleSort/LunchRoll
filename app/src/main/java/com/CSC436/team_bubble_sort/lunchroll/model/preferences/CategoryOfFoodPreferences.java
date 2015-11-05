@@ -4,12 +4,16 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class CategoryOfFoodPreferences implements Serializable{
-    private static final long serialVersionUID = 10L;
     private ArrayList<CategoryOfFoodPreference> preferences;
+    private String userName;
     // Constructor
-    public CategoryOfFoodPreferences(){
+    public CategoryOfFoodPreferences(String newUserName){
+        userName = newUserName;
         preferences = new ArrayList<>();
         addDefaultTypesOfFood();
     }
@@ -54,11 +58,26 @@ public class CategoryOfFoodPreferences implements Serializable{
     // Helps build JSON object
     @Override
     public String toString(){
-        String result = "{";
+        JSONObject json_prefobj = new JSONObject();
+        JSONArray json_preferences = new JSONArray();
         for(CategoryOfFoodPreference foodType : preferences){
-            result += foodType.toString() + ", ";
+            json_preferences.put(foodType.toString());
         }
-        return result.substring(0,result.length() - 2) + "}";
+        try {
+            json_prefobj.accumulate("username", userName);
+            json_prefobj.accumulate("preferences", json_preferences);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return json_prefobj.toString();
+    }
+
+    public void setUserName(String newUserName){
+        userName = newUserName;
+    }
+
+    public String getUserName(){
+        return userName;
     }
 
     // Private class declaring a CategoryOfFoodPreference
@@ -78,6 +97,14 @@ public class CategoryOfFoodPreferences implements Serializable{
         }
         // Helps build JSON object
         @Override
-        public String toString(){return "\"" + categoryOfFood + "\":" + userApproved;}
+        public String toString(){
+            JSONObject json_pref = new JSONObject();
+            try {
+                json_pref.accumulate(categoryOfFood, userApproved);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return json_pref.toString();
+        }
     }
 }

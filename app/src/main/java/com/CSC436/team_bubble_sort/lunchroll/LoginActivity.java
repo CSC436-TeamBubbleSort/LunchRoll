@@ -193,7 +193,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
             Intent intent = new Intent(this, SetupActivity.class);
-            AppUser user = new AppUser("theBest", new CategoryOfFoodPreferences());
+            // TODO should change username to be different than email
+            AppUser user = new AppUser("theBest", new CategoryOfFoodPreferences(email));
             intent.putExtra("user", user);
             startActivity(intent);
         }
