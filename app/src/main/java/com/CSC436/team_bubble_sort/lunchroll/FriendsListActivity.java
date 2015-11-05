@@ -17,12 +17,15 @@ import com.csc436.team_bubble_sort.lunchroll.model.user.AppUser;
 
 import java.util.ArrayList;
 
-public class FriendsListActivity extends AppCompatActivity implements GroupCreateDialog.CommunicateGroupNameBackToFriendsList, View.OnClickListener{
+public class FriendsListActivity extends AppCompatActivity implements
+        GroupCreateDialog.CommunicateGroupNameBackToFriendsList,
+        AddFriendDialog.CommunicateFriendUsernameBackToFriendsList, View.OnClickListener{
 
     // Array holding list of friends
     private ArrayList<String> friendsList;
     private ArrayList<String> selectedFriends;
     private AppUser user;
+    private String usernameOfFriend;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +46,17 @@ public class FriendsListActivity extends AppCompatActivity implements GroupCreat
         Bundle args = new Bundle();
         args.putStringArrayList("selected_friends_list", selectedFriends);
         dialog.setArguments(args);
-        dialog.show(manager,"groupCreateDialog");
+        dialog.show(manager, "groupCreateDialog");
+    }
+
+    public void showAddFriendDialog(View view){
+        FragmentManager manager = getFragmentManager();
+        GroupCreateDialog dialog = new GroupCreateDialog();
+        dialog.show(manager, "addFriendDialog");
+        // TODO Add friend to user's friend's list on server
+        // TODO Pull AppUser object for friend
+        // TODO Repopulate friend's list
+        // TODO Refresh ListView to reflect new friend
     }
 
     @Override
@@ -52,6 +65,12 @@ public class FriendsListActivity extends AppCompatActivity implements GroupCreat
         Intent intent = new Intent(this, TopResultActivity.class);
         intent.putExtra("SELECTION", nameOfGroup);
         startActivity(intent);
+    }
+
+    @Override
+    public void sendFriendUsernameMessageBack(String newUsernameOfFriend){
+        Toast.makeText(this, newUsernameOfFriend, Toast.LENGTH_SHORT).show();
+        usernameOfFriend = newUsernameOfFriend;
     }
 
     private void initFriendsList(){
@@ -106,8 +125,8 @@ public class FriendsListActivity extends AppCompatActivity implements GroupCreat
             showGroupCreateDialog(v);
         }
         else if(v.getId() == R.id.add_friend_button){
-            // TODO Do Things
-            // TODO store new username in server as new friend if legit
+            showAddFriendDialog(v);
+            // TODO store new username in server as new friend if legit (Might be done above)
         }
     }
 }
