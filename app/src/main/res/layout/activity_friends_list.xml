@@ -21,14 +21,36 @@
         android:layout_gravity="center_horizontal"
         />
 
-    <Button
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/create_group"
-        android:id="@+id/create_group_button"
-        android:layout_weight="1"
-        android:layout_gravity="center"
-        android:clickable="true"
-        android:enabled="true" />
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:text="@string/create_group_string"
+            android:id="@+id/create_group_button"
+            android:layout_gravity="center"
+            style="?android:attr/buttonBarButtonStyle"
+            android:textColor="@color/myBlack"
+            android:clickable="true"
+            android:enabled="true"
+            android:layout_weight="0.55" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:text="@string/add_friend_string"
+            android:id="@+id/add_friend_button"
+            style="?android:attr/buttonBarButtonStyle"
+            android:textColor="@color/myBlack"
+            android:layout_weight="0.47" />
+    </LinearLayout>
 
 </LinearLayout>

@@ -30,8 +30,10 @@ public class FriendsListActivity extends AppCompatActivity implements GroupCreat
         selectedFriends = new ArrayList<>();
         setContentView(R.layout.activity_friends_list);
         Button createGroupButton = (Button) findViewById(R.id.create_group_button);
+        Button addFriendButton = (Button) findViewById(R.id.add_friend_button);
         user = (AppUser) getIntent().getSerializableExtra("user");
         createGroupButton.setOnClickListener(this);
+        addFriendButton.setOnClickListener(this);
         initFriendsList();
     }
 
@@ -102,6 +104,9 @@ public class FriendsListActivity extends AppCompatActivity implements GroupCreat
                 }
             }
             showGroupCreateDialog(v);
+        }
+        else if(v.getId() == R.id.add_friend_button){
+            // TODO Do Things
         }
     }
 }
