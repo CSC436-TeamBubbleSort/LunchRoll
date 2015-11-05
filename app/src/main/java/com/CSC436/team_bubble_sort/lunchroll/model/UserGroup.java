@@ -1,6 +1,4 @@
-package com.csc436.team_bubble_sort.lunchroll.model.group;
-
-import com.csc436.team_bubble_sort.lunchroll.model.user.AppUser;
+package com.csc436.team_bubble_sort.lunchroll.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;

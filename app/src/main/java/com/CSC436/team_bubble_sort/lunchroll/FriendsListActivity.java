@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.csc436.team_bubble_sort.lunchroll.model.user.AppUser;
+import com.csc436.team_bubble_sort.lunchroll.model.AppUser;
 
 import java.util.ArrayList;
 

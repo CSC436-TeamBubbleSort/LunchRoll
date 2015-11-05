@@ -3,7 +3,6 @@ package com.csc436.team_bubble_sort.lunchroll;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
@@ -32,15 +31,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.csc436.team_bubble_sort.lunchroll.model.preferences.CategoryOfFoodPreferences;
-import com.csc436.team_bubble_sort.lunchroll.model.preferences.PreferencesCalls;
-import com.csc436.team_bubble_sort.lunchroll.model.user.AppUser;
+import com.csc436.team_bubble_sort.lunchroll.model.CategoryOfFoodPreferences;
+import com.csc436.team_bubble_sort.lunchroll.model.AppUser;
 import com.csc436.team_bubble_sort.lunchroll.web_services.UserService;
 import com.csc436.team_bubble_sort.lunchroll.web_services.user.UpdateUser;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.prefs.Preferences;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
