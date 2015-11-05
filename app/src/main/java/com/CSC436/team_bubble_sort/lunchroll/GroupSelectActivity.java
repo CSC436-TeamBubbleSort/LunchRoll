@@ -3,7 +3,6 @@ package com.csc436.team_bubble_sort.lunchroll;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,10 +11,11 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.csc436.team_bubble_sort.lunchroll.model.user.AppUser;
+import com.csc436.team_bubble_sort.lunchroll.model.AppUser;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class GroupSelectActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -31,6 +31,8 @@ public class GroupSelectActivity extends AppCompatActivity implements View.OnCli
         Button newGroup = (Button) findViewById(R.id.new_group_button);
         Button selectGroup = (Button) findViewById(R.id.select_group_button);
         user = (AppUser) getIntent().getSerializableExtra("user");
+        // TODO Make web service call to interface. the group calls one
+        //JSONObject json_grouplist = this.getGroups();
         groupsList = user.getGroupNames();
         newGroup.setOnClickListener(this);
         selectGroup.setOnClickListener(this);

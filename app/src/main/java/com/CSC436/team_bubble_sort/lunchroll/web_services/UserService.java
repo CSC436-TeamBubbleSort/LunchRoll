@@ -1,11 +1,10 @@
 package com.csc436.team_bubble_sort.lunchroll.web_services;
 
-import android.app.Activity;
 import android.content.Context;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.csc436.team_bubble_sort.lunchroll.model.user.AppUser;
+import com.csc436.team_bubble_sort.lunchroll.model.AppUser;
 import com.csc436.team_bubble_sort.lunchroll.web_services.user.UpdateUser;
 
 import org.json.JSONException;

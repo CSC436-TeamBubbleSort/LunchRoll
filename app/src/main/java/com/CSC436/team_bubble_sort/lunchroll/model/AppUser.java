@@ -1,15 +1,6 @@
-package com.csc436.team_bubble_sort.lunchroll.model.user;
+package com.csc436.team_bubble_sort.lunchroll.model;
 
 import android.graphics.Point;
-import android.os.Parcel;
-import android.os.Parcelable;
-
-import com.csc436.team_bubble_sort.lunchroll.model.group.GroupsCalls;
-import com.csc436.team_bubble_sort.lunchroll.model.group.UserGroup;
-import com.csc436.team_bubble_sort.lunchroll.model.locations.ClientNearbyAnyCalls;
-import com.csc436.team_bubble_sort.lunchroll.model.preferences.CategoryOfFoodPreferences;
-import com.csc436.team_bubble_sort.lunchroll.model.preferences.PreferencesCalls;
-import com.csc436.team_bubble_sort.lunchroll.web_services.user.UpdateUser;
 
 import org.json.JSONException;
 import org.json.JSONObject;

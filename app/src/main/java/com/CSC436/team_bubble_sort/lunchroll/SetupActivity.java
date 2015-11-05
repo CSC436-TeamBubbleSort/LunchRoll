@@ -11,8 +11,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.csc436.team_bubble_sort.lunchroll.model.preferences.CategoryOfFoodPreferences;
-import com.csc436.team_bubble_sort.lunchroll.model.user.AppUser;
+import com.csc436.team_bubble_sort.lunchroll.model.CategoryOfFoodPreferences;
+import com.csc436.team_bubble_sort.lunchroll.model.AppUser;
 
 import java.util.ArrayList;
 import java.util.List;
