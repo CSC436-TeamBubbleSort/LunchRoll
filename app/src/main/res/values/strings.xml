@@ -34,4 +34,9 @@
     <string name="add_friend_popup_hint_string">Username of Friend</string>
     <string name="add_friend_popup_cancel_button_string">Cancel</string>
     <string name="add_friend_popup_add_button_string">ADD FRIEND</string>
+    <string name="register_username_hint_string">Username</string>
+    <string name="register_email_hint_string">Email</string>
+    <string name="register_password_hint_string">Enter Password</string>
+    <string name="register_cancel_button_string">Cancel</string>
+    <string name="register_register_button_string">Register</string>
 </resources>
