@@ -2,10 +2,12 @@ package com.csc436.team_bubble_sort.lunchroll.model.group;
 
 import com.csc436.team_bubble_sort.lunchroll.model.user.AppUser;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class UserGroup implements Comparable<UserGroup>{
+public class UserGroup implements Comparable<UserGroup>, Serializable{
+    private static final long serialVersionUID = 20L;
     private String groupName;
     private String parentUsername;
     private ArrayList<AppUser> appUsers;

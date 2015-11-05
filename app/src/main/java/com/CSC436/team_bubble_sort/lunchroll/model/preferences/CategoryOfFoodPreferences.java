@@ -1,10 +1,12 @@
 package com.csc436.team_bubble_sort.lunchroll.model.preferences;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class CategoryOfFoodPreferences{
+public class CategoryOfFoodPreferences implements Serializable{
+    private static final long serialVersionUID = 10L;
     private ArrayList<CategoryOfFoodPreference> preferences;
     // Constructor
     public CategoryOfFoodPreferences(){
@@ -14,7 +16,7 @@ public class CategoryOfFoodPreferences{
     // Maintaining preferences list
     public void flipPreferenceValue(String key){
         CategoryOfFoodPreference pref = findPreference(key);
-        if(pref.userApproved == true) pref.userApproved = false;
+        if(pref.userApproved) pref.userApproved = false;
         else pref.userApproved = true;
     }
     // Used for flipping a preference value
@@ -61,7 +63,7 @@ public class CategoryOfFoodPreferences{
 
     // Private class declaring a CategoryOfFoodPreference
     // Provides simple key:value pair object with comparable keys and JSON toString helper
-    private class CategoryOfFoodPreference implements Comparable<CategoryOfFoodPreference>{
+    private class CategoryOfFoodPreference implements Comparable<CategoryOfFoodPreference>, Serializable{
         private String categoryOfFood;
         private boolean userApproved;
         // Constructor

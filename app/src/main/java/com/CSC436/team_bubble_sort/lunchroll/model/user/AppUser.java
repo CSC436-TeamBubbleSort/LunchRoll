@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 //TODO implement Parcelable instead of Serializable for performance boost
 public class AppUser implements PreferencesCalls, Comparable<AppUser>, ClientNearbyAnyCalls, UsersCalls, GroupsCalls, Serializable {
+    private static final long serialVersionUID = 1L;
     private CategoryOfFoodPreferences preferences;
     private ArrayList<UserGroup> userGroups;
     private String username;
@@ -28,6 +29,7 @@ public class AppUser implements PreferencesCalls, Comparable<AppUser>, ClientNea
         this.preferences = preferences;
         this.userGroups = new ArrayList<>();
     }
+
     // TODO Helps build JSON object in string form
     @Override
     public String toString(){
@@ -40,6 +42,7 @@ public class AppUser implements PreferencesCalls, Comparable<AppUser>, ClientNea
         else if(this.username.compareTo(another.username) > 0) return 1;
         else return 0;
     }
+
     // Getters and Setters
     public CategoryOfFoodPreferences getPreferences(){return preferences;}
     public void setPreferences(CategoryOfFoodPreferences newPreferences){preferences = newPreferences;}
