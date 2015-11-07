@@ -5,6 +5,7 @@ import android.content.Context;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.csc436.team_bubble_sort.lunchroll.model.AppUser;
+import com.csc436.team_bubble_sort.lunchroll.web_services.admin.GetUsers;
 import com.csc436.team_bubble_sort.lunchroll.web_services.user.UpdateUser;
 import com.csc436.team_bubble_sort.lunchroll.web_services.user.Login;
 
@@ -92,6 +93,44 @@ public class UserService extends BaseService {
             userActivity.loginError("JSON could not be created.");
         }
     }
+
+    public void getUsers(final GetUsers userActivity){
+        Response.Listener responseLisenter = new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    response = response.getJSONObject("data");
+                }
+                catch (JSONException e){
+                    e.printStackTrace();
+                }
+                userActivity.getUsersSuccess(response.toString());
+            }
+        };
+        Response.ErrorListener errorListener = new  Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                userActivity.getUsersError("error" + error.getLocalizedMessage() + "\n" + error.getMessage());
+            }
+        };
+        JSONObject jsonBody = new JSONObject();
+        try {
+            jsonBody.accumulate("userID", "1");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        if (jsonBody != null){
+            userActivity.getUsersError(jsonBody.toString());
+            request.call("/admin/getUsers", jsonBody, responseLisenter, errorListener, context);
+        }
+        else{
+            userActivity.getUsersError("JSON could not be created.");
+        }
+    }
+
+
 
 
 

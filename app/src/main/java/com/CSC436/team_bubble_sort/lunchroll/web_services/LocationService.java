@@ -44,8 +44,8 @@ public class LocationService extends BaseService {
         };
         JSONObject jsonBody = new JSONObject();
         try {
-            jsonBody.accumulate("latitude", "32");
-            jsonBody.accumulate("longitude", "-111");
+            jsonBody.accumulate("latitude", "32.1958");
+            jsonBody.accumulate("longitude", "-110.892");
         } catch (JSONException e) {
             e.printStackTrace();
         }

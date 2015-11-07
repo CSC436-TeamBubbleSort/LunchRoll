@@ -14,10 +14,16 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.csc436.team_bubble_sort.lunchroll.model.AppUser;
+import com.csc436.team_bubble_sort.lunchroll.web_services.UserService;
+import com.csc436.team_bubble_sort.lunchroll.web_services.admin.GetUsers;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class FriendsListActivity extends AppCompatActivity implements
+public class FriendsListActivity extends AppCompatActivity implements GetUsers,
         GroupCreateDialog.CommunicateGroupNameBackToFriendsList,
         AddFriendDialog.CommunicateFriendUsernameBackToFriendsList, View.OnClickListener{
 
@@ -26,18 +32,22 @@ public class FriendsListActivity extends AppCompatActivity implements
     private ArrayList<String> selectedFriends;
     private AppUser user;
     private String usernameOfFriend;
+    private UserService UserService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        friendsList = new ArrayList<String>();
         selectedFriends = new ArrayList<>();
+        this.UserService = new UserService(this.getApplicationContext());
         setContentView(R.layout.activity_friends_list);
         Button createGroupButton = (Button) findViewById(R.id.create_group_button);
         Button addFriendButton = (Button) findViewById(R.id.add_friend_button);
         user = (AppUser) getIntent().getSerializableExtra("user");
         createGroupButton.setOnClickListener(this);
         addFriendButton.setOnClickListener(this);
-        initFriendsList();
+
+        this.getUsersRequest();
     }
 
     public void showGroupCreateDialog(View view) {
@@ -75,7 +85,7 @@ public class FriendsListActivity extends AppCompatActivity implements
 
     private void initFriendsList(){
         // The friend's list
-        friendsList = user.getFriendsNames();
+        //friendsList = user.getFriendsNames();
         if(friendsList.size() == 0){
             friendsList.add("You have no friends");
         }
@@ -130,5 +140,29 @@ public class FriendsListActivity extends AppCompatActivity implements
             showAddFriendDialog(v);
             // TODO store new username in server as new friend if legit (Might be done above)
         }
+    }
+
+    public void getUsersRequest() {
+        UserService.getUsers(this);
+    }
+    public void getUsersSuccess(String result) {
+        Toast.makeText(this, result, Toast.LENGTH_LONG).show();
+        JSONArray jsonArray = null;
+        try {
+            jsonArray = new JSONArray(result);
+            //friendsList.add(jsonArray.toString());
+            for (int i = 0; i < jsonArray.length(); i++) {
+                //friendsList.add(jsonArray.getJSONObject(i).get("yes"));
+            }
+        }
+        catch (JSONException e){
+            e.printStackTrace();
+            friendsList.add("temp");
+        }
+
+        initFriendsList();
+    }
+    public void getUsersError(String error) {
+        Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
     }
 }
