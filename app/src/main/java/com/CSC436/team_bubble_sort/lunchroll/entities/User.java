@@ -93,6 +93,8 @@ public class User implements Comparable<User>, Serializable {
     public String getPassword(){return this.password;}
     public void setPassword(String password){this.password = password;}
     public int getUserId(){return userId;}
+    public Point getLocation(){return location;}
+    public void setLocation(Point location){this.location = location;}
 
     public JSONObject toJSON(){
         JSONObject jsonBody = new JSONObject();
