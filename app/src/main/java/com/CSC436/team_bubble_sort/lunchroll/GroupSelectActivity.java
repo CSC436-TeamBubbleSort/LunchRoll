@@ -11,11 +11,13 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.csc436.team_bubble_sort.lunchroll.entities.Group;
 import com.csc436.team_bubble_sort.lunchroll.entities.User;
 import com.csc436.team_bubble_sort.lunchroll.web_services.GroupService;
 import com.csc436.team_bubble_sort.lunchroll.web_services.group.GetGroups;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GroupSelectActivity extends AppCompatActivity implements GetGroups, View.OnClickListener{
 
@@ -94,8 +96,11 @@ public class GroupSelectActivity extends AppCompatActivity implements GetGroups,
     public void getGroupsRequest() {
         GroupService.getGroups(this, user.getUserId() + "");
     }
-    public void getGroupsSuccess(String result) {
-        Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+    public void getGroupsSuccess(List<Group> groups) {
+        for ( Group group : groups){
+            groupsList.add(group.getName());
+        }
+        Toast.makeText(this, "Success!", Toast.LENGTH_SHORT).show();
     }
     public void getGroupsError(String error){
         Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
