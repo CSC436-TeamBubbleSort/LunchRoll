@@ -31,11 +31,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.csc436.team_bubble_sort.lunchroll.model.CategoryOfFoodPreferences;
-import com.csc436.team_bubble_sort.lunchroll.model.AppUser;
+import com.csc436.team_bubble_sort.lunchroll.entities.Preferences;
+import com.csc436.team_bubble_sort.lunchroll.entities.User;
 import com.csc436.team_bubble_sort.lunchroll.web_services.UserService;
 import com.csc436.team_bubble_sort.lunchroll.web_services.user.Login;
-import com.csc436.team_bubble_sort.lunchroll.web_services.user.UpdateUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -321,7 +320,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     public void loginSuccess(String result) {
         Toast.makeText(this, result, Toast.LENGTH_LONG).show();
-        AppUser user = new AppUser("Joe", new CategoryOfFoodPreferences("Joe"));
+        User user = new User("Joe", this.email, this.password);
         user.setEmail(this.email);
         user.setPassword(this.password);
         Intent intent = new Intent(this, SetupActivity.class);

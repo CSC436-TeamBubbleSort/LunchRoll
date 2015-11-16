@@ -11,21 +11,21 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.csc436.team_bubble_sort.lunchroll.model.CategoryOfFoodPreferences;
-import com.csc436.team_bubble_sort.lunchroll.model.AppUser;
+import com.csc436.team_bubble_sort.lunchroll.entities.Preferences;
+import com.csc436.team_bubble_sort.lunchroll.entities.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SetupActivity extends AppCompatActivity implements View.OnClickListener{
-    private CategoryOfFoodPreferences preferences;
-    private AppUser user;
+    private Preferences preferences;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup);
-        user = (AppUser) getIntent().getSerializableExtra("user");
+        user = (User) getIntent().getSerializableExtra("user");
         preferences = user.getPreferences();
         Button setupPrefs = (Button) findViewById(R.id.activity_setup_set_preferences);
         setupPrefs.setOnClickListener(this);
@@ -34,7 +34,7 @@ public class SetupActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void initFoodsList() {
-        List<String> typesOfFood = preferences.getFoodTypesOnly();
+        List<String> typesOfFood = preferences.getPreferenceNames();
         ArrayList<String> foodsList = new ArrayList<>();
         foodsList.addAll(typesOfFood);
         ArrayAdapter<String> foodsAdapter = new ArrayAdapter<>(this,

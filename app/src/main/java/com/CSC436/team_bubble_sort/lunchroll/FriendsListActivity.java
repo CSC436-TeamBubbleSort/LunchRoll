@@ -13,13 +13,12 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.csc436.team_bubble_sort.lunchroll.model.AppUser;
+import com.csc436.team_bubble_sort.lunchroll.entities.User;
 import com.csc436.team_bubble_sort.lunchroll.web_services.UserService;
 import com.csc436.team_bubble_sort.lunchroll.web_services.admin.GetUsers;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -30,7 +29,7 @@ public class FriendsListActivity extends AppCompatActivity implements GetUsers,
     // Array holding list of friends
     private ArrayList<String> friendsList;
     private ArrayList<String> selectedFriends;
-    private AppUser user;
+    private User user;
     private String usernameOfFriend;
     private UserService UserService;
 
@@ -43,7 +42,7 @@ public class FriendsListActivity extends AppCompatActivity implements GetUsers,
         setContentView(R.layout.activity_friends_list);
         Button createGroupButton = (Button) findViewById(R.id.create_group_button);
         Button addFriendButton = (Button) findViewById(R.id.add_friend_button);
-        user = (AppUser) getIntent().getSerializableExtra("user");
+        user = (User) getIntent().getSerializableExtra("user");
         createGroupButton.setOnClickListener(this);
         addFriendButton.setOnClickListener(this);
 
@@ -64,7 +63,7 @@ public class FriendsListActivity extends AppCompatActivity implements GetUsers,
         AddFriendDialog dialog = new AddFriendDialog();
         dialog.show(manager, "addFriendDialog");
         // TODO Add friend to user's friend's list on server
-        // TODO Pull AppUser object for friend
+        // TODO Pull User object for friend
         // TODO Repopulate friend's list
         // TODO Refresh ListView to reflect new friend
     }

@@ -4,9 +4,7 @@ import android.content.Context;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.csc436.team_bubble_sort.lunchroll.model.AppUser;
 import com.csc436.team_bubble_sort.lunchroll.web_services.group.GetGroups;
-import com.csc436.team_bubble_sort.lunchroll.web_services.user.UpdateUser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -45,7 +43,7 @@ public class GroupService extends BaseService{
         };
         JSONObject jsonBody = new JSONObject();
         try {
-            jsonBody.accumulate("userID", userId);
+            jsonBody.accumulate("userId", userId);
         } catch (JSONException e) {
             e.printStackTrace();
         }

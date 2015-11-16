@@ -11,11 +11,9 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.csc436.team_bubble_sort.lunchroll.model.AppUser;
+import com.csc436.team_bubble_sort.lunchroll.entities.User;
 import com.csc436.team_bubble_sort.lunchroll.web_services.GroupService;
 import com.csc436.team_bubble_sort.lunchroll.web_services.group.GetGroups;
-
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -24,7 +22,7 @@ public class GroupSelectActivity extends AppCompatActivity implements GetGroups,
     // Array holding list of groups
     private ArrayList<String> groupsList;
     private ListView groupsView;
-    private AppUser user;
+    private User user;
     private GroupService GroupService;
 
     @Override
@@ -34,7 +32,7 @@ public class GroupSelectActivity extends AppCompatActivity implements GetGroups,
         this.GroupService = new GroupService(this.getApplicationContext());
         Button newGroup = (Button) findViewById(R.id.new_group_button);
         Button selectGroup = (Button) findViewById(R.id.select_group_button);
-        user = (AppUser) getIntent().getSerializableExtra("user");
+        user = (User) getIntent().getSerializableExtra("user");
         // TODO Make web service call to interface. the group calls one
         //JSONObject json_grouplist = this.getGroups();
         groupsList = user.getGroupNames();
@@ -94,7 +92,7 @@ public class GroupSelectActivity extends AppCompatActivity implements GetGroups,
         }
     }
     public void getGroupsRequest() {
-        GroupService.getGroups(this, user.userID);
+        GroupService.getGroups(this, user.getUserId() + "");
     }
     public void getGroupsSuccess(String result) {
         Toast.makeText(this, result, Toast.LENGTH_SHORT).show();

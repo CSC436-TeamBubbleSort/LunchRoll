@@ -10,8 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.csc436.team_bubble_sort.lunchroll.model.AppUser;
-import com.csc436.team_bubble_sort.lunchroll.model.CategoryOfFoodPreferences;
+import com.csc436.team_bubble_sort.lunchroll.entities.User;
+import com.csc436.team_bubble_sort.lunchroll.entities.Preferences;
 import com.csc436.team_bubble_sort.lunchroll.web_services.UserService;
 import com.csc436.team_bubble_sort.lunchroll.web_services.user.UpdateUser;
 
@@ -22,7 +22,7 @@ public class RegisterActivity extends AppCompatActivity implements UpdateUser, V
 
     private EditText nameBox, emailBox, pwBox;
     private UserService UserService;
-    private AppUser user;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -75,7 +75,7 @@ public class RegisterActivity extends AppCompatActivity implements UpdateUser, V
         username = nameBox.getText().toString();
         email = emailBox.getText().toString();
         pw = pwBox.getText().toString();
-        user = new AppUser(username, new CategoryOfFoodPreferences(username));
+        user = new User(username,pw,email);
         user.setEmail(email);
         user.setPassword(pw);
         UserService.updateUser(this, user);

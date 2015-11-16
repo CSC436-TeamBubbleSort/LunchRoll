@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.csc436.team_bubble_sort.lunchroll.model.AppUser;
+import com.csc436.team_bubble_sort.lunchroll.entities.User;
 import com.csc436.team_bubble_sort.lunchroll.web_services.admin.GetUsers;
 import com.csc436.team_bubble_sort.lunchroll.web_services.user.UpdateUser;
 import com.csc436.team_bubble_sort.lunchroll.web_services.user.Login;
@@ -25,7 +25,7 @@ public class UserService extends BaseService {
         this.context = context;
     }
 
-    public void updateUser(final UpdateUser userActivity, AppUser user){
+    public void updateUser(final UpdateUser userActivity, User user){
         Response.Listener responseLisenter = new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -116,7 +116,7 @@ public class UserService extends BaseService {
         };
         JSONObject jsonBody = new JSONObject();
         try {
-            jsonBody.accumulate("userID", "1");
+            jsonBody.accumulate("userId", "1");
         } catch (JSONException e) {
             e.printStackTrace();
         }
