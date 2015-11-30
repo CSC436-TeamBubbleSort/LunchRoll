@@ -15,14 +15,13 @@ import android.widget.Toast;
 
 import com.csc436.team_bubble_sort.lunchroll.entities.User;
 import com.csc436.team_bubble_sort.lunchroll.web_services.UserService;
-import com.csc436.team_bubble_sort.lunchroll.web_services.admin.GetUsers;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class FriendsListActivity extends AppCompatActivity implements GetUsers,
+public class FriendsListActivity extends AppCompatActivity implements
         GroupCreateDialog.CommunicateGroupNameBackToFriendsList,
         AddFriendDialog.CommunicateFriendUsernameBackToFriendsList, View.OnClickListener{
 
@@ -46,7 +45,7 @@ public class FriendsListActivity extends AppCompatActivity implements GetUsers,
         createGroupButton.setOnClickListener(this);
         addFriendButton.setOnClickListener(this);
 
-        this.getUsersRequest();
+        this.getFriendsRequest();
     }
 
     public void showGroupCreateDialog(View view) {
@@ -141,10 +140,10 @@ public class FriendsListActivity extends AppCompatActivity implements GetUsers,
         }
     }
 
-    public void getUsersRequest() {
-        UserService.getUsers(this);
+    public void getFriendsRequest() {
+
     }
-    public void getUsersSuccess(String result) {
+    public void getFriendsSuccess(String result) {
         Toast.makeText(this, result, Toast.LENGTH_LONG).show();
         JSONArray jsonArray = null;
         try {
@@ -161,7 +160,7 @@ public class FriendsListActivity extends AppCompatActivity implements GetUsers,
 
         initFriendsList();
     }
-    public void getUsersError(String error) {
+    public void getFriendsError(String error) {
         Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
     }
 }

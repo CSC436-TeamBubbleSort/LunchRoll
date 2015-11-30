@@ -109,4 +109,8 @@ public class User implements Comparable<User>, Serializable {
         }
         return jsonBody;
     }
+
+    public void setUserId(int userId){
+        this.userId = userId;
+    }
 }
