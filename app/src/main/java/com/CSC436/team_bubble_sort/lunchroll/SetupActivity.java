@@ -13,24 +13,26 @@ import android.widget.ListView;
 
 import com.csc436.team_bubble_sort.lunchroll.entities.Preferences;
 import com.csc436.team_bubble_sort.lunchroll.entities.User;
+import com.csc436.team_bubble_sort.lunchroll.web_services.UserService;
+import com.csc436.team_bubble_sort.lunchroll.web_services.user.GetPreferences;
+import com.csc436.team_bubble_sort.lunchroll.web_services.user.UpdatePreferences;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SetupActivity extends AppCompatActivity implements View.OnClickListener{
+public class SetupActivity extends AppCompatActivity implements GetPreferences, UpdatePreferences, View.OnClickListener{
     private Preferences preferences;
     private User user;
+    private UserService userService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup);
-        //user = (User) getIntent().getSerializableExtra("user");
-        //preferences = user.getPreferences();
+        userService = new UserService(this.getApplicationContext());
+        //getPreferencesRequest();
         Button setupPrefs = (Button) findViewById(R.id.activity_setup_set_preferences);
         setupPrefs.setOnClickListener(this);
-        //initFoodsList();
-        //Log.d("MyApp", preferences.toString());
     }
 
     private void initFoodsList() {
@@ -74,5 +76,36 @@ public class SetupActivity extends AppCompatActivity implements View.OnClickList
             intent.putExtra("user", user);
             startActivity(intent);
         }
+    }
+
+    @Override
+    public void getPreferencesRequest(int userId) {
+        userService.GetPreferences(this, userId);
+    }
+
+    @Override
+    public void getPreferencesSuccess(Preferences preferences) {
+        this.preferences = preferences;
+        initFoodsList();
+    }
+
+    @Override
+    public void getPreferencesError(String error) {
+
+    }
+
+    @Override
+    public void updatePreferencesRequest(int userId) {
+
+    }
+
+    @Override
+    public void updatePreferencesSuccess(String responses) {
+
+    }
+
+    @Override
+    public void updatePreferencesError(String error) {
+
     }
 }
