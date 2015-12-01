@@ -40,4 +40,17 @@ public class ModelFactory {
 
         return new Group(userId, name, users, groupId);
     }
+
+    public static List<FriendListItem> CreateFriendListItem(JSONArray array) {
+        List<FriendListItem> friendListItems = new ArrayList<FriendListItem>();
+        try {
+            for (int i = 0; i < array.length(); i++) {
+                JSONObject obj = array.getJSONObject(i);
+                friendListItems.add(new FriendListItem(obj.getInt("friendId"), obj.getString("username"), obj.getString("email")));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return friendListItems;
+    }
 }

@@ -29,7 +29,7 @@ public class GroupService extends BaseService{
     }
 
     public void getGroups(final GetGroups userActivity, int userId){
-        Response.Listener responseLisenter = new Response.Listener<JSONObject>() {
+        Response.Listener responseListener = new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
@@ -57,7 +57,7 @@ public class GroupService extends BaseService{
         }
 
         if (jsonBody != null){
-            request.call( "/user/getGroups", jsonBody, responseLisenter, errorListener, context);
+            request.call( "/user/getGroups", jsonBody, responseListener, errorListener, context);
         }
         else{
             userActivity.getGroupsError("JSON could not be created.");
@@ -65,7 +65,7 @@ public class GroupService extends BaseService{
     }
 
     public void GetGroup(final GetGroup userActivity, int groupId){
-        Response.Listener responseLisenter = new Response.Listener<JSONObject>() {
+        Response.Listener responseListener = new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
@@ -93,7 +93,7 @@ public class GroupService extends BaseService{
 
         if (jsonBody != null){
 
-            request.call(baseRoute + "getGroup", jsonBody, responseLisenter, errorListener, context);
+            request.call(baseRoute + "getGroup", jsonBody, responseListener, errorListener, context);
         }
         else{
 
@@ -101,7 +101,7 @@ public class GroupService extends BaseService{
     }
 
     public void UpdateGroup(final UpdateGroup userActivity, final Group group){
-        Response.Listener responseLisenter = new Response.Listener<JSONObject>() {
+        Response.Listener responseListener = new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 int groupId = 0;
@@ -135,7 +135,7 @@ public class GroupService extends BaseService{
 
         if (jsonBody != null){
 
-            request.call(baseRoute + "updateGroup", jsonBody, responseLisenter, errorListener, context);
+            request.call(baseRoute + "updateGroup", jsonBody, responseListener, errorListener, context);
         }
         else{
             userActivity.updateGroupError("JSON could not be created.");
@@ -143,7 +143,7 @@ public class GroupService extends BaseService{
     }
 
     public void DeleteGroup(final DeleteGroup userActivity, int groupId){
-        Response.Listener responseLisenter = new Response.Listener<JSONObject>() {
+        Response.Listener responseListener = new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
@@ -176,7 +176,7 @@ public class GroupService extends BaseService{
 
         if (jsonBody != null){
             userActivity.deleteGroupError(jsonBody.toString());
-            request.call(baseRoute + "deleteGroup", jsonBody, responseLisenter, errorListener, context);
+            request.call(baseRoute + "deleteGroup", jsonBody, responseListener, errorListener, context);
         }
         else{
             userActivity.deleteGroupError("JSON could not be created.");

@@ -23,7 +23,7 @@ public class LocationService extends BaseService {
     }
 
     public void nearbyAny(final NearbyAny activity, double latitude, double longitude){
-        Response.Listener responseLisenter = new Response.Listener<JSONObject>() {
+        Response.Listener responseListener = new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
@@ -52,7 +52,7 @@ public class LocationService extends BaseService {
 
         if (jsonBody != null){
             activity.nearbyAnyError(jsonBody.toString());
-            request.call(baseRoute + "nearbyAny", jsonBody, responseLisenter, errorListener, context);
+            request.call(baseRoute + "nearbyAny", jsonBody, responseListener, errorListener, context);
         }
         else{
             activity.nearbyAnyError("JSON could not be created.");

@@ -17,12 +17,10 @@ public class Preferences implements Serializable{
     public Preferences(int userId, JSONObject newPreferences){
         this.userId = userId;
         preferences = new ArrayList<>();
-        JSONArray prefs = null;
+        String [] serverPreferences = new String [] {"american", "asian", "greek", "indian", "italian", "mexican"};
         try {
-            prefs = newPreferences.getJSONArray("preferences");
-            for(int i = 0; i < prefs.length(); i++){
-                JSONObject pref = prefs.getJSONObject(i);
-                preferences.add(new Preference(pref.getString("pref_name"),pref.getBoolean("pref_value")));
+            for(int i = 0; i < serverPreferences.length; i++){
+                preferences.add(new Preference(serverPreferences[i], newPreferences.getInt(serverPreferences[i]) == 1 ? true : false));
             }
         } catch (JSONException e) {
             e.printStackTrace();

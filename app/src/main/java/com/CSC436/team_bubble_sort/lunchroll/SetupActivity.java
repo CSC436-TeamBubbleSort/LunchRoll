@@ -25,15 +25,16 @@ public class SetupActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup);
-        user = (User) getIntent().getSerializableExtra("user");
-        preferences = user.getPreferences();
+        //user = (User) getIntent().getSerializableExtra("user");
+        //preferences = user.getPreferences();
         Button setupPrefs = (Button) findViewById(R.id.activity_setup_set_preferences);
         setupPrefs.setOnClickListener(this);
-        initFoodsList();
-        Log.d("MyApp", preferences.toString());
+        //initFoodsList();
+        //Log.d("MyApp", preferences.toString());
     }
 
     private void initFoodsList() {
+
         List<String> typesOfFood = preferences.getPreferenceNames();
         ArrayList<String> foodsList = new ArrayList<>();
         foodsList.addAll(typesOfFood);

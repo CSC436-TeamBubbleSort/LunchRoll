@@ -66,23 +66,20 @@ public class RegisterActivity extends AppCompatActivity implements UpdateUser, V
             this.finish();
         }
         else if(v.getId() == R.id.register_create_button){
-            updateUserRequest();
+            updateUser();
         }
     }
 
-    public void updateUserRequest() {
-        String username, email, pw;
-        username = nameBox.getText().toString();
-        email = emailBox.getText().toString();
-        pw = pwBox.getText().toString();
-        user = new User(username,pw,email);
-        user.setEmail(email);
-        user.setPassword(pw);
+    private void updateUser(){
+        User user = new User(nameBox.getText().toString(), pwBox.getText().toString(), emailBox.getText().toString());
+        updateUserRequest(user);
+    }
+
+    public void updateUserRequest(User user) {
         UserService.updateUser(this, user);
     }
 
-    public void updateUserSuccess(String result) {
-        Toast.makeText(this, result, Toast.LENGTH_LONG).show();
+    public void updateUserSuccess(User user) {
         Intent intent = new Intent(this, SetupActivity.class);
         intent.putExtra("user", user);
         startActivity(intent);
