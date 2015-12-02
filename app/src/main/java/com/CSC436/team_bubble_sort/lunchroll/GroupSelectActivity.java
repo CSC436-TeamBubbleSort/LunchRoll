@@ -58,11 +58,16 @@ public class GroupSelectActivity extends AppCompatActivity implements GetGroups,
 
     private void initGroupList(){
         // The list of groups
+
         if(groupsList.size() == 0){
             groupsList.add("You have no groups created");
         }
-        ArrayAdapter<String> groupsAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_multiple_choice, groupsList);
+        List<GroupListItem> dataForTheAdapter = new ArrayList<GroupListItem>();
+        for (int i = 0; i < groupListItems.size(); i++) {
+            dataForTheAdapter.add(new GroupListItem(groupListItems.get(i).getGroupId(), groupListItems.get(i).getName()));
+        }
+        ArrayAdapter<GroupListItem> groupsAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_multiple_choice, dataForTheAdapter);
         groupsView = (ListView) findViewById(R.id.group_list);
         groupsView.setAdapter(groupsAdapter);
     }
