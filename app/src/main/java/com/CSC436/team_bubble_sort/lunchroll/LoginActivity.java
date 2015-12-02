@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -318,14 +319,27 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         UserService.login(this, this.password, this.email);
     }
 
-    public void loginSuccess(String result) {
-        Toast.makeText(this, result, Toast.LENGTH_LONG).show();
-        User user = new User("Joe", this.email, this.password);
-        user.setEmail(this.email);
-        user.setPassword(this.password);
-        Intent intent = new Intent(this, SetupActivity.class);
-        //intent.putExtra("user", user);
-        startActivity(intent);
+    public void loginSuccess(boolean success, String errorMessage, User user) {
+
+        if (success){
+            Toast.makeText(this, "success", Toast.LENGTH_LONG).show();
+            saveToPreferences(user);
+            Intent intent = new Intent(this, SetupActivity.class);
+            startActivity(intent);
+        }
+        else{
+            Toast.makeText(this, "errormsg: " + errorMessage, Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+    private void saveToPreferences(User user) {
+        SharedPreferences settings = getSharedPreferences("DEFAULT",MODE_PRIVATE);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putInt("userId",user.getUserId());
+        editor.putString("username", user.getUsername());
+        editor.putString("email", user.getEmail());
+        editor.commit();
     }
 
     public void loginError(String error) {

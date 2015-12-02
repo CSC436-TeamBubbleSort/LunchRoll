@@ -1,6 +1,7 @@
 package com.csc436.team_bubble_sort.lunchroll;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -24,24 +25,35 @@ public class GroupSelectActivity extends AppCompatActivity implements GetGroups,
 
     // Array holding list of groups
     private ArrayList<String> groupsList;
+    private List<GroupListItem> groupListItems;
     private ListView groupsView;
     private User user;
     private GroupService GroupService;
+    Button selectGroup;
+    Button newGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_select);
         this.GroupService = new GroupService(this.getApplicationContext());
-        Button newGroup = (Button) findViewById(R.id.new_group_button);
-        Button selectGroup = (Button) findViewById(R.id.select_group_button);
+        newGroup = (Button) findViewById(R.id.new_group_button);
+        selectGroup = (Button) findViewById(R.id.select_group_button);
         user = (User) getIntent().getSerializableExtra("user");
         // TODO Make web service call to interface. the group calls one
+        SharedPreferences settings = this.getSharedPreferences("DEFAULT", MODE_PRIVATE);
+        int userId = settings.getInt("userId", 0);
+
+        if (userId != 0){
+            getGroupsRequest(userId);
+        }
+
         //JSONObject json_grouplist = this.getGroups();
-        groupsList = user.getGroupNames();
+
         newGroup.setOnClickListener(this);
         selectGroup.setOnClickListener(this);
-        initGroupList();
+        selectGroup.setEnabled(false);
+
     }
 
     private void initGroupList(){
@@ -81,27 +93,28 @@ public class GroupSelectActivity extends AppCompatActivity implements GetGroups,
     public void onClick(View v) {
         if(v.getId() == R.id.new_group_button){
             Intent intent = new Intent(this, FriendsListActivity.class);
-            intent.putExtra("user", user);
             startActivity(intent);
         }
         else if(v.getId() == R.id.select_group_button){
             int selectionPosition = groupsView.getCheckedItemPosition();
             String selection = groupsList.get(selectionPosition);
+            int groupId = groupListItems.get(selectionPosition).getGroupId();
             Toast.makeText(this, selection, Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, TopResultActivity.class);
-            intent.putExtra("SELECTION", selection);
-            intent.putExtra("user", user);
             startActivity(intent);
         }
     }
     public void getGroupsRequest(int userId) {
-        GroupService.getGroups(this, user.getUserId());
+        GroupService.getGroups(this, userId);
     }
 
     public void getGroupsSuccess(List<GroupListItem> groups) {
+        groupsList = new ArrayList<String>();
+        groupListItems = groups;
         for ( GroupListItem item : groups){
             groupsList.add(item.getName());
         }
+        initGroupList();
         Toast.makeText(this, "Success!", Toast.LENGTH_SHORT).show();
     }
 

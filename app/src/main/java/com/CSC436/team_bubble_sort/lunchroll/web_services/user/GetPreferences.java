@@ -8,6 +8,6 @@ import com.csc436.team_bubble_sort.lunchroll.entities.Preferences;
  */
 public interface GetPreferences {
     public void getPreferencesRequest(int userId);
-    public void getPreferencesSuccess(Preferences preferences);
+    public void getPreferencesSuccess(boolean success, Preferences preferences);
     public void getPreferencesError(String error);
 }

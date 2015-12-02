@@ -80,9 +80,7 @@ public class RegisterActivity extends AppCompatActivity implements UpdateUser, V
     }
 
     public void updateUserSuccess(User user) {
-        Intent intent = new Intent(this, SetupActivity.class);
-        intent.putExtra("user", user);
-        startActivity(intent);
+        this.finish();
     }
 
     public void updateUserError(String error) {

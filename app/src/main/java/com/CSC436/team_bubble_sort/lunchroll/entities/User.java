@@ -101,7 +101,7 @@ public class User implements Comparable<User>, Serializable {
         try {
             jsonBody.accumulate("username", username);
             jsonBody.accumulate("password", password);
-            jsonBody.accumulate("userId", userId);
+            jsonBody.accumulate("userId", userId + "");
             jsonBody.accumulate("email", email);
         }
         catch (JSONException e) {

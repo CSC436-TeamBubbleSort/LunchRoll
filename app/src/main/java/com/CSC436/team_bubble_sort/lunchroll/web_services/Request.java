@@ -27,7 +27,7 @@ import java.util.Map;
 
 public class Request {
 
-    private String baseURL = "http://52.8.67.183/";
+    private String baseURL = "http://52.8.67.183";
 
     public Request(){
     }

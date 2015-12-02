@@ -12,6 +12,7 @@ import com.csc436.team_bubble_sort.lunchroll.web_services.user.AddFriend;
 import com.csc436.team_bubble_sort.lunchroll.web_services.user.GetFriends;
 import com.csc436.team_bubble_sort.lunchroll.web_services.user.GetPreferences;
 import com.csc436.team_bubble_sort.lunchroll.web_services.user.RemoveFriend;
+import com.csc436.team_bubble_sort.lunchroll.web_services.user.UpdatePreferences;
 import com.csc436.team_bubble_sort.lunchroll.web_services.user.UpdateUser;
 import com.csc436.team_bubble_sort.lunchroll.web_services.user.Login;
 
@@ -39,7 +40,7 @@ public class UserService extends BaseService {
                 int userId = 0;
                 try {
                     response = response.getJSONObject("data");
-                    userId = response.getInt("groupId");
+                    userId = response.getInt("userId");
                 }
                 catch (JSONException e){
                     e.printStackTrace();
@@ -67,30 +68,42 @@ public class UserService extends BaseService {
         }
     }
 
-    public void login(final Login userActivity, String password, String email){
+    public void login(final Login userActivity, String password, String username){
         Response.Listener responseListener = new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
                     response = response.getJSONObject("data");
+                    boolean success = response.getBoolean("success");
+                    if (success){
+                        JSONObject obj = response.getJSONObject("user");
+
+                        int userId = obj.getInt("userId");
+                        String username = obj.getString("username");
+                        String email = obj.getString("email");
+                        userActivity.loginSuccess(true, "", new User(userId, username, "", email));
+                    }
+                    else {
+                        String errorMessage = response.optString("Error");
+                        userActivity.loginSuccess(false, errorMessage, null);
+                    }
                 }
                 catch (JSONException e){
                     e.printStackTrace();
                 }
-                userActivity.loginSuccess(response.toString());
             }
         };
         Response.ErrorListener errorListener = new  Response.ErrorListener() {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                userActivity.loginError("error" + error.getLocalizedMessage() + "\n" + error.getMessage());
+                userActivity.loginError("error: " + error.getLocalizedMessage() + "\n" + error.getMessage());
             }
         };
         JSONObject jsonBody = new JSONObject();
         try {
             jsonBody.accumulate("password", password);
-            jsonBody.accumulate("email", email);
+            jsonBody.accumulate("username", username);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -141,7 +154,7 @@ public class UserService extends BaseService {
         }
     }
 
-    public void AddFriend(final RemoveFriend userActivity, Friend friend){
+    public void RemoveFriend(final RemoveFriend userActivity, Friend friend){
         Response.Listener responseListener = new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -221,23 +234,29 @@ public class UserService extends BaseService {
             public void onResponse(JSONObject response) {
                 try {
                     response = response.getJSONObject("data");
+                    userActivity.getPreferencesError(response.toString());
+                    String success = response.getString("success");
+                    if (success.compareToIgnoreCase("true") == 0){
+                        userActivity.getPreferencesSuccess(true, new Preferences(userId, response));
+                    }
+                    userActivity.getPreferencesSuccess(false,  new Preferences(userId));
                 }
                 catch (JSONException e){
                     e.printStackTrace();
                 }
-                userActivity.getPreferencesSuccess(new Preferences(userId, response));
+
             }
         };
         Response.ErrorListener errorListener = new  Response.ErrorListener() {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                userActivity.getPreferencesError("error" + error.getLocalizedMessage() + "\n" + error.getMessage());
+                userActivity.getPreferencesError("error: " + error.getLocalizedMessage() + "\n" + error.getMessage());
             }
         };
         JSONObject jsonBody = new JSONObject();
         try {
-            jsonBody.accumulate("userId", userId);
+            jsonBody.accumulate("userId", userId + "");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -248,6 +267,43 @@ public class UserService extends BaseService {
         }
         else{
             userActivity.getPreferencesError("JSON could not be created.");
+        }
+    }
+
+    public void UpdatePreferences(final UpdatePreferences userActivity, Preferences preferences){
+        Response.Listener responseListener = new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    response = response.getJSONObject("data");
+                    boolean success = response.getBoolean("success");
+                    if (success){
+                        userActivity.updatePreferencesSuccess("success");
+                    }
+                    else{
+                        userActivity.updatePreferencesSuccess(response.toString());
+                    }
+                }
+                catch (JSONException e){
+                    e.printStackTrace();
+                }
+
+            }
+        };
+        Response.ErrorListener errorListener = new  Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                userActivity.updatePreferencesError("error" + error.getLocalizedMessage() + "\n" + error.getMessage());
+            }
+        };
+        JSONObject jsonBody = preferences.toJSON();
+        userActivity.updatePreferencesError(jsonBody.toString());
+        if (jsonBody != null){
+            request.call(baseRoute + "updatePreferences", jsonBody, responseListener, errorListener, context);
+        }
+        else{
+            userActivity.updatePreferencesError("JSON could not be created.");
         }
     }
 
