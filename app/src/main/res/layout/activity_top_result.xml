@@ -203,32 +203,37 @@
 
         <Button
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:text="BACK"
             android:id="@+id/result_back_button"
             android:textColor="@color/myBlack"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
             style="?android:attr/buttonBarButtonStyle"
+            android:layout_weight="0.33"
             />
 
         <Button
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:text="MAP"
             android:id="@+id/result_map_button"
             android:textColor="@color/myBlack"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            style="?android:attr/buttonBarButtonStyle"/>
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_weight="0.34"/>
 
         <Button
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:text="NEXT"
             android:id="@+id/result_next_button"
             android:textColor="@color/myBlack"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            style="?android:attr/buttonBarButtonStyle"/>
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_weight="0.33"/>
     </LinearLayout>
 
 </LinearLayout>
