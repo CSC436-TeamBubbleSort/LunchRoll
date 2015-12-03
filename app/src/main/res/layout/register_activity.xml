@@ -9,6 +9,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:weightSum="5"
     >
 
     <ProgressBar android:id="@+id/register_progress"
@@ -18,9 +19,21 @@
         android:layout_marginBottom="8dp"
         android:visibility="gone" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Join Lunchroll Today!"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:id="@+id/register_title_label"
+        android:layout_weight="1"
+        android:layout_gravity="center_horizontal"/>
+
     <ScrollView android:id="@+id/register_form_scrollview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_weight="4">
 
         <LinearLayout android:id="@+id/register_form_linear"
             android:layout_width="match_parent"
@@ -113,4 +126,5 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
 </LinearLayout>
