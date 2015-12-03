@@ -69,7 +69,6 @@ public class LocationService extends BaseService {
             public void onResponse(JSONObject response) {
                 try {
                     JSONArray array = response.getJSONArray("results");
-                    activity.suggestError(array.toString());
                     activity.suggestSuccess(ModelFactory.CreateRestaurantList(array));
                 }
                 catch (JSONException e){
@@ -87,14 +86,14 @@ public class LocationService extends BaseService {
         };
         JSONObject jsonBody = new JSONObject();
         try {
-            if (groupId < 0){
+            if (groupId < 1){
                 jsonBody.accumulate("userId", userId + "");
             }
             else{
                 jsonBody.accumulate("groupId", groupId + "");
             }
-            jsonBody.accumulate("latitude", "32.1958");
-            jsonBody.accumulate("longitude", "-110.892");
+            jsonBody.accumulate("latitude", latitude + "");
+            jsonBody.accumulate("longitude", longitude + "");
         } catch (JSONException e) {
             e.printStackTrace();
         }

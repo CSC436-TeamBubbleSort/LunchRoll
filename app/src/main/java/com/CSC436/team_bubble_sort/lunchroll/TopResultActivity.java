@@ -35,7 +35,6 @@ public class TopResultActivity extends DrawerActivity implements Suggest, Google
     private LocationService locationService;
     private List<Restaurant> restaurants;
     private TextView latitudeView, longitudeView, nameView, priceLevelView, ratingView;
-    private ImageView picture;
     private Button back,map,next;
     private int currentResult;
     private GoogleApiClient mGoogleApiClient;
@@ -68,7 +67,8 @@ public class TopResultActivity extends DrawerActivity implements Suggest, Google
         priceLevelView = (TextView) findViewById(R.id.result_price_level_value);
         ratingView = (TextView) findViewById(R.id.result_rating_value);
         // Initialize ImageView
-        picture = (ImageView) findViewById(R.id.result_picture);
+
+
         // Initialize Button objects
         back = (Button) findViewById(R.id.result_back_button);
         map = (Button) findViewById(R.id.result_map_button);

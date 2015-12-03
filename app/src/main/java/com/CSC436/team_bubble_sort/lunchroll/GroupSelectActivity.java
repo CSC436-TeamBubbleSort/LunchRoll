@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -17,16 +18,20 @@ import com.csc436.team_bubble_sort.lunchroll.entities.Group;
 import com.csc436.team_bubble_sort.lunchroll.entities.GroupListItem;
 import com.csc436.team_bubble_sort.lunchroll.entities.User;
 import com.csc436.team_bubble_sort.lunchroll.web_services.GroupService;
+import com.csc436.team_bubble_sort.lunchroll.web_services.group.DeleteGroup;
 import com.csc436.team_bubble_sort.lunchroll.web_services.group.GetGroups;
 import com.heinrichreimersoftware.materialdrawer.DrawerActivity;
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerItem;
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerProfile;
 import com.heinrichreimersoftware.materialdrawer.theme.DrawerTheme;
+import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton;
+import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
+import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GroupSelectActivity extends DrawerActivity implements GetGroups, View.OnClickListener{
+public class GroupSelectActivity extends DrawerActivity implements GetGroups, DeleteGroup, View.OnClickListener{
 
     // Array holding list of groups
     private ArrayList<String> groupsList;
@@ -34,8 +39,10 @@ public class GroupSelectActivity extends DrawerActivity implements GetGroups, Vi
     private ListView groupsView;
     private User user;
     private GroupService GroupService;
-    Button selectGroup;
-    Button newGroup;
+    private int userId;
+    private static final String TAG_ADD_GROUP = "addGroup";
+    private static final String TAG_DELETE_GROUP = "deleteGroup";
+    private static final String TAG_SEARCH = "search";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,23 +51,55 @@ public class GroupSelectActivity extends DrawerActivity implements GetGroups, Vi
         setDrawerProfile();
         setDrawerTheme();
         this.GroupService = new GroupService(this.getApplicationContext());
-        newGroup = (Button) findViewById(R.id.new_group_button);
-        selectGroup = (Button) findViewById(R.id.select_group_button);
         user = (User) getIntent().getSerializableExtra("user");
         // TODO Make web service call to interface. the group calls one
         SharedPreferences settings = this.getSharedPreferences("DEFAULT", MODE_PRIVATE);
-        int userId = settings.getInt("userId", 0);
+        userId = settings.getInt("userId", 0);
 
         if (userId != 0){
             getGroupsRequest(userId);
         }
 
         //JSONObject json_grouplist = this.getGroups();
+        instantiateFAB();
 
-        newGroup.setOnClickListener(this);
-        selectGroup.setOnClickListener(this);
-        selectGroup.setEnabled(false);
+    }
 
+    private void instantiateFAB() {
+        ImageView icon = new ImageView(this); // Create an icon
+        icon.setImageResource(R.mipmap.ic_plus_black_36dp);
+
+        FloatingActionButton actionButton = new FloatingActionButton.Builder(this)
+                .setContentView(icon)
+                .setPosition(5)
+                .build();
+        ImageView deleteIcon = new ImageView(this); // Create an icon
+        deleteIcon.setImageResource(R.mipmap.ic_delete_black_24dp);
+        ImageView addGroupIcon = new ImageView(this); // Create an icon
+        addGroupIcon.setImageResource(R.mipmap.ic_group_add_black_24dp);
+        ImageView searchIcon = new ImageView(this); // Create an icon
+        searchIcon.setImageResource(R.mipmap.ic_search_black_24dp);
+
+        SubActionButton.Builder itemBuilder = new SubActionButton.Builder(this);
+// repeat many times:
+        SubActionButton searchButton = itemBuilder.setContentView(searchIcon).build();
+        SubActionButton addGroupButton = itemBuilder.setContentView(addGroupIcon).build();
+        SubActionButton deleteGroupButton = itemBuilder.setContentView(deleteIcon).build();
+        searchButton.setTag(TAG_SEARCH);
+        addGroupButton.setTag(TAG_ADD_GROUP);
+        deleteGroupButton.setTag(TAG_DELETE_GROUP);
+        searchButton.setOnClickListener(this);
+        addGroupButton.setOnClickListener(this);
+        deleteGroupButton.setOnClickListener(this);
+
+        FloatingActionMenu actionMenu = new FloatingActionMenu.Builder(this)
+                .addSubActionView(searchButton)
+                .addSubActionView(addGroupButton)
+                .addSubActionView(deleteGroupButton)
+                .setStartAngle(210)
+                .setEndAngle(330)
+                .attachTo(actionButton)
+                .build();
     }
 
     private void setDrawerTheme() {
@@ -82,6 +121,9 @@ public class GroupSelectActivity extends DrawerActivity implements GetGroups, Vi
         addItems(new DrawerItem()
                         .setTextPrimary("Preferences")
         );
+        addItems(new DrawerItem()
+                        .setTextPrimary("Search for Me")
+        );
         setOnItemClickListener(new DrawerItem.OnItemClickListener() {
             @Override
             public void onClick(DrawerItem item, long id, int position) {
@@ -97,6 +139,11 @@ public class GroupSelectActivity extends DrawerActivity implements GetGroups, Vi
                 }
                 else if (position == 2){
                     Intent intent = new Intent(GroupSelectActivity.this, SetupActivity.class);
+                    startActivity(intent);
+                }
+                else if (position == 3){
+                    Intent intent = new Intent(GroupSelectActivity.this, TopResultActivity.class);
+                    intent.putExtra("userId", userId);
                     startActivity(intent);
                 }
 
@@ -126,7 +173,6 @@ public class GroupSelectActivity extends DrawerActivity implements GetGroups, Vi
                 android.R.layout.simple_list_item_multiple_choice, dataForTheAdapter);
         groupsView = (ListView) findViewById(R.id.group_list);
         groupsView.setAdapter(groupsAdapter);
-        selectGroup.setEnabled(true);
     }
 
     @Override
@@ -153,20 +199,35 @@ public class GroupSelectActivity extends DrawerActivity implements GetGroups, Vi
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.new_group_button){
+        if(v.getTag().equals(TAG_ADD_GROUP)){
             Intent intent = new Intent(this, FriendsListActivity.class);
             intent.putExtra("return", true);
             startActivityForResult(intent, 0);
 
         }
-        else if(v.getId() == R.id.select_group_button){
+        else if(v.getTag().equals(TAG_SEARCH)){
             int selectionPosition = groupsView.getCheckedItemPosition();
+            if (    selectionPosition < 0){
+                Toast.makeText(this, "Must select a group", Toast.LENGTH_SHORT).show();
+                return;
+            }
             String selection = groupsList.get(selectionPosition);
             int groupId = groupListItems.get(selectionPosition).getGroupId();
-            Toast.makeText(this, selection, Toast.LENGTH_SHORT).show();
+
             Intent intent = new Intent(this, TopResultActivity.class);
             intent.putExtra("groupId", groupId);
             startActivity(intent);
+        }
+        else if (v.getTag().equals(TAG_DELETE_GROUP)){
+            int selectionPosition = groupsView.getCheckedItemPosition();
+            if ( selectionPosition < 0){
+                Toast.makeText(this, "Must select a group", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            String selection = groupsList.get(selectionPosition);
+            int groupId = groupListItems.get(selectionPosition).getGroupId();
+            deleteGroupRequest(groupId);
+
         }
     }
 
@@ -199,4 +260,18 @@ public class GroupSelectActivity extends DrawerActivity implements GetGroups, Vi
         Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void deleteGroupRequest(int groupId) {
+        GroupService.DeleteGroup(this, groupId);
+    }
+
+    @Override
+    public void deleteGroupSuccess(String response) {
+        getGroupsRequest(userId);
+    }
+
+    @Override
+    public void deleteGroupError(String error) {
+        Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
+    }
 }
