@@ -23,8 +23,7 @@ public class TopResultActivity extends AppCompatActivity implements Suggest, Vie
 
     private LocationService locationService;
     private List<Restaurant> restaurants;
-    private TextView latitudeView, longitudeView, iconURLView, nameView, priceLevelView, ratingView,
-            crossRoadsView, openNowView;
+    private TextView latitudeView, longitudeView, nameView, priceLevelView, ratingView;
     private Button back,map,next;
     private int currentResult;
 
@@ -38,12 +37,9 @@ public class TopResultActivity extends AppCompatActivity implements Suggest, Vie
         // Initialize TextView objects
         latitudeView = (TextView) findViewById(R.id.result_latitude_value);
         longitudeView = (TextView) findViewById(R.id.result_longitude_value);
-        iconURLView = (TextView) findViewById(R.id.result_icon_url_value);
         nameView = (TextView) findViewById(R.id.result_name_value);
         priceLevelView = (TextView) findViewById(R.id.result_price_level_value);
         ratingView = (TextView) findViewById(R.id.result_rating_value);
-        crossRoadsView = (TextView) findViewById(R.id.result_vicinity_value);
-        openNowView = (TextView) findViewById(R.id.result_open_now_value);
         // Initialize Button objects
         back = new Button(this);
         map = new Button(this);
@@ -64,20 +60,17 @@ public class TopResultActivity extends AppCompatActivity implements Suggest, Vie
     private void populateField(Restaurant r){
         latitudeView.setText(r.getLatitude() + "");
         longitudeView.setText(r.getLongitude() + "");
-        iconURLView.setText(r.getIconURL());
         nameView.setText(r.getName());
         priceLevelView.setText(r.getPriceLevel());
         ratingView.setText(r.getRating());
-        crossRoadsView.setText(r.getCrossRoads());
-        openNowView.setText(r.isOpenNow() + "");
     }
 
     //TODO delete this hardcoded list when we start making server calls
     private void defaultRestaurants(){
-        Restaurant rest1 = new Restaurant(12,15,"notAURL","Bob's Burgers", "expensivo",
-                "not very good", "near and far", true);
-        Restaurant rest2 = new Restaurant(13,16,"notEvenAlmostAURL","Little Italy pasta", "cheap",
-                "excellent", "close and closer", false);
+        Restaurant rest1 = new Restaurant(12,15,"Bob's Burgers", "expensivo",
+                "not very good");
+        Restaurant rest2 = new Restaurant(13,16,"Little Italy pasta", "cheap",
+                "excellent");
         restaurants.add(rest1);
         restaurants.add(rest2);
     }
