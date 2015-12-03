@@ -204,7 +204,7 @@ public class TopResultActivity extends DrawerActivity implements Suggest, Google
     }
 
     protected void createLocationRequest() {
-         mLocationRequest = new LocationRequest();
+        mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(10000);
         mLocationRequest.setFastestInterval(5000);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
