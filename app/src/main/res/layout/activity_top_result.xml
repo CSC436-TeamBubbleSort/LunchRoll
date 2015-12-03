@@ -5,49 +5,58 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="1"
+    android:weightSum="10"
     >
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/result_picture"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="4" />
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.13">
+        android:layout_weight="1"
+        android:weightSum="4">
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Latitude:"
             android:id="@+id/result_latitude_label"
-            android:layout_weight="0.15"
+            android:layout_weight="1"
+            android:textStyle="bold"
             android:textColor="@color/myBlack"/>
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="     "
             android:id="@+id/result_latitude_value"
-            android:layout_weight="0.15"
+            android:layout_weight="1"
             android:textColor="@color/myBlack"/>
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Longitude:"
             android:id="@+id/result_longitude_label"
-            android:layout_weight="0.15"
+            android:textStyle="bold"
+            android:layout_weight="1"
             android:textColor="@color/myBlack"/>
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="     "
             android:id="@+id/result_longitude_value"
-            android:layout_weight="0.15"
+            android:layout_weight="1"
             android:textColor="@color/myBlack"/>
     </LinearLayout>
 
@@ -55,72 +64,52 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.12">
+        android:layout_weight="1"
+        android:weightSum="2">
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Icon URL:"
-            android:id="@+id/result_icon_url_label"
-            android:layout_weight="0.15"
-            android:textColor="@color/myBlack"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="     "
-            android:id="@+id/result_icon_url_value"
-            android:layout_weight="0.15"
-            android:textColor="@color/myBlack"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.12">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Restaurant:"
             android:id="@+id/result_name_label"
-            android:layout_weight="0.15"
+            android:textStyle="bold"
+            android:layout_weight="1"
             android:textColor="@color/myBlack"/>
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="     "
             android:id="@+id/result_name_value"
-            android:layout_weight="0.15"
+            android:layout_weight="1"
             android:textColor="@color/myBlack"/>
-
     </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.13">
+        android:layout_weight="1"
+        android:weightSum="2">
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Price:"
             android:id="@+id/result_price_level_label"
+            android:textStyle="bold"
+            android:layout_weight="1"
             android:textColor="@color/myBlack"/>
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="    "
+            android:layout_weight="1"
             android:id="@+id/result_price_level_value"
             android:textColor="@color/myBlack"/>
     </LinearLayout>
@@ -129,19 +118,23 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.13">
+        android:layout_weight="1"
+        android:weightSum="2">
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Rating:"
+            android:layout_weight="1"
             android:id="@+id/result_rating_label"
+            android:textStyle="bold"
             android:textColor="@color/myBlack"/>
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="    "
             android:id="@+id/result_rating_value"
@@ -152,53 +145,15 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.13">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Vicinity:"
-            android:id="@+id/result_vicinity_label"
-            android:textColor="@color/myBlack"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="     "
-            android:id="@+id/result_vicinity_value"
-            android:textColor="@color/myBlack"/>
+        android:layout_weight="1">
     </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.13">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Open:"
-            android:id="@+id/result_open_now_label"
-            android:textColor="@color/myBlack" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="     "
-            android:id="@+id/result_open_now_value"
-            android:textColor="@color/myBlack" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.06">
+        android:layout_weight="1"
+        android:weightSum="3">
 
         <Button
             android:layout_width="wrap_content"
@@ -208,8 +163,9 @@
             android:textColor="@color/myBlack"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
+            android:textStyle="bold"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_weight="0.33"
+            android:layout_weight="1"
             />
 
         <Button
@@ -221,7 +177,8 @@
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_weight="0.34"/>
+            android:textStyle="bold"
+            android:layout_weight="1"/>
 
         <Button
             android:layout_width="wrap_content"
@@ -232,7 +189,8 @@
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_weight="0.33"/>
+            android:textStyle="bold"
+            android:layout_weight="1"/>
     </LinearLayout>
 
 </LinearLayout>
