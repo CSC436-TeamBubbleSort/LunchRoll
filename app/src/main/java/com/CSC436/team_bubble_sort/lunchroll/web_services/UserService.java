@@ -246,7 +246,6 @@ public class UserService extends BaseService {
             public void onResponse(JSONObject response) {
                 try {
                     response = response.getJSONObject("data");
-                    userActivity.getPreferencesError(response.toString());
                     boolean success = response.getBoolean("success");
 
                     if (success){

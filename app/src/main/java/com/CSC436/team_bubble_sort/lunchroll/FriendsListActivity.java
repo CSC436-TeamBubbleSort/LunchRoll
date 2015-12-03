@@ -103,7 +103,6 @@ public class FriendsListActivity extends DrawerActivity implements
 
     @Override
     public void sendCreateGroupMessageBack(String nameOfGroup) {
-        Toast.makeText(this, nameOfGroup, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, TopResultActivity.class);
         List<Integer> groupUsers = new ArrayList<Integer>();
         for (int i = 0; i < selectedFriendsList.size(); i++) {
@@ -116,7 +115,6 @@ public class FriendsListActivity extends DrawerActivity implements
 
     @Override
     public void sendFriendUsernameMessageBack(String newUsernameOfFriend){
-        Toast.makeText(this, newUsernameOfFriend, Toast.LENGTH_SHORT).show();
         this.addFriendRequest(new Friend(userId, newUsernameOfFriend, newUsernameOfFriend));
     }
 
@@ -216,7 +214,6 @@ public class FriendsListActivity extends DrawerActivity implements
     @Override
     public void getFriendsSuccess(List<FriendListItem> friends) {
         friendsList.addAll(friends);
-        Toast.makeText(this, "friends " + friends.size(), Toast.LENGTH_SHORT).show();
         initFriendsList();
     }
 
@@ -231,9 +228,7 @@ public class FriendsListActivity extends DrawerActivity implements
 
     @Override
     public void updateGroupSuccess(Group group) {
-        Toast.makeText(this, "success", Toast.LENGTH_SHORT).show();
         if (shouldReturn){
-            Toast.makeText(this, shouldReturn + "", Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
@@ -276,7 +271,6 @@ public class FriendsListActivity extends DrawerActivity implements
             @Override
             public void onClick(DrawerItem item, long id, int position) {
                 selectItem(position);
-                Toast.makeText(FriendsListActivity.this, "Clicked item #" + position, Toast.LENGTH_SHORT).show();
                 if (position == 0){
                     Intent intent = new Intent(FriendsListActivity.this, FriendsListActivity.class);
                     startActivity(intent);
