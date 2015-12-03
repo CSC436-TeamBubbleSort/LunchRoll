@@ -106,6 +106,7 @@ public class TopResultActivity extends AppCompatActivity implements Suggest, Vie
             currentResult--;
             Restaurant r = restaurants.get(currentResult);
             populateField(r);
+            Toast.makeText(this, r.getName(), Toast.LENGTH_SHORT).show();
         }
         else if(id == R.id.result_map_button){
             Uri gmmIntentUri = Uri.parse("google.navigation:q="/* getLatitude() + "," + getLongitude() */);
@@ -117,6 +118,7 @@ public class TopResultActivity extends AppCompatActivity implements Suggest, Vie
             currentResult++;
             Restaurant r = restaurants.get(currentResult);
             populateField(r);
+            Toast.makeText(this, r.getName(), Toast.LENGTH_SHORT).show();
         }
     }
 
