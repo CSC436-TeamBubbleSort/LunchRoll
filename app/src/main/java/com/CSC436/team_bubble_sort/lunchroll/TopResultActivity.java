@@ -15,9 +15,8 @@ import com.csc436.team_bubble_sort.lunchroll.web_services.location.NearbyAny;
 
 import java.util.List;
 
-public class TopResultActivity extends AppCompatActivity, View.OnClickListener{
-
-    private TextView result;
+public class TopResultActivity extends AppCompatActivity implements View.OnClickListener{
+    
     private LocationService LocationService;
     private List<Restaurant> restaurants;
     private TextView latitudeView, longitudeView, iconURLView, nameView, priceLevelView, ratingView,
@@ -28,7 +27,6 @@ public class TopResultActivity extends AppCompatActivity, View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top_result);
-        result = (TextView) findViewById(R.id.result);
         LocationService = new LocationService(this.getApplicationContext());
         // Initialize TextView objects
         latitudeView = new TextView(this);
