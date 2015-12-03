@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -23,10 +24,14 @@ import com.csc436.team_bubble_sort.lunchroll.web_services.UserService;
 import com.csc436.team_bubble_sort.lunchroll.web_services.group.UpdateGroup;
 import com.csc436.team_bubble_sort.lunchroll.web_services.user.AddFriend;
 import com.csc436.team_bubble_sort.lunchroll.web_services.user.GetFriends;
+import com.csc436.team_bubble_sort.lunchroll.web_services.user.RemoveFriend;
 import com.heinrichreimersoftware.materialdrawer.DrawerActivity;
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerItem;
 import com.heinrichreimersoftware.materialdrawer.structure.DrawerProfile;
 import com.heinrichreimersoftware.materialdrawer.theme.DrawerTheme;
+import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton;
+import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
+import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,7 +41,7 @@ import java.util.List;
 
 public class FriendsListActivity extends DrawerActivity implements
         GroupCreateDialog.CommunicateGroupNameBackToFriendsList,
-        AddFriendDialog.CommunicateFriendUsernameBackToFriendsList, GetFriends, UpdateGroup, AddFriend, View.OnClickListener{
+        AddFriendDialog.CommunicateFriendUsernameBackToFriendsList, GetFriends, UpdateGroup, AddFriend, RemoveFriend, View.OnClickListener{
 
     // Array holding list of friends
     private List<FriendListItem> friendsList;
@@ -50,12 +55,16 @@ public class FriendsListActivity extends DrawerActivity implements
     private boolean shouldReturn = false;
     ListView friendsView;
     ArrayAdapter<FriendListItem> friendsAdapter;
+    private static final String TAG_ADD_GROUP = "addGroup";
+    private static final String TAG_DELETE_FRIEND = "deleteFriend";
+    private static final String TAG_ADD_FRIEND = "addFriend";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setDrawerProfile();
         setDrawerTheme();
+        instantiateFAB();
         shouldReturn = this.getIntent().getBooleanExtra("return", false);
         friendsList = new ArrayList<FriendListItem>();
         selectedFriends = new ArrayList<>();
@@ -65,11 +74,8 @@ public class FriendsListActivity extends DrawerActivity implements
         this.userService = new UserService(this.getApplicationContext());
         this.groupService = new GroupService(this.getApplicationContext());
         setContentView(R.layout.activity_friends_list);
-        Button createGroupButton = (Button) findViewById(R.id.create_group_button);
-        Button addFriendButton = (Button) findViewById(R.id.add_friend_button);
+
         user = (User) getIntent().getSerializableExtra("user");
-        createGroupButton.setOnClickListener(this);
-        addFriendButton.setOnClickListener(this);
 
         if (userId != 0){
             getFriendsRequest(userId);
@@ -156,12 +162,16 @@ public class FriendsListActivity extends DrawerActivity implements
     // Trying to get checked friends out of list
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.create_group_button){
+        if (v.getTag().equals(TAG_ADD_GROUP)){
             selectedFriends.clear();
             selectedFriendsList.clear();
             ListView friends = (ListView) findViewById(R.id.friends_list);
             SparseBooleanArray checkedFriends = friends.getCheckedItemPositions();
             int size = checkedFriends.size();
+            if (size < 1){
+                Toast.makeText(this, "Select at least 1 friend.", Toast.LENGTH_LONG).show();
+                return;
+            }
             for (int i = 0; i < friends.getAdapter().getCount(); i++)
                 if (checkedFriends.get(i)){
 
@@ -175,9 +185,26 @@ public class FriendsListActivity extends DrawerActivity implements
                 showGroupCreateDialog(v);
             }
         }
-        else if(v.getId() == R.id.add_friend_button){
+        else if(v.getTag().equals(TAG_ADD_FRIEND)){
             showAddFriendDialog(v);
             // TODO store new username in server as new friend if legit (Might be done above)
+        }
+        else if (v.getTag().equals(TAG_DELETE_FRIEND)){
+            ListView friends = (ListView) findViewById(R.id.friends_list);
+            SparseBooleanArray checkedFriends = friends.getCheckedItemPositions();
+            int size = checkedFriends.size();
+            if (size != 1){
+                Toast.makeText(this, "Select only 1 to delete.", Toast.LENGTH_LONG).show();
+                return;
+            }
+            for (int i = 0; i < friends.getAdapter().getCount(); i++)
+                if (checkedFriends.get(i)){
+                    boolean value = checkedFriends.get(i);
+                    if(value){
+                        removeFriendRequest(userId, friendsAdapter.getItem(i).getFriendId() );
+                        return;
+                    }
+                }
         }
     }
 
@@ -242,6 +269,9 @@ public class FriendsListActivity extends DrawerActivity implements
         addItems(new DrawerItem()
                         .setTextPrimary("Preferences")
         );
+        addItems(new DrawerItem()
+                        .setTextPrimary("Search for Me")
+        );
         setOnItemClickListener(new DrawerItem.OnItemClickListener() {
             @Override
             public void onClick(DrawerItem item, long id, int position) {
@@ -257,6 +287,11 @@ public class FriendsListActivity extends DrawerActivity implements
                 }
                 else if (position == 2){
                     Intent intent = new Intent(FriendsListActivity.this, SetupActivity.class);
+                    startActivity(intent);
+                }
+                else if (position == 3){
+                    Intent intent = new Intent(FriendsListActivity.this, TopResultActivity.class);
+                    intent.putExtra("userId", userId);
                     startActivity(intent);
                 }
 
@@ -279,5 +314,63 @@ public class FriendsListActivity extends DrawerActivity implements
                         .setTextColorPrimaryRes(R.color.colorPrimary)
                         .setTextColorSecondaryRes(R.color.colorAccent)
         );
+    }
+
+    private void instantiateFAB() {
+        ImageView icon = new ImageView(this); // Create an icon
+        icon.setImageResource(R.mipmap.ic_plus_black_36dp);
+
+        FloatingActionButton actionButton = new FloatingActionButton.Builder(this)
+                .setContentView(icon)
+                .setPosition(5)
+                .build();
+        ImageView deleteIcon = new ImageView(this); // Create an icon
+        deleteIcon.setImageResource(R.mipmap.ic_delete_black_24dp);
+        ImageView addGroupIcon = new ImageView(this); // Create an icon
+        addGroupIcon.setImageResource(R.mipmap.ic_group_add_black_24dp);
+        ImageView searchIcon = new ImageView(this); // Create an icon
+        searchIcon.setImageResource(R.mipmap.ic_person_add_black_24dp);
+
+        SubActionButton.Builder itemBuilder = new SubActionButton.Builder(this);
+// repeat many times:
+        SubActionButton addFriendButton = itemBuilder.setContentView(searchIcon).build();
+        SubActionButton addGroupButton = itemBuilder.setContentView(addGroupIcon).build();
+        SubActionButton deleteFriendButton = itemBuilder.setContentView(deleteIcon).build();
+        addFriendButton.setTag(TAG_ADD_FRIEND);
+        addGroupButton.setTag(TAG_ADD_GROUP);
+        deleteFriendButton.setTag(TAG_DELETE_FRIEND);
+        addFriendButton.setOnClickListener(this);
+        addGroupButton.setOnClickListener(this);
+        deleteFriendButton.setOnClickListener(this);
+
+        FloatingActionMenu actionMenu = new FloatingActionMenu.Builder(this)
+                .addSubActionView(addGroupButton)
+                .addSubActionView(addFriendButton)
+                .addSubActionView(deleteFriendButton)
+                .setStartAngle(210)
+                .setEndAngle(330)
+                .attachTo(actionButton)
+                .build();
+    }
+
+    @Override
+    public void removeFriendRequest(int userId, int friendId) {
+        userService.RemoveFriend(this, userId, friendId);
+    }
+
+    @Override
+    public void removeFriendSuccess(int friendId) {
+        for (int i = 0; i < friendsAdapter.getCount(); i++){
+            if (friendsAdapter.getItem(i).getFriendId() == friendId){
+                friendsAdapter.remove(friendsAdapter.getItem(i));
+                return;
+            }
+        }
+
+    }
+
+    @Override
+    public void removeFriendError(String error) {
+        Toast.makeText(this, "error: " + error, Toast.LENGTH_SHORT).show();
     }
 }

@@ -161,7 +161,7 @@ public class GroupService extends BaseService{
                         userActivity.deleteGroupSuccess("Delete Succeeded");
                     }
                     else{
-                        userActivity.deleteGroupSuccess("Delete Failed");
+                        userActivity.deleteGroupError("Delete Failed");
                     }
                 }
                 catch (JSONException e){
@@ -178,7 +178,7 @@ public class GroupService extends BaseService{
         };
         JSONObject jsonBody = new JSONObject();
         try {
-            jsonBody.accumulate("groupId", groupId);
+            jsonBody.accumulate("groupId", groupId + "");
         } catch (JSONException e) {
             e.printStackTrace();
         }

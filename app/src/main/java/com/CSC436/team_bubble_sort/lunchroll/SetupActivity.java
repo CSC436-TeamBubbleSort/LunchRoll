@@ -35,6 +35,7 @@ public class SetupActivity extends DrawerActivity implements GetPreferences, Upd
     ListView foodsView;
     ArrayList<String> foodsList;
     private boolean fromLogin = false;
+    int userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,7 @@ public class SetupActivity extends DrawerActivity implements GetPreferences, Upd
         setDrawerTheme();
         userService = new UserService(this.getApplicationContext());
         SharedPreferences settings = this.getSharedPreferences("DEFAULT", MODE_PRIVATE);
-        int userId = settings.getInt("userId", 0);
+        userId = settings.getInt("userId", 0);
 
         if (userId != 0){
             //Toast.makeText(this, userId + "", Toast.LENGTH_LONG).show();
@@ -67,7 +68,6 @@ public class SetupActivity extends DrawerActivity implements GetPreferences, Upd
         foodsView = (ListView) findViewById(R.id.activity_setup_foods_view);
         foodsView.setAdapter(foodsAdapter);
         for (int i = 0; i < foodsView.getAdapter().getCount(); i++) {
-            Toast.makeText(this, foodsList.get(i) + " " + preferences.getPreferenceValue(foodsList.get(i)), Toast.LENGTH_SHORT).show();
             foodsView.setItemChecked(i, preferences.getPreferenceValue(foodsView.getAdapter().getItem(i).toString()));
         }
     }
@@ -172,6 +172,9 @@ public class SetupActivity extends DrawerActivity implements GetPreferences, Upd
         addItems(new DrawerItem()
                         .setTextPrimary("Preferences")
         );
+        addItems(new DrawerItem()
+                        .setTextPrimary("Search for Me")
+        );
         setOnItemClickListener(new DrawerItem.OnItemClickListener() {
             @Override
             public void onClick(DrawerItem item, long id, int position) {
@@ -187,6 +190,11 @@ public class SetupActivity extends DrawerActivity implements GetPreferences, Upd
                 }
                 else if (position == 2){
                     Intent intent = new Intent(SetupActivity.this, SetupActivity.class);
+                    startActivity(intent);
+                }
+                else if (position == 3){
+                    Intent intent = new Intent(SetupActivity.this, TopResultActivity.class);
+                    intent.putExtra("userId", userId);
                     startActivity(intent);
                 }
 

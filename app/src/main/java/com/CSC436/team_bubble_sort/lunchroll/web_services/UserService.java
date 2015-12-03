@@ -157,7 +157,6 @@ public class UserService extends BaseService {
         }
 
         if (jsonBody != null){
-            userActivity.addFriendError(jsonBody.toString());
             request.call(baseRoute + "addFriend", jsonBody, responseListener, errorListener, context);
         }
         else{
@@ -165,17 +164,23 @@ public class UserService extends BaseService {
         }
     }
 
-    public void RemoveFriend(final RemoveFriend userActivity, Friend friend){
+    public void RemoveFriend(final RemoveFriend userActivity, int userId, final int friendId){
         Response.Listener responseListener = new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
                     response = response.getJSONObject("data");
+                    if (response.getBoolean("success")){
+                        userActivity.removeFriendSuccess(friendId);
+                    }
+                    else{
+                        userActivity.removeFriendError(response.optString("Error"));
+                    }
                 }
                 catch (JSONException e){
                     e.printStackTrace();
                 }
-                userActivity.removeFriendSuccess(response.toString());
+
             }
         };
         Response.ErrorListener errorListener = new  Response.ErrorListener() {
@@ -187,8 +192,8 @@ public class UserService extends BaseService {
         };
         JSONObject jsonBody = new JSONObject();
         try {
-            jsonBody.accumulate("userId", friend.getUserId());
-            jsonBody.accumulate("friendId", friend.getFriendId());
+            jsonBody.accumulate("userId", userId + "");
+            jsonBody.accumulate("friendId", friendId + "");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -247,11 +252,15 @@ public class UserService extends BaseService {
                     response = response.getJSONObject("data");
                     userActivity.getPreferencesError(response.toString());
                     boolean success = response.getBoolean("success");
-                    userActivity.getPreferencesError(success + "");
+
                     if (success){
+                        userActivity.getPreferencesError(success + "??????");
                         userActivity.getPreferencesSuccess(true, new Preferences(userId, response));
                     }
-                    userActivity.getPreferencesSuccess(false,  new Preferences(userId));
+                    else{
+                        userActivity.getPreferencesSuccess(false,  new Preferences(userId));
+                    }
+
                 }
                 catch (JSONException e){
                     e.printStackTrace();
