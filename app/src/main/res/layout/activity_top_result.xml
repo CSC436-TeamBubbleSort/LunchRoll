@@ -140,8 +140,16 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
+
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_weight="5">
+
+        <RatingBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ratingBar"
+            android:numStars="5" />
     </LinearLayout>
 
     <LinearLayout
@@ -152,7 +160,7 @@
         android:layout_gravity="bottom"
         android:weightSum="3">
 
-        <Button
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="BACK"
@@ -165,7 +173,7 @@
             android:layout_weight="1"
             />
 
-        <Button
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="MAP"
@@ -177,7 +185,7 @@
             android:textStyle="bold"
             android:layout_weight="1"/>
 
-        <Button
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="NEXT"

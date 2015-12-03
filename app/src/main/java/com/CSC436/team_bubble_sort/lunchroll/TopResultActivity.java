@@ -9,7 +9,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,7 +37,8 @@ public class TopResultActivity extends DrawerActivity implements Suggest, Google
     private LocationService locationService;
     private List<Restaurant> restaurants;
     private TextView latitudeView, longitudeView, nameView, priceLevelView, ratingView;
-    private Button back,map,next;
+    private RatingBar ratingBar;
+    private ImageButton back,map,next;
     private int currentResult;
     private GoogleApiClient mGoogleApiClient;
     private Location mLastLocation;
@@ -66,13 +69,17 @@ public class TopResultActivity extends DrawerActivity implements Suggest, Google
         nameView = (TextView) findViewById(R.id.result_name_value);
         priceLevelView = (TextView) findViewById(R.id.result_price_level_value);
         ratingView = (TextView) findViewById(R.id.result_rating_value);
+        ratingBar = (RatingBar) findViewById(R.id.ratingBar);
         // Initialize ImageView
 
 
         // Initialize Button objects
-        back = (Button) findViewById(R.id.result_back_button);
-        map = (Button) findViewById(R.id.result_map_button);
-        next = (Button) findViewById(R.id.result_next_button);
+        back = (ImageButton) findViewById(R.id.result_back_button);
+        setBackButton();
+        map = (ImageButton) findViewById(R.id.result_map_button);
+        map.setImageResource(R.mipmap.ic_directions_black_24dp);
+        next = (ImageButton) findViewById(R.id.result_next_button);
+        setNextButton();
         // Set Button listeners
         back.setOnClickListener(this);
         map.setOnClickListener(this);
@@ -80,12 +87,32 @@ public class TopResultActivity extends DrawerActivity implements Suggest, Google
 
     }
 
+    private void setBackButton(){
+        if (currentResult == 0){
+            back.setImageResource(R.mipmap.ic_arrow_left_grey600_24dp);
+        }
+        else{
+            back.setImageResource(R.mipmap.ic_arrow_left_bold_black_24dp);
+        }
+    }
+
+    private void setNextButton(){
+        if (currentResult >= restaurants.size() - 1){
+            next.setImageResource(R.mipmap.ic_arrow_right_grey600_24dp);
+        }
+        else{
+            next.setImageResource(R.mipmap.ic_arrow_right_bold_black_24dp);
+        }
+    }
+
+
     private void populateField(Restaurant r){
         latitudeView.setText(r.getLatitude() + "");
         longitudeView.setText(r.getLongitude() + "");
         nameView.setText(r.getName());
         priceLevelView.setText(r.getPriceLevel());
         ratingView.setText(r.getRating());
+        ratingBar.setRating(Float.parseFloat(r.getRating()));
     }
 
     //TODO delete this hardcoded list when we start making server calls
@@ -134,21 +161,26 @@ public class TopResultActivity extends DrawerActivity implements Suggest, Google
             Restaurant r = restaurants.get(currentResult);
             populateField(r);
             Toast.makeText(this, r.getName(), Toast.LENGTH_SHORT).show();
+            setBackButton();
+            setNextButton();
         }
         else if(id == R.id.result_map_button){
             if (mLastLocation != null){
-                Uri gmmIntentUri = Uri.parse("google.navigation:q=" + restaurants.get(currentResult).getLatitude() + "," + restaurants.get(currentResult).getLatitude());
+                Uri gmmIntentUri = Uri.parse("google.navigation:q=" + restaurants.get(currentResult).getLatitude() + "," + restaurants.get(currentResult).getLongitude());
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                 mapIntent.setPackage("com.google.android.apps.maps");
                 startActivity(mapIntent);
             }
 
         }
-        else if(id == R.id.result_next_button && currentResult < restaurants.size()){
+        else if(id == R.id.result_next_button && currentResult < restaurants.size() - 1){
+
             currentResult++;
             Restaurant r = restaurants.get(currentResult);
             populateField(r);
             Toast.makeText(this, r.getName(), Toast.LENGTH_SHORT).show();
+            setNextButton();
+            setBackButton();
         }
     }
 
@@ -162,6 +194,8 @@ public class TopResultActivity extends DrawerActivity implements Suggest, Google
         this.restaurants.addAll(restaurants);
 
         Restaurant r = restaurants.get(currentResult);
+        setBackButton();
+        setNextButton();
         Toast.makeText(this, "stuff" + this.restaurants.size(), Toast.LENGTH_SHORT).show();
         populateField(r);
     }
