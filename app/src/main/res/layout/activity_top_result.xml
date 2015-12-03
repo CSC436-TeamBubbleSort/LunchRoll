@@ -13,14 +13,14 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.41">
+        android:layout_weight="0.13">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Medium Text"
-            android:id="@+id/textView3"
+            android:text="Latitude:"
+            android:id="@+id/result_latitude_label"
             android:layout_weight="0.15"
             android:textColor="@color/myBlack"/>
 
@@ -28,8 +28,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Medium Text"
-            android:id="@+id/textView2"
+            android:text="     "
+            android:id="@+id/result_latitude_value"
             android:layout_weight="0.15"
             android:textColor="@color/myBlack"/>
 
@@ -37,24 +37,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Medium Text"
-            android:id="@+id/textView"
-            android:layout_weight="0.15"
-            android:textColor="@color/myBlack"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.31">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Medium Text"
-            android:id="@+id/textView7"
+            android:text="Longitude:"
+            android:id="@+id/result_longitude_label"
             android:layout_weight="0.15"
             android:textColor="@color/myBlack"/>
 
@@ -62,8 +46,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Medium Text"
-            android:id="@+id/textView6"
+            android:text="     "
+            android:id="@+id/result_longitude_value"
             android:layout_weight="0.15"
             android:textColor="@color/myBlack"/>
     </LinearLayout>
@@ -72,14 +56,14 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.25">
+        android:layout_weight="0.12">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Medium Text"
-            android:id="@+id/textView4"
+            android:text="Icon URL:"
+            android:id="@+id/result_icon_url_label"
             android:layout_weight="0.15"
             android:textColor="@color/myBlack"/>
 
@@ -87,11 +71,128 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Medium Text"
-            android:id="@+id/textView5"
+            android:text="     "
+            android:id="@+id/result_icon_url_value"
+            android:layout_weight="0.15"
+            android:textColor="@color/myBlack"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.12">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Restaurant:"
+            android:id="@+id/result_name_label"
             android:layout_weight="0.15"
             android:textColor="@color/myBlack"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="     "
+            android:id="@+id/result_name_value"
+            android:layout_weight="0.15"
+            android:textColor="@color/myBlack"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.13">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Price:"
+            android:id="@+id/result_price_level_label"
+            android:textColor="@color/myBlack"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="    "
+            android:id="@+id/result_price_level_value"
+            android:textColor="@color/myBlack"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.13">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Rating:"
+            android:id="@+id/result_rating_label"
+            android:textColor="@color/myBlack"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="    "
+            android:id="@+id/result_rating_value"
+            android:textColor="@color/myBlack"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.13">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Vicinity:"
+            android:id="@+id/result_vicinity_label"
+            android:textColor="@color/myBlack"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="     "
+            android:id="@+id/result_vicinity_value"
+            android:textColor="@color/myBlack"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.13">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Open:"
+            android:id="@+id/result_open_now_label"
+            android:textColor="@color/myBlack" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="     "
+            android:id="@+id/result_open_now_value"
+            android:textColor="@color/myBlack" />
     </LinearLayout>
 
     <LinearLayout
@@ -103,8 +204,8 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New Button"
-            android:id="@+id/button2"
+            android:text="BACK"
+            android:id="@+id/result_back_button"
             android:textColor="@color/myBlack"
             style="?android:attr/buttonBarButtonStyle"
             />
@@ -112,16 +213,16 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New Button"
-            android:id="@+id/button"
+            android:text="MAP"
+            android:id="@+id/result_map_button"
             android:textColor="@color/myBlack"
             style="?android:attr/buttonBarButtonStyle"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New Button"
-            android:id="@+id/button3"
+            android:text="NEXT"
+            android:id="@+id/result_next_button"
             android:textColor="@color/myBlack"
             style="?android:attr/buttonBarButtonStyle"/>
     </LinearLayout>

@@ -29,15 +29,6 @@ public class TopResultActivity extends AppCompatActivity{
         defaultRestaurants();
     }
 
-
-    private long latitude;
-    private long longitude;
-    private String iconURL;
-    private String name;
-    private String priceLevel;
-    private String rating;
-    private String crossRoads; //Vicinity in the object
-    private boolean openNow;
     //TODO delete this hardcoded list when we start making server calls
     private void defaultRestaurants(){
         Restaurant rest1 = new Restaurant(12,15,"notAURL","Bob's Burgers", "expensivo",
