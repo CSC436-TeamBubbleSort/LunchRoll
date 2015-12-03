@@ -8,7 +8,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".LoginActivity">
+    tools:context=".LoginActivity"
+    android:weightSum="5">
 
     <!-- Login progress -->
     <ProgressBar android:id="@+id/login_progress"
@@ -18,9 +19,21 @@
         android:layout_marginBottom="8dp"
         android:visibility="gone" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Lunchroll Signin!"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:id="@+id/register_title_label"
+        android:layout_weight="1.5"
+        android:layout_gravity="center_horizontal"/>
+
     <ScrollView android:id="@+id/login_form"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_weight="3.5">
 
         <LinearLayout android:id="@+id/email_login_form"
             android:layout_width="match_parent"
