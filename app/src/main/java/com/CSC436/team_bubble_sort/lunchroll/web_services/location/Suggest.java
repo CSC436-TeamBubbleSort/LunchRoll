@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface Suggest {
 
-    public void suggestRequest(int userId, int groupId);
+    public void suggestRequest(int userId, int groupId, double latitude, double longitude);
     public void suggestSuccess(List<Restaurant> restaurants);
     public void suggestError(String error);
 }
