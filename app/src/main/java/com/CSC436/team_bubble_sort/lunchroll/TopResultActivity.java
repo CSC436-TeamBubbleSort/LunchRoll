@@ -18,6 +18,8 @@ public class TopResultActivity extends AppCompatActivity{
     private TextView result;
     private LocationService LocationService;
     private List<Restaurant> restaurants;
+    private TextView latitudeView, longitudeView, iconURLView, nameView, priceLevelView, ratingView,
+            crossRoadsView, openNowView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +27,34 @@ public class TopResultActivity extends AppCompatActivity{
         setContentView(R.layout.activity_top_result);
         result = (TextView) findViewById(R.id.result);
         LocationService = new LocationService(this.getApplicationContext());
-        //nearbyAnyRequest();
-        defaultRestaurants();
+        // Initialize TextView objects
+        latitudeView = new TextView(this);
+        longitudeView = new TextView(this);
+        iconURLView = new TextView(this);
+        nameView = new TextView(this);
+        priceLevelView = new TextView(this);
+        ratingView = new TextView(this);
+        crossRoadsView = new TextView(this);
+        openNowView = new TextView(this);
+        //nearbyAnyRequest(); // TODO request for server information
+        // TODO move the following stuff to the success method
+        if(restaurants.size() == 0) {
+            defaultRestaurants();
+        }
+        // Populate the fields with the first result
+        Restaurant r = restaurants.get(0);
+        populateField(r);
+    }
+
+    private void populateField(Restaurant r){
+        latitudeView.setText(r.getLatitude() + "");
+        longitudeView.setText(r.getLongitude() + "");
+        iconURLView.setText(r.getIconURL());
+        nameView.setText(r.getName());
+        priceLevelView.setText(r.getPriceLevel());
+        ratingView.setText(r.getRating());
+        crossRoadsView.setText(r.getCrossRoads());
+        openNowView.setText(r.isOpenNow() + "");
     }
 
     //TODO delete this hardcoded list when we start making server calls
