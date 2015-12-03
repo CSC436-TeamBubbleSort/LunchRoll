@@ -67,7 +67,7 @@ public class TopResultActivity extends DrawerActivity implements Suggest, Google
         nameView = (TextView) findViewById(R.id.result_name_value);
         priceLevelView = (TextView) findViewById(R.id.result_price_level_value);
         ratingView = (TextView) findViewById(R.id.result_rating_value);
-        ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+        ratingBar = (RatingBar) findViewById(R.id.rating_bar);
         // Initialize ImageView
 
 
