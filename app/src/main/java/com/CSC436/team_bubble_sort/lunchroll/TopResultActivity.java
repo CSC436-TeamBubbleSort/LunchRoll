@@ -1,5 +1,7 @@
 package com.csc436.team_bubble_sort.lunchroll;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,12 +14,14 @@ import android.widget.Toast;
 import com.csc436.team_bubble_sort.lunchroll.entities.Restaurant;
 import com.csc436.team_bubble_sort.lunchroll.web_services.LocationService;
 import com.csc436.team_bubble_sort.lunchroll.web_services.location.NearbyAny;
+import com.csc436.team_bubble_sort.lunchroll.web_services.location.Suggest;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class TopResultActivity extends AppCompatActivity implements View.OnClickListener{
+public class TopResultActivity extends AppCompatActivity implements Suggest, View.OnClickListener{
 
-    private LocationService LocationService;
+    private LocationService locationService;
     private List<Restaurant> restaurants;
     private TextView latitudeView, longitudeView, iconURLView, nameView, priceLevelView, ratingView,
             crossRoadsView, openNowView;
@@ -28,8 +32,9 @@ public class TopResultActivity extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top_result);
-        LocationService = new LocationService(this.getApplicationContext());
+        locationService = new LocationService(this.getApplicationContext());
         currentResult = 0;
+        restaurants = new ArrayList<Restaurant>();
         // Initialize TextView objects
         latitudeView = new TextView(this);
         longitudeView = new TextView(this);
@@ -103,13 +108,31 @@ public class TopResultActivity extends AppCompatActivity implements View.OnClick
             populateField(r);
         }
         else if(id == R.id.result_map_button){
-            // TODO if map button clicked
+            Uri gmmIntentUri = Uri.parse("google.navigation:q="/* getLatitude() + "," + getLongitude() */);
+            Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+            mapIntent.setPackage("com.google.android.apps.maps");
+            startActivity(mapIntent);
         }
         else if(id == R.id.result_next_button){
             currentResult++;
             Restaurant r = restaurants.get(currentResult);
             populateField(r);
         }
+    }
+
+    @Override
+    public void suggestRequest(int userId, int groupId, double latitude, double longitude) {
+        locationService.suggest(this, groupId, userId, latitude, longitude);
+    }
+
+    @Override
+    public void suggestSuccess(List<Restaurant> restaurants) {
+        restaurants.addAll(restaurants);
+    }
+
+    @Override
+    public void suggestError(String error) {
+
     }
 
 //    // Called by Activity to send request to server with user data

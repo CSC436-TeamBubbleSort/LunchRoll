@@ -70,6 +70,7 @@ public class GroupSelectActivity extends AppCompatActivity implements GetGroups,
                 android.R.layout.simple_list_item_multiple_choice, dataForTheAdapter);
         groupsView = (ListView) findViewById(R.id.group_list);
         groupsView.setAdapter(groupsAdapter);
+        selectGroup.setEnabled(true);
     }
 
     @Override
