@@ -86,9 +86,6 @@ public class TopResultActivity extends DrawerActivity implements Suggest, Google
         nameView.setText(r.getName());
         priceLevelView.setText(r.getPriceLevel());
         ratingView.setText(r.getRating());
-
-        crossRoadsView.setText(r.getCrossRoads());
-        openNowView.setText(r.isOpenNow() + "");
     }
 
     //TODO delete this hardcoded list when we start making server calls
@@ -207,7 +204,7 @@ public class TopResultActivity extends DrawerActivity implements Suggest, Google
     }
 
     protected void createLocationRequest() {
-         mLocationRequest = new LocationRequest();
+        mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(10000);
         mLocationRequest.setFastestInterval(5000);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
