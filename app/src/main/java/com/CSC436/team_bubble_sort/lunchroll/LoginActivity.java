@@ -325,6 +325,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             Toast.makeText(this, "success", Toast.LENGTH_LONG).show();
             saveToPreferences(user);
             Intent intent = new Intent(this, SetupActivity.class);
+            intent.putExtra("fromLogin", true);
             startActivity(intent);
         }
         else{

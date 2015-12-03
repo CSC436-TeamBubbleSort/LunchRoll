@@ -2,6 +2,7 @@ package com.csc436.team_bubble_sort.lunchroll;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -17,11 +18,15 @@ import com.csc436.team_bubble_sort.lunchroll.entities.GroupListItem;
 import com.csc436.team_bubble_sort.lunchroll.entities.User;
 import com.csc436.team_bubble_sort.lunchroll.web_services.GroupService;
 import com.csc436.team_bubble_sort.lunchroll.web_services.group.GetGroups;
+import com.heinrichreimersoftware.materialdrawer.DrawerActivity;
+import com.heinrichreimersoftware.materialdrawer.structure.DrawerItem;
+import com.heinrichreimersoftware.materialdrawer.structure.DrawerProfile;
+import com.heinrichreimersoftware.materialdrawer.theme.DrawerTheme;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GroupSelectActivity extends AppCompatActivity implements GetGroups, View.OnClickListener{
+public class GroupSelectActivity extends DrawerActivity implements GetGroups, View.OnClickListener{
 
     // Array holding list of groups
     private ArrayList<String> groupsList;
@@ -36,6 +41,8 @@ public class GroupSelectActivity extends AppCompatActivity implements GetGroups,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_select);
+        setDrawerProfile();
+        setDrawerTheme();
         this.GroupService = new GroupService(this.getApplicationContext());
         newGroup = (Button) findViewById(R.id.new_group_button);
         selectGroup = (Button) findViewById(R.id.select_group_button);
@@ -54,6 +61,55 @@ public class GroupSelectActivity extends AppCompatActivity implements GetGroups,
         selectGroup.setOnClickListener(this);
         selectGroup.setEnabled(false);
 
+    }
+
+    private void setDrawerTheme() {
+        setDrawerTheme(
+                new DrawerTheme(this)
+                        .setBackgroundColorRes(R.color.myWhite)
+                        .setTextColorPrimaryRes(R.color.colorPrimary)
+                        .setTextColorSecondaryRes(R.color.colorAccent)
+        );
+    }
+
+    private void setDrawerProfile() {
+        addItems(new DrawerItem()
+                        .setTextPrimary("Friends")
+        );
+        addItems(new DrawerItem()
+                        .setTextPrimary("Groups")
+        );
+        addItems(new DrawerItem()
+                        .setTextPrimary("Preferences")
+        );
+        setOnItemClickListener(new DrawerItem.OnItemClickListener() {
+            @Override
+            public void onClick(DrawerItem item, long id, int position) {
+                selectItem(position);
+                Toast.makeText(GroupSelectActivity.this, "Clicked item #" + position, Toast.LENGTH_SHORT).show();
+                if (position == 0){
+                    Intent intent = new Intent(GroupSelectActivity.this, FriendsListActivity.class);
+                    startActivity(intent);
+                }
+                else if (position == 1){
+                    Intent intent = new Intent(GroupSelectActivity.this, GroupSelectActivity.class);
+                    startActivity(intent);
+                }
+                else if (position == 2){
+                    Intent intent = new Intent(GroupSelectActivity.this, SetupActivity.class);
+                    startActivity(intent);
+                }
+
+            }
+        });
+
+
+        addProfile(
+                new DrawerProfile()
+                        .setBackground(getDrawable(R.mipmap.logo))
+                        .setName("Lunch Roll")
+                        .setDescription("best app ever")
+        );
     }
 
     private void initGroupList(){

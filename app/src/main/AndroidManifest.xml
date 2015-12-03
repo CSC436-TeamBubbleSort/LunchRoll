@@ -12,7 +12,7 @@
 
 
     <application
-        android:screenOrientation="portrait"
+
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -20,6 +20,7 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.csc436.team_bubble_sort.lunchroll.LoginActivity"
+            android:screenOrientation="portrait"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,22 +29,27 @@
         </activity>
         <activity
             android:name="com.csc436.team_bubble_sort.lunchroll.SetupActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_setup" >
         </activity>
         <activity
             android:name="com.csc436.team_bubble_sort.lunchroll.RegisterActivity"
+            android:screenOrientation="portrait"
             android:label="Register" >
         </activity>
         <activity
             android:name="com.csc436.team_bubble_sort.lunchroll.GroupSelectActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_group_select" >
         </activity>
         <activity
             android:name="FriendsListActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_friends_list" >
         </activity>
         <activity
             android:name="com.csc436.team_bubble_sort.lunchroll.TopResultActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_top_result" >
         </activity>
         <meta-data

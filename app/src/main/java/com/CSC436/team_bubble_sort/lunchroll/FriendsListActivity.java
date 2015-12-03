@@ -23,6 +23,10 @@ import com.csc436.team_bubble_sort.lunchroll.web_services.UserService;
 import com.csc436.team_bubble_sort.lunchroll.web_services.group.UpdateGroup;
 import com.csc436.team_bubble_sort.lunchroll.web_services.user.AddFriend;
 import com.csc436.team_bubble_sort.lunchroll.web_services.user.GetFriends;
+import com.heinrichreimersoftware.materialdrawer.DrawerActivity;
+import com.heinrichreimersoftware.materialdrawer.structure.DrawerItem;
+import com.heinrichreimersoftware.materialdrawer.structure.DrawerProfile;
+import com.heinrichreimersoftware.materialdrawer.theme.DrawerTheme;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,7 +34,7 @@ import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FriendsListActivity extends AppCompatActivity implements
+public class FriendsListActivity extends DrawerActivity implements
         GroupCreateDialog.CommunicateGroupNameBackToFriendsList,
         AddFriendDialog.CommunicateFriendUsernameBackToFriendsList, GetFriends, UpdateGroup, AddFriend, View.OnClickListener{
 
@@ -50,6 +54,8 @@ public class FriendsListActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setDrawerProfile();
+        setDrawerTheme();
         shouldReturn = this.getIntent().getBooleanExtra("return", false);
         friendsList = new ArrayList<FriendListItem>();
         selectedFriends = new ArrayList<>();
@@ -224,5 +230,54 @@ public class FriendsListActivity extends AppCompatActivity implements
     @Override
     public void addFriendError(String error) {
         Toast.makeText(this, "error: " + error, Toast.LENGTH_SHORT).show();
+    }
+
+    private void setDrawerProfile() {
+        addItems(new DrawerItem()
+                        .setTextPrimary("Friends")
+        );
+        addItems(new DrawerItem()
+                        .setTextPrimary("Groups")
+        );
+        addItems(new DrawerItem()
+                        .setTextPrimary("Preferences")
+        );
+        setOnItemClickListener(new DrawerItem.OnItemClickListener() {
+            @Override
+            public void onClick(DrawerItem item, long id, int position) {
+                selectItem(position);
+                Toast.makeText(FriendsListActivity.this, "Clicked item #" + position, Toast.LENGTH_SHORT).show();
+                if (position == 0){
+                    Intent intent = new Intent(FriendsListActivity.this, FriendsListActivity.class);
+                    startActivity(intent);
+                }
+                else if (position == 1){
+                    Intent intent = new Intent(FriendsListActivity.this, GroupSelectActivity.class);
+                    startActivity(intent);
+                }
+                else if (position == 2){
+                    Intent intent = new Intent(FriendsListActivity.this, SetupActivity.class);
+                    startActivity(intent);
+                }
+
+            }
+        });
+
+
+        addProfile(
+                new DrawerProfile()
+                        .setBackground(getDrawable(R.mipmap.logo))
+                        .setName("Lunch Roll")
+                        .setDescription("best app ever")
+        );
+    }
+
+    private void setDrawerTheme() {
+        setDrawerTheme(
+                new DrawerTheme(this)
+                        .setBackgroundColorRes(R.color.myWhite)
+                        .setTextColorPrimaryRes(R.color.colorPrimary)
+                        .setTextColorSecondaryRes(R.color.colorAccent)
+        );
     }
 }

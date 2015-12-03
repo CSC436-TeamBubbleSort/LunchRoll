@@ -21,11 +21,15 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.heinrichreimersoftware.materialdrawer.DrawerActivity;
+import com.heinrichreimersoftware.materialdrawer.structure.DrawerItem;
+import com.heinrichreimersoftware.materialdrawer.structure.DrawerProfile;
+import com.heinrichreimersoftware.materialdrawer.theme.DrawerTheme;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TopResultActivity extends AppCompatActivity implements Suggest, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, View.OnClickListener{
+public class TopResultActivity extends DrawerActivity implements Suggest, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, View.OnClickListener{
 
     private LocationService locationService;
     private List<Restaurant> restaurants;
@@ -44,6 +48,8 @@ public class TopResultActivity extends AppCompatActivity implements Suggest, Goo
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top_result);
+        setDrawerProfile();
+        setDrawerTheme();
         locationService = new LocationService(this.getApplicationContext());
         currentResult = 0;
         Intent intent = getIntent();
@@ -64,9 +70,9 @@ public class TopResultActivity extends AppCompatActivity implements Suggest, Goo
         crossRoadsView = (TextView) findViewById(R.id.result_vicinity_value);
         openNowView = (TextView) findViewById(R.id.result_open_now_value);
         // Initialize Button objects
-        back = new Button(this);
-        map = new Button(this);
-        next = new Button(this);
+        back = (Button) findViewById(R.id.result_back_button);
+        map = (Button) findViewById(R.id.result_map_button);
+        next = (Button) findViewById(R.id.result_next_button);
         back.setOnClickListener(this);
         map.setOnClickListener(this);
         next.setOnClickListener(this);
@@ -134,7 +140,7 @@ public class TopResultActivity extends AppCompatActivity implements Suggest, Goo
         }
         else if(id == R.id.result_map_button){
             if (mLastLocation != null){
-                Uri gmmIntentUri = Uri.parse("google.navigation:q=" + getLastLatitude() + "," + getLastLongitude());
+                Uri gmmIntentUri = Uri.parse("google.navigation:q=" + restaurants.get(currentResult).getLatitude() + "," + restaurants.get(currentResult).getLatitude());
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                 mapIntent.setPackage("com.google.android.apps.maps");
                 startActivity(mapIntent);
@@ -227,4 +233,53 @@ public class TopResultActivity extends AppCompatActivity implements Suggest, Goo
 //        // TODO maybe handle error
 //        Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
 //    }
+
+    private void setDrawerProfile() {
+        addItems(new DrawerItem()
+                        .setTextPrimary("Friends")
+        );
+        addItems(new DrawerItem()
+                        .setTextPrimary("Groups")
+        );
+        addItems(new DrawerItem()
+                        .setTextPrimary("Preferences")
+        );
+        setOnItemClickListener(new DrawerItem.OnItemClickListener() {
+            @Override
+            public void onClick(DrawerItem item, long id, int position) {
+                selectItem(position);
+                Toast.makeText(TopResultActivity.this, "Clicked item #" + position, Toast.LENGTH_SHORT).show();
+                if (position == 0){
+                    Intent intent = new Intent(TopResultActivity.this, FriendsListActivity.class);
+                    startActivity(intent);
+                }
+                else if (position == 1){
+                    Intent intent = new Intent(TopResultActivity.this, GroupSelectActivity.class);
+                    startActivity(intent);
+                }
+                else if (position == 2){
+                    Intent intent = new Intent(TopResultActivity.this, SetupActivity.class);
+                    startActivity(intent);
+                }
+
+            }
+        });
+
+
+        addProfile(
+                new DrawerProfile()
+                        .setBackground(getDrawable(R.mipmap.logo))
+                        .setName("Lunch Roll")
+                        .setDescription("best app ever")
+        );
+    }
+
+    private void setDrawerTheme() {
+        setDrawerTheme(
+                new DrawerTheme(this)
+                        .setBackgroundColorRes(R.color.myWhite)
+                        .setTextColorPrimaryRes(R.color.colorPrimary)
+                        .setTextColorSecondaryRes(R.color.colorAccent)
+        );
+    }
 }

@@ -23,7 +23,7 @@ public class Preferences implements Serializable {
         serverPreferences = new String[]{"american", "asian", "greek", "indian", "italian", "mexican"};
 
             for (int i = 0; i < serverPreferences.length; i++) {
-                preferences.add(new Preference(serverPreferences[i], newPreferences.optString(serverPreferences[i]).compareToIgnoreCase("1") == 0 ? true : false));
+                preferences.add(new Preference(serverPreferences[i], (newPreferences.optInt(serverPreferences[i]) == 1 ? true : false)));
             }
 
         Collections.sort(preferences);

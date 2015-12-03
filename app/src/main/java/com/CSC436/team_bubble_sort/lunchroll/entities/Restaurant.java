@@ -9,8 +9,8 @@ import org.json.JSONObject;
  * Created by Jonathan on 11/15/2015.
  */
 public class Restaurant {
-    private long latitude;
-    private long longitude;
+    private double latitude;
+    private double longitude;
     private String iconURL;
     private String name;
     private String priceLevel;
@@ -24,8 +24,8 @@ public class Restaurant {
         }
         try {
             JSONObject location = result.getJSONObject("geometry").getJSONObject("location");
-            latitude = location.getLong("lat");
-            longitude = location.getLong("lng");
+            latitude = location.getDouble("lat");
+            longitude = location.getDouble("lng");
             iconURL = result.optString("icon");
             name = result.getString("name");
             priceLevel = result.optString("price_level");
@@ -58,7 +58,7 @@ public class Restaurant {
         this.latitude = latitude;
     }
 
-    public long getLatitude(){
+    public double getLatitude(){
         return latitude;
     }
 
@@ -66,7 +66,7 @@ public class Restaurant {
         this.longitude = longitude;
     }
 
-    public long getLongitude(){
+    public double getLongitude(){
         return longitude;
     }
 
