@@ -33,7 +33,7 @@ public class Group implements Comparable<Group>, Serializable{
     public void setUsers(String users){this.users = users;}
     public String getUsers(){return users;}
     public void setUserList(List<Integer> users){
-        this.users = android.text.TextUtils.join(", ", users);
+        this.users = android.text.TextUtils.join(",", users);
     }
     public List<Integer> getUserList(){
         List<Integer> numbersInt = new ArrayList<>();

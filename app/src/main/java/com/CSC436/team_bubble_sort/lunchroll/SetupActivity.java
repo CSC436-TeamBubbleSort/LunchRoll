@@ -124,6 +124,8 @@ public class SetupActivity extends DrawerActivity implements GetPreferences, Upd
 
     @Override
     public void getPreferencesRequest(int userId) {
+        //
+        // Toast.makeText(this, userId + "", Toast.LENGTH_LONG).show();
         userService.GetPreferences(this, userId);
     }
 
