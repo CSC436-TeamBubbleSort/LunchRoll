@@ -55,4 +55,16 @@ public class ModelFactory {
         }
         return friendListItems;
     }
+
+    public static List<Restaurant> CreateRestaurantList(JSONArray array){
+        List<Restaurant> restaurants = new ArrayList<Restaurant>();
+        try {
+            for (int i = 0; i < array.length(); i++) {
+                restaurants.add(new Restaurant(array.getJSONObject(i)));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return restaurants;
+    }
 }
