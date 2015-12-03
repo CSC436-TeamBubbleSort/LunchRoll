@@ -9,10 +9,10 @@ public class Group implements Comparable<Group>, Serializable{
     private int userId, groupId;
     private String name, users;
     // Constructor
-    public Group(int userId, String name, String users){
+    public Group(int userId, String name, List<Integer> users){
         this.userId = userId;
         this.name = name;
-        this.users = users;
+        setUserList(users);
         groupId = 0;
     }
 
@@ -33,7 +33,7 @@ public class Group implements Comparable<Group>, Serializable{
     public void setUsers(String users){this.users = users;}
     public String getUsers(){return users;}
     public void setUserList(List<Integer> users){
-        this.users = android.text.TextUtils.join(",", users);
+        this.users = android.text.TextUtils.join(", ", users);
     }
     public List<Integer> getUserList(){
         List<Integer> numbersInt = new ArrayList<>();

@@ -40,7 +40,7 @@ public class SetupActivity extends AppCompatActivity implements GetPreferences, 
         int userId = settings.getInt("userId", 0);
 
         if (userId != 0){
-            Toast.makeText(this, userId + "", Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, userId + "", Toast.LENGTH_LONG).show();
             getPreferencesRequest(userId);
         }
 
@@ -120,7 +120,7 @@ public class SetupActivity extends AppCompatActivity implements GetPreferences, 
 
     @Override
     public void getPreferencesSuccess(boolean success, Preferences preferences) {
-        Toast.makeText(this, "new user", Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, "new user", Toast.LENGTH_LONG).show();
         if (success){
             Intent intent = new Intent(this, GroupSelectActivity.class);
             startActivity(intent);
@@ -145,7 +145,7 @@ public class SetupActivity extends AppCompatActivity implements GetPreferences, 
 
     @Override
     public void updatePreferencesSuccess(String response) {
-        Toast.makeText(this, response, Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, response, Toast.LENGTH_LONG).show();
     }
 
     @Override

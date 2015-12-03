@@ -5,6 +5,7 @@ import android.content.Context;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.csc436.team_bubble_sort.lunchroll.entities.Friend;
+import com.csc436.team_bubble_sort.lunchroll.entities.FriendListItem;
 import com.csc436.team_bubble_sort.lunchroll.entities.ModelFactory;
 import com.csc436.team_bubble_sort.lunchroll.entities.Preferences;
 import com.csc436.team_bubble_sort.lunchroll.entities.User;
@@ -117,17 +118,25 @@ public class UserService extends BaseService {
         }
     }
 
-    public void AddFriend(final AddFriend userActivity, Friend friend){
+    public void AddFriend(final AddFriend userActivity,final Friend friend){
         Response.Listener responseListener = new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
                     response = response.getJSONObject("data");
+                    boolean success = response.getBoolean("success");
+                    if (success) {
+                        int friendId = response.getInt("friendId");
+                        userActivity.addFriendSuccess(new FriendListItem(friendId, friend.getUsername(), friend.getEmail()));
+                    }
+                    else{
+                        userActivity.addFriendError(response.optString("Error"));
+                    }
                 }
                 catch (JSONException e){
                     e.printStackTrace();
                 }
-                userActivity.addFriendSuccess(response.toString());
+
             }
         };
         Response.ErrorListener errorListener = new  Response.ErrorListener() {
@@ -139,8 +148,10 @@ public class UserService extends BaseService {
         };
         JSONObject jsonBody = new JSONObject();
         try {
-            jsonBody.accumulate("userId", friend.getUserId());
-            jsonBody.accumulate("friendId", friend.getFriendId());
+            jsonBody.accumulate("userId", friend.getUserId() + "");
+            jsonBody.accumulate("friendUsername", friend.getUsername());
+            jsonBody.accumulate("friendEmail", friend.getEmail());
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -214,7 +225,7 @@ public class UserService extends BaseService {
         };
         JSONObject jsonBody = new JSONObject();
         try {
-            jsonBody.accumulate("userId", userId);
+            jsonBody.accumulate("userId", userId + "");
         } catch (JSONException e) {
             e.printStackTrace();
         }

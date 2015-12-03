@@ -46,7 +46,9 @@ public class ModelFactory {
         try {
             for (int i = 0; i < array.length(); i++) {
                 JSONObject obj = array.getJSONObject(i);
-                friendListItems.add(new FriendListItem(obj.getInt("friendId"), obj.getString("username"), obj.getString("email")));
+                obj = obj.getJSONObject("friend");
+
+                friendListItems.add(new FriendListItem(Integer.parseInt(obj.getString("userId")), obj.getString("username"), obj.getString("email")));
             }
         } catch (JSONException e) {
             e.printStackTrace();

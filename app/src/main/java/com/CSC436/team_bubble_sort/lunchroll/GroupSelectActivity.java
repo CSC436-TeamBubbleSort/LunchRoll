@@ -98,7 +98,9 @@ public class GroupSelectActivity extends AppCompatActivity implements GetGroups,
     public void onClick(View v) {
         if(v.getId() == R.id.new_group_button){
             Intent intent = new Intent(this, FriendsListActivity.class);
-            startActivity(intent);
+            intent.putExtra("return", true);
+            startActivityForResult(intent, 0);
+
         }
         else if(v.getId() == R.id.select_group_button){
             int selectionPosition = groupsView.getCheckedItemPosition();
@@ -109,6 +111,18 @@ public class GroupSelectActivity extends AppCompatActivity implements GetGroups,
             startActivity(intent);
         }
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Check which request we're responding to
+                SharedPreferences settings = this.getSharedPreferences("DEFAULT", MODE_PRIVATE);
+                int userId = settings.getInt("userId", 0);
+
+                if (userId != 0){
+                    getGroupsRequest(userId);
+                }
+    }
+
     public void getGroupsRequest(int userId) {
         GroupService.getGroups(this, userId);
     }

@@ -107,13 +107,21 @@ public class GroupService extends BaseService{
                 int groupId = 0;
                 try {
                     response = response.getJSONObject("data");
-                    groupId = response.getInt("groupId");
+
+                    boolean success = response.getBoolean("success");
+                    if (success) {
+                        groupId = response.getInt("groupId");
+                        userActivity.updateGroupSuccess(new Group(group.getUserId(), group.getName(), group.getUsers(), groupId));
+                    }
+                    else{
+                        userActivity.updateGroupError(response.getString("Error"));
+                    }
+
                 }
                 catch (JSONException e){
                     e.printStackTrace();
                 }
-                group.setGroupId(groupId);
-                userActivity.updateGroupSuccess(group);
+
             }
         };
         Response.ErrorListener errorListener = new  Response.ErrorListener() {
@@ -125,10 +133,11 @@ public class GroupService extends BaseService{
         };
         JSONObject jsonBody = new JSONObject();
         try {
-            jsonBody.accumulate("userId", group.getUserId());
-            jsonBody.accumulate("groupId", group.getGroupId());
+            jsonBody.accumulate("userId", group.getUserId() + "");
+            jsonBody.accumulate("groupId", group.getGroupId() + "");
             jsonBody.accumulate("name", group.getName());
             jsonBody.accumulate("users", group.getUsers());
+            userActivity.updateGroupError(jsonBody.toString());
         } catch (JSONException e) {
             e.printStackTrace();
         }
