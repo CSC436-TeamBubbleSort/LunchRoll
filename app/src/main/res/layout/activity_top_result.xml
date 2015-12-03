@@ -216,6 +216,8 @@
             android:text="MAP"
             android:id="@+id/result_map_button"
             android:textColor="@color/myBlack"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
             style="?android:attr/buttonBarButtonStyle"/>
 
         <Button
@@ -224,6 +226,8 @@
             android:text="NEXT"
             android:id="@+id/result_next_button"
             android:textColor="@color/myBlack"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
             style="?android:attr/buttonBarButtonStyle"/>
     </LinearLayout>
 
