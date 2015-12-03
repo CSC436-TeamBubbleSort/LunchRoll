@@ -184,7 +184,6 @@ public class GroupService extends BaseService{
         }
 
         if (jsonBody != null){
-            userActivity.deleteGroupError(jsonBody.toString());
             request.call(baseRoute + "deleteGroup", jsonBody, responseListener, errorListener, context);
         }
         else{

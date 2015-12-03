@@ -128,7 +128,6 @@ public class GroupSelectActivity extends DrawerActivity implements GetGroups, De
             @Override
             public void onClick(DrawerItem item, long id, int position) {
                 selectItem(position);
-                Toast.makeText(GroupSelectActivity.this, "Clicked item #" + position, Toast.LENGTH_SHORT).show();
                 if (position == 0){
                     Intent intent = new Intent(GroupSelectActivity.this, FriendsListActivity.class);
                     startActivity(intent);
@@ -253,7 +252,6 @@ public class GroupSelectActivity extends DrawerActivity implements GetGroups, De
             groupsList.add(item.getName());
         }
         initGroupList();
-        Toast.makeText(this, "Success!", Toast.LENGTH_SHORT).show();
     }
 
     public void getGroupsError(String error){

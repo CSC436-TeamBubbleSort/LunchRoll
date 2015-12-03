@@ -108,7 +108,9 @@ public class TopResultActivity extends DrawerActivity implements Suggest, Google
         nameView.setText(r.getName());
         priceLevelView.setText(r.getPriceLevel());
         ratingView.setText(r.getRating());
-        ratingBar.setRating(Float.parseFloat(r.getRating()));
+        float f = Float.parseFloat(r.getRating());
+        ratingBar.setRating(f);
+
     }
 
     //TODO delete this hardcoded list when we start making server calls
@@ -152,11 +154,11 @@ public class TopResultActivity extends DrawerActivity implements Suggest, Google
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if(id == R.id.result_back_button && currentResult > 0){
+        if(id == R.id.result_back_button && currentResult > 0 && restaurants.size() > 0){
             currentResult--;
             Restaurant r = restaurants.get(currentResult);
             populateField(r);
-            Toast.makeText(this, r.getName(), Toast.LENGTH_SHORT).show();
+
             setBackButton();
             setNextButton();
         }
@@ -169,12 +171,11 @@ public class TopResultActivity extends DrawerActivity implements Suggest, Google
             }
 
         }
-        else if(id == R.id.result_next_button && currentResult < restaurants.size() - 1){
+        else if(id == R.id.result_next_button && currentResult < restaurants.size() - 1 && restaurants.size() > 0){
 
             currentResult++;
             Restaurant r = restaurants.get(currentResult);
             populateField(r);
-            Toast.makeText(this, r.getName(), Toast.LENGTH_SHORT).show();
             setNextButton();
             setBackButton();
         }
@@ -192,7 +193,6 @@ public class TopResultActivity extends DrawerActivity implements Suggest, Google
         Restaurant r = restaurants.get(currentResult);
         setBackButton();
         setNextButton();
-        Toast.makeText(this, "stuff" + this.restaurants.size(), Toast.LENGTH_SHORT).show();
         populateField(r);
     }
 
@@ -275,7 +275,6 @@ public class TopResultActivity extends DrawerActivity implements Suggest, Google
             @Override
             public void onClick(DrawerItem item, long id, int position) {
                 selectItem(position);
-                Toast.makeText(TopResultActivity.this, "Clicked item #" + position, Toast.LENGTH_SHORT).show();
                 if (position == 0){
                     Intent intent = new Intent(TopResultActivity.this, FriendsListActivity.class);
                     startActivity(intent);

@@ -19,7 +19,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_group_select">Groups</string>
-    <string name="title_activity_friends_list">Contacts</string>
+    <string name="title_activity_friends_list">Friends</string>
     <string name="title_activity_top_result">Suggested Restaurants</string>
 
     <!-- String related to Friends List -->
