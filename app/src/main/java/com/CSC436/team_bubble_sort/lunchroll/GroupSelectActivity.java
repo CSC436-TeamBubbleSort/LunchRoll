@@ -109,6 +109,7 @@ public class GroupSelectActivity extends AppCompatActivity implements GetGroups,
             int groupId = groupListItems.get(selectionPosition).getGroupId();
             Toast.makeText(this, selection, Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, TopResultActivity.class);
+            intent.putExtra("groupId", groupId);
             startActivity(intent);
         }
     }

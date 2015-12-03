@@ -19,7 +19,7 @@ import org.json.JSONObject;
  */
 public class LocationService extends BaseService {
     private Context context;
-    private String baseRoute = "client/";
+    private String baseRoute = "/client/";
 
     public LocationService(Context context){
         super();
@@ -48,8 +48,8 @@ public class LocationService extends BaseService {
         };
         JSONObject jsonBody = new JSONObject();
         try {
-            jsonBody.accumulate("latitude", "32.1958");
-            jsonBody.accumulate("longitude", "-110.892");
+            jsonBody.accumulate("latitude", latitude + "");
+            jsonBody.accumulate("longitude", longitude +"");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -69,6 +69,7 @@ public class LocationService extends BaseService {
             public void onResponse(JSONObject response) {
                 try {
                     JSONArray array = response.getJSONArray("results");
+                    activity.suggestError(array.toString());
                     activity.suggestSuccess(ModelFactory.CreateRestaurantList(array));
                 }
                 catch (JSONException e){
@@ -100,7 +101,7 @@ public class LocationService extends BaseService {
 
         if (jsonBody != null){
             activity.suggestError(jsonBody.toString());
-            request.call(baseRoute + "nearbyAny", jsonBody, responseListener, errorListener, context);
+            request.call(baseRoute + "suggest", jsonBody, responseListener, errorListener, context);
         }
         else{
             activity.suggestError("JSON could not be created.");

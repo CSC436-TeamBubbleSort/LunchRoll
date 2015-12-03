@@ -31,7 +31,10 @@ public class Restaurant {
             priceLevel = result.optString("price_level");
             rating = result.optString("rating");
             crossRoads = result.optString("vicinity");
-            openNow = result.optJSONObject("opening_hours").getBoolean("open_now");
+            if (result.optJSONObject("opening_hours") != null){
+                openNow = result.optJSONObject("opening_hours").optBoolean("open_now");
+            }
+
         } catch (JSONException e) {
             Log.e("restaurant", "Error parsing JSON in Restaurant constructor");
             e.printStackTrace();
