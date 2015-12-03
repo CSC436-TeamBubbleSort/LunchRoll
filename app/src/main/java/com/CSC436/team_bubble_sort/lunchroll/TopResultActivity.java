@@ -112,7 +112,7 @@ public class TopResultActivity extends DrawerActivity implements Suggest, Google
         nameView.setText(r.getName());
         priceLevelView.setText(r.getPriceLevel());
         ratingView.setText(r.getRating());
-        ratingBar.setRating(Float.parseFloat(r.getRating()));
+        //ratingBar.setRating(Float.parseFloat(r.getRating()));
     }
 
     //TODO delete this hardcoded list when we start making server calls
@@ -156,7 +156,7 @@ public class TopResultActivity extends DrawerActivity implements Suggest, Google
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if(id == R.id.result_back_button && currentResult > 0){
+        if(id == R.id.result_back_button && currentResult > 0 && restaurants.size() > 0){
             currentResult--;
             Restaurant r = restaurants.get(currentResult);
             populateField(r);
@@ -173,7 +173,7 @@ public class TopResultActivity extends DrawerActivity implements Suggest, Google
             }
 
         }
-        else if(id == R.id.result_next_button && currentResult < restaurants.size() - 1){
+        else if(id == R.id.result_next_button && currentResult < restaurants.size() - 1 && restaurants.size() > 0){
 
             currentResult++;
             Restaurant r = restaurants.get(currentResult);

@@ -55,7 +55,6 @@ public class LocationService extends BaseService {
         }
 
         if (jsonBody != null){
-            activity.nearbyAnyError(jsonBody.toString());
             request.call(baseRoute + "nearbyAny", jsonBody, responseListener, errorListener, context);
         }
         else{
@@ -99,7 +98,6 @@ public class LocationService extends BaseService {
         }
 
         if (jsonBody != null){
-            activity.suggestError(jsonBody.toString());
             request.call(baseRoute + "suggest", jsonBody, responseListener, errorListener, context);
         }
         else{

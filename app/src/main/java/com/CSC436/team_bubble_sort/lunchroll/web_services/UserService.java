@@ -61,7 +61,6 @@ public class UserService extends BaseService {
         jsonBody = user.toJSON();
 
         if (jsonBody != null){
-            userActivity.updateUserError(jsonBody.toString());
             request.call(baseRoute + "updateUser", jsonBody, responseListener, errorListener, context);
         }
         else{
@@ -110,7 +109,6 @@ public class UserService extends BaseService {
         }
 
         if (jsonBody != null){
-            userActivity.loginError(jsonBody.toString());
             request.call(baseRoute + "login", jsonBody, responseListener, errorListener, context);
         }
         else{
@@ -199,7 +197,6 @@ public class UserService extends BaseService {
         }
 
         if (jsonBody != null){
-            userActivity.removeFriendError(jsonBody.toString());
             request.call(baseRoute + "removeFriend", jsonBody, responseListener, errorListener, context);
         }
         else{
@@ -236,7 +233,6 @@ public class UserService extends BaseService {
         }
 
         if (jsonBody != null){
-            userActivity.getFriendsError(jsonBody.toString());
             request.call(baseRoute + "getFriends", jsonBody, responseListener, errorListener, context);
         }
         else{
@@ -254,7 +250,6 @@ public class UserService extends BaseService {
                     boolean success = response.getBoolean("success");
 
                     if (success){
-                        userActivity.getPreferencesError(success + "??????");
                         userActivity.getPreferencesSuccess(true, new Preferences(userId, response));
                     }
                     else{
@@ -283,7 +278,6 @@ public class UserService extends BaseService {
         }
 
         if (jsonBody != null){
-            userActivity.getPreferencesError(jsonBody.toString());
             request.call(baseRoute + "getPreferences", jsonBody, responseListener, errorListener, context);
         }
         else{
@@ -319,7 +313,6 @@ public class UserService extends BaseService {
             }
         };
         JSONObject jsonBody = preferences.toJSON();
-        userActivity.updatePreferencesError(jsonBody.toString());
         if (jsonBody != null){
             request.call(baseRoute + "updatePreferences", jsonBody, responseListener, errorListener, context);
         }

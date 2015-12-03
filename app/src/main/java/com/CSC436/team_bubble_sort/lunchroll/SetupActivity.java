@@ -179,7 +179,6 @@ public class SetupActivity extends DrawerActivity implements GetPreferences, Upd
             @Override
             public void onClick(DrawerItem item, long id, int position) {
                 selectItem(position);
-                Toast.makeText(SetupActivity.this, "Clicked item #" + position, Toast.LENGTH_SHORT).show();
                 if (position == 0){
                     Intent intent = new Intent(SetupActivity.this, FriendsListActivity.class);
                     startActivity(intent);
