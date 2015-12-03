@@ -48,6 +48,9 @@ public class TopResultActivity extends AppCompatActivity implements Suggest, Vie
         back = new Button(this);
         map = new Button(this);
         next = new Button(this);
+        back.setOnClickListener(this);
+        map.setOnClickListener(this);
+        next.setOnClickListener(this);
         //nearbyAnyRequest(); // TODO request for server information
         // TODO move the following stuff to the success method
         if(restaurants.size() == 0) {
