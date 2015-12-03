@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ public class TopResultActivity extends AppCompatActivity implements Suggest, Vie
     private LocationService locationService;
     private List<Restaurant> restaurants;
     private TextView latitudeView, longitudeView, nameView, priceLevelView, ratingView;
+    private ImageView picture;
     private Button back,map,next;
     private int currentResult;
 
@@ -40,10 +42,13 @@ public class TopResultActivity extends AppCompatActivity implements Suggest, Vie
         nameView = (TextView) findViewById(R.id.result_name_value);
         priceLevelView = (TextView) findViewById(R.id.result_price_level_value);
         ratingView = (TextView) findViewById(R.id.result_rating_value);
+        // Initialize ImageView
+        picture = (ImageView) findViewById(R.id.result_picture);
         // Initialize Button objects
         back = new Button(this);
         map = new Button(this);
         next = new Button(this);
+        // Set Button listeners
         back.setOnClickListener(this);
         map.setOnClickListener(this);
         next.setOnClickListener(this);
@@ -63,6 +68,7 @@ public class TopResultActivity extends AppCompatActivity implements Suggest, Vie
         nameView.setText(r.getName());
         priceLevelView.setText(r.getPriceLevel());
         ratingView.setText(r.getRating());
+        picture.setImageDrawable(r.getPicture());
     }
 
     //TODO delete this hardcoded list when we start making server calls

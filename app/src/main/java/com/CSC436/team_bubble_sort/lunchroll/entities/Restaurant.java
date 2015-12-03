@@ -1,7 +1,9 @@
 package com.csc436.team_bubble_sort.lunchroll.entities;
 
+import android.media.Image;
 import android.util.Log;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -14,6 +16,7 @@ public class Restaurant {
     private String name;
     private String priceLevel;
     private String rating;
+    private String picture;
 
     public Restaurant(JSONObject result){
         if(result == null){
@@ -26,6 +29,11 @@ public class Restaurant {
             name = result.getString("name");
             priceLevel = result.optString("price_level");
             rating = result.optString("rating");
+//            JSONArray pics = result.optJSONArray("photos");
+//            if(pics != null) {
+//                JSONObject pic = pics.getJSONObject(0);
+//                picture = new Image();
+//            }
         } catch (JSONException e) {
             Log.e("restaurant", "Error parsing JSON in Restaurant constructor");
             e.printStackTrace();
@@ -33,12 +41,21 @@ public class Restaurant {
     }
 
     // Used for making hard coded restaurants
-    public Restaurant(long latitude, long longitude, String name, String priceLevel, String rating){
+    public Restaurant(long latitude, long longitude, String name, String priceLevel,
+                      String rating, String picture){
         this.latitude = latitude;
         this.longitude = longitude;
         this.name = name;
         this.priceLevel = priceLevel;
         this.rating = rating;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 
     public void setLatitude(long latitude){
