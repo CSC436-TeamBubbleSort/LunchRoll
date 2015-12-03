@@ -175,8 +175,8 @@ public class FriendsListActivity extends DrawerActivity implements
 
                 boolean value = checkedFriends.get(i);
                 if(value){
-                    selectedFriends.add(friendsList.get(i).getUsername());
-                    selectedFriendsList.add(friendsList.get(i));
+                    selectedFriends.add(friendsAdapter.getItem(i).getUsername());
+                    selectedFriendsList.add(friendsAdapter.getItem(i));
                 }
             }
             if(selectedFriends.size() > 0) {
@@ -213,6 +213,7 @@ public class FriendsListActivity extends DrawerActivity implements
 
     @Override
     public void getFriendsSuccess(List<FriendListItem> friends) {
+        friendsList.clear();
         friendsList.addAll(friends);
         initFriendsList();
     }
@@ -354,13 +355,15 @@ public class FriendsListActivity extends DrawerActivity implements
 
     @Override
     public void removeFriendSuccess(int friendId) {
-        for (int i = 0; i < friendsAdapter.getCount(); i++){
+        /*for (int i = 0; i < friendsAdapter.getCount(); i++){
             if (friendsAdapter.getItem(i).getFriendId() == friendId){
                 friendsAdapter.remove(friendsAdapter.getItem(i));
+
                 return;
             }
-        }
 
+        }*/
+        getFriendsRequest(userId);
     }
 
     @Override

@@ -115,7 +115,7 @@
             android:textSize="22sp"
             android:layout_gravity="center_vertical"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Press the middle button to navigate to your destination. Or you can click next to see another result"
+            android:text="Press the middle button to navigate to your destination. Or you can click an arrow to see another result"
 
             android:textColor="@color/myBlack"/>
     </LinearLayout>

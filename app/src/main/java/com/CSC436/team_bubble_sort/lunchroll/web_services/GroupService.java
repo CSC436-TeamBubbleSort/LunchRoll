@@ -137,7 +137,7 @@ public class GroupService extends BaseService{
             jsonBody.accumulate("groupId", group.getGroupId() + "");
             jsonBody.accumulate("name", group.getName());
             jsonBody.accumulate("users", group.getUsers());
-            userActivity.updateGroupError(jsonBody.toString());
+
         } catch (JSONException e) {
             e.printStackTrace();
         }

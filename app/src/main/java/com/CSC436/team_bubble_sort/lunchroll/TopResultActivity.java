@@ -112,6 +112,9 @@ public class TopResultActivity extends DrawerActivity implements Suggest, Google
             float f = Float.parseFloat(r.getRating());
             ratingBar.setRating(f);
         }
+        else{
+            ratingBar.setRating(0);
+        }
 
 
 
