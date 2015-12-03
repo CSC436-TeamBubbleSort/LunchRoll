@@ -4,6 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,13 +15,14 @@ import com.csc436.team_bubble_sort.lunchroll.web_services.location.NearbyAny;
 
 import java.util.List;
 
-public class TopResultActivity extends AppCompatActivity{
+public class TopResultActivity extends AppCompatActivity, View.OnClickListener{
 
     private TextView result;
     private LocationService LocationService;
     private List<Restaurant> restaurants;
     private TextView latitudeView, longitudeView, iconURLView, nameView, priceLevelView, ratingView,
             crossRoadsView, openNowView;
+    private Button back,map,next;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,10 @@ public class TopResultActivity extends AppCompatActivity{
         ratingView = new TextView(this);
         crossRoadsView = new TextView(this);
         openNowView = new TextView(this);
+        // Initialize Button objects
+        back = new Button(this);
+        map = new Button(this);
+        next = new Button(this);
         //nearbyAnyRequest(); // TODO request for server information
         // TODO move the following stuff to the success method
         if(restaurants.size() == 0) {
@@ -85,6 +92,20 @@ public class TopResultActivity extends AppCompatActivity{
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        if(id == R.id.result_back_button){
+            // TODO if back button clicked
+        }
+        else if(id == R.id.result_map_button){
+            // TODO if map button clicked
+        }
+        else if(id == R.id.result_next_button){
+            // TODO if next button clicked
+        }
     }
 
 //    // Called by Activity to send request to server with user data
