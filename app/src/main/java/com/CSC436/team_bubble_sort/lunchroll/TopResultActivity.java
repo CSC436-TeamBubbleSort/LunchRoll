@@ -16,18 +16,20 @@ import com.csc436.team_bubble_sort.lunchroll.web_services.location.NearbyAny;
 import java.util.List;
 
 public class TopResultActivity extends AppCompatActivity implements View.OnClickListener{
-    
+
     private LocationService LocationService;
     private List<Restaurant> restaurants;
     private TextView latitudeView, longitudeView, iconURLView, nameView, priceLevelView, ratingView,
             crossRoadsView, openNowView;
     private Button back,map,next;
+    private int currentResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_top_result);
         LocationService = new LocationService(this.getApplicationContext());
+        currentResult = 0;
         // Initialize TextView objects
         latitudeView = new TextView(this);
         longitudeView = new TextView(this);
@@ -47,7 +49,7 @@ public class TopResultActivity extends AppCompatActivity implements View.OnClick
             defaultRestaurants();
         }
         // Populate the fields with the first result
-        Restaurant r = restaurants.get(0);
+        Restaurant r = restaurants.get(currentResult);
         populateField(r);
     }
 
@@ -96,13 +98,17 @@ public class TopResultActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         int id = v.getId();
         if(id == R.id.result_back_button){
-            // TODO if back button clicked
+            currentResult--;
+            Restaurant r = restaurants.get(currentResult);
+            populateField(r);
         }
         else if(id == R.id.result_map_button){
             // TODO if map button clicked
         }
         else if(id == R.id.result_next_button){
-            // TODO if next button clicked
+            currentResult++;
+            Restaurant r = restaurants.get(currentResult);
+            populateField(r);
         }
     }
 
