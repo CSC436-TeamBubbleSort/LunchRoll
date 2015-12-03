@@ -108,8 +108,12 @@ public class TopResultActivity extends DrawerActivity implements Suggest, Google
         nameView.setText(r.getName());
         priceLevelView.setText(r.getPriceLevel());
         ratingView.setText(r.getRating());
-        float f = Float.parseFloat(r.getRating());
-        ratingBar.setRating(f);
+        if (r.getRating() != null && r.getRating().length() > 1){
+            float f = Float.parseFloat(r.getRating());
+            ratingBar.setRating(f);
+        }
+
+
 
     }
 

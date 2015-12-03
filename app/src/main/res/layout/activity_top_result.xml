@@ -41,16 +41,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:weightSum="2">
+        android:weightSum="3">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Price:"
+            android:text="Price Level:"
             android:id="@+id/result_price_level_label"
             android:textStyle="bold"
-            android:layout_weight="1"
+            android:layout_weight=".5"
             android:textColor="@color/myBlack"/>
 
         <TextView
@@ -58,7 +58,7 @@
             android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="    "
-            android:layout_weight="1"
+            android:layout_weight="2.5"
             android:id="@+id/result_price_level_value"
             android:textColor="@color/myBlack"/>
     </LinearLayout>
@@ -68,14 +68,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:weightSum="2">
+        android:weightSum="3">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Rating:"
-            android:layout_weight="1"
+            android:layout_weight=".5"
             android:id="@+id/result_rating_label"
             android:textStyle="bold"
             android:textColor="@color/myBlack"/>
@@ -83,12 +83,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="2.5"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="    "
+            android:text=""
             android:id="@+id/result_rating_value"
             android:textColor="@color/myBlack"/>
     </LinearLayout>
+
+
 
     <LinearLayout
         android:orientation="horizontal"
@@ -120,7 +122,21 @@
         android:layout_width="match_parent"
         android:orientation="horizontal"
         android:layout_weight="4"
-        android:layout_height="wrap_content"></LinearLayout>
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:layout_gravity="center_vertical"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Press the middle button to navigate to your destination. Or you can click next to see another result"
+
+            android:textColor="@color/myBlack"/>
+    </LinearLayout>
+
+
 
     <LinearLayout
         android:orientation="horizontal"
@@ -140,8 +156,7 @@
             android:paddingRight="16dp"
             android:textStyle="bold"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_weight="1"
-            />
+            android:layout_weight="1" />
 
         <ImageButton
             android:layout_width="wrap_content"
