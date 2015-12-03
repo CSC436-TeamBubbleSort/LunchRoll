@@ -36,7 +36,7 @@ public class TopResultActivity extends DrawerActivity implements Suggest, Google
 
     private LocationService locationService;
     private List<Restaurant> restaurants;
-    private TextView latitudeView, longitudeView, nameView, priceLevelView, ratingView;
+    private TextView nameView, priceLevelView, ratingView;
     private RatingBar ratingBar;
     private ImageButton back,map,next;
     private int currentResult;
@@ -64,8 +64,6 @@ public class TopResultActivity extends DrawerActivity implements Suggest, Google
         }
         restaurants = new ArrayList<Restaurant>();
         // Initialize TextView objects
-        latitudeView = (TextView) findViewById(R.id.result_latitude_value);
-        longitudeView = (TextView) findViewById(R.id.result_longitude_value);
         nameView = (TextView) findViewById(R.id.result_name_value);
         priceLevelView = (TextView) findViewById(R.id.result_price_level_value);
         ratingView = (TextView) findViewById(R.id.result_rating_value);
@@ -107,8 +105,6 @@ public class TopResultActivity extends DrawerActivity implements Suggest, Google
 
 
     private void populateField(Restaurant r){
-        latitudeView.setText(r.getLatitude() + "");
-        longitudeView.setText(r.getLongitude() + "");
         nameView.setText(r.getName());
         priceLevelView.setText(r.getPriceLevel());
         ratingView.setText(r.getRating());
