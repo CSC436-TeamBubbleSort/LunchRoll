@@ -68,7 +68,6 @@ public class TopResultActivity extends AppCompatActivity implements Suggest, Vie
         nameView.setText(r.getName());
         priceLevelView.setText(r.getPriceLevel());
         ratingView.setText(r.getRating());
-        picture.setImageDrawable(r.getPicture());
     }
 
     //TODO delete this hardcoded list when we start making server calls

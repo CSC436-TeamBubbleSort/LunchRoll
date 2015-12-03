@@ -42,7 +42,7 @@ public class Restaurant {
 
     // Used for making hard coded restaurants
     public Restaurant(long latitude, long longitude, String name, String priceLevel,
-                      String rating, String picture){
+                      String rating){
         this.latitude = latitude;
         this.longitude = longitude;
         this.name = name;
