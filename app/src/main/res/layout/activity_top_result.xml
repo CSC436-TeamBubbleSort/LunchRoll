@@ -6,55 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="10"
+    android:weightSum="9"
     >
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:paddingTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:weightSum="4">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Latitude:"
-            android:id="@+id/result_latitude_label"
-            android:layout_weight="1"
-            android:textStyle="bold"
-            android:textColor="@color/myBlack"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="     "
-            android:id="@+id/result_latitude_value"
-            android:layout_weight="1"
-            android:textColor="@color/myBlack"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Longitude:"
-            android:id="@+id/result_longitude_label"
-            android:textStyle="bold"
-            android:layout_weight="1"
-            android:textColor="@color/myBlack"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="     "
-            android:id="@+id/result_longitude_value"
-            android:layout_weight="1"
-            android:textColor="@color/myBlack"/>
-    </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -140,17 +93,32 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="5">
-
+        android:layout_weight="1"
+        android:weightSum="3">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"></LinearLayout>
         <RatingBar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/ratingBar"
-            android:numStars="5" />
+            android:clickable="false"
+            android:numStars="4"
+            android:layout_weight="1"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"></LinearLayout>
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_weight="4"
+        android:layout_height="wrap_content"></LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
