@@ -4,7 +4,6 @@
     android:name="com.csc436.team_bubble_sort.lunchroll.TopResultActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/friends_list_gradient"
     android:orientation="vertical"
     android:weightSum="1"
     >

@@ -67,12 +67,9 @@ public class TopResultActivity extends AppCompatActivity implements Suggest, Goo
         back = new Button(this);
         map = new Button(this);
         next = new Button(this);
-         // TODO request for server information
-        // TODO move the following stuff to the success method
-        //if(restaurants.size() == 0) {
-         //   defaultRestaurants();
-        //}
-        // Populate the fields with the first result
+        back.setOnClickListener(this);
+        map.setOnClickListener(this);
+        next.setOnClickListener(this);
 
     }
 
@@ -129,10 +126,11 @@ public class TopResultActivity extends AppCompatActivity implements Suggest, Goo
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if(id == R.id.result_back_button){
+        if(id == R.id.result_back_button && currentResult > 0){
             currentResult--;
             Restaurant r = restaurants.get(currentResult);
             populateField(r);
+            Toast.makeText(this, r.getName(), Toast.LENGTH_SHORT).show();
         }
         else if(id == R.id.result_map_button){
             if (mLastLocation != null){
@@ -143,10 +141,11 @@ public class TopResultActivity extends AppCompatActivity implements Suggest, Goo
             }
 
         }
-        else if(id == R.id.result_next_button){
+        else if(id == R.id.result_next_button && currentResult < restaurants.size()){
             currentResult++;
             Restaurant r = restaurants.get(currentResult);
             populateField(r);
+            Toast.makeText(this, r.getName(), Toast.LENGTH_SHORT).show();
         }
     }
 
