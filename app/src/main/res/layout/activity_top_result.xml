@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/result_picture"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="4"/>
+        android:layout_weight="4" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -28,6 +28,7 @@
             android:text="Latitude:"
             android:id="@+id/result_latitude_label"
             android:layout_weight="1"
+            android:textStyle="bold"
             android:textColor="@color/myBlack"/>
 
         <TextView
@@ -45,6 +46,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Longitude:"
             android:id="@+id/result_longitude_label"
+            android:textStyle="bold"
             android:layout_weight="1"
             android:textColor="@color/myBlack"/>
 
@@ -71,6 +73,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Restaurant:"
             android:id="@+id/result_name_label"
+            android:textStyle="bold"
             android:layout_weight="1"
             android:textColor="@color/myBlack"/>
 
@@ -97,6 +100,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Price:"
             android:id="@+id/result_price_level_label"
+            android:textStyle="bold"
             android:layout_weight="1"
             android:textColor="@color/myBlack"/>
 
@@ -124,6 +128,7 @@
             android:text="Rating:"
             android:layout_weight="1"
             android:id="@+id/result_rating_label"
+            android:textStyle="bold"
             android:textColor="@color/myBlack"/>
 
         <TextView
@@ -158,6 +163,7 @@
             android:textColor="@color/myBlack"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
+            android:textStyle="bold"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_weight="1"
             />
@@ -171,6 +177,7 @@
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             style="?android:attr/buttonBarButtonStyle"
+            android:textStyle="bold"
             android:layout_weight="1"/>
 
         <Button
@@ -182,6 +189,7 @@
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             style="?android:attr/buttonBarButtonStyle"
+            android:textStyle="bold"
             android:layout_weight="1"/>
     </LinearLayout>
 
