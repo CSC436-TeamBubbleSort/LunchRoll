@@ -31,14 +31,14 @@ public class TopResultActivity extends AppCompatActivity implements View.OnClick
         LocationService = new LocationService(this.getApplicationContext());
         currentResult = 0;
         // Initialize TextView objects
-        latitudeView = new TextView(this);
-        longitudeView = new TextView(this);
-        iconURLView = new TextView(this);
-        nameView = new TextView(this);
-        priceLevelView = new TextView(this);
-        ratingView = new TextView(this);
-        crossRoadsView = new TextView(this);
-        openNowView = new TextView(this);
+        latitudeView = (TextView) findViewById(R.id.result_latitude_value);
+        longitudeView = (TextView) findViewById(R.id.result_longitude_value);
+        iconURLView = (TextView) findViewById(R.id.result_icon_url_value);
+        nameView = (TextView) findViewById(R.id.result_name_value);
+        priceLevelView = (TextView) findViewById(R.id.result_price_level_value);
+        ratingView = (TextView) findViewById(R.id.result_rating_value);
+        crossRoadsView = (TextView) findViewById(R.id.result_vicinity_value);
+        openNowView = (TextView) findViewById(R.id.result_open_now_value);
         // Initialize Button objects
         back = new Button(this);
         map = new Button(this);
