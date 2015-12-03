@@ -97,7 +97,7 @@ public class TopResultActivity extends AppCompatActivity implements View.OnClick
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if(id == R.id.result_back_button){
+        if(id == R.id.result_back_button && currentResult > 0){
             currentResult--;
             Restaurant r = restaurants.get(currentResult);
             populateField(r);
@@ -105,7 +105,7 @@ public class TopResultActivity extends AppCompatActivity implements View.OnClick
         else if(id == R.id.result_map_button){
             // TODO if map button clicked
         }
-        else if(id == R.id.result_next_button){
+        else if(id == R.id.result_next_button && currentResult < restaurants.size()){
             currentResult++;
             Restaurant r = restaurants.get(currentResult);
             populateField(r);
